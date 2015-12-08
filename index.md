@@ -1,7 +1,7 @@
 ---
 layout: page
-title: Hello World!
-tagline: Supporting tagline
+title: {{ site.title }}
+tagline: {{ site.tagline }}
 ---
 {% include JB/setup %}
 
@@ -9,20 +9,23 @@ Read [Jekyll Quick Start](http://jekyllbootstrap.com/usage/jekyll-quick-start.ht
 
 Complete usage and documentation available at: [Jekyll Bootstrap](http://jekyllbootstrap.com)
 
-## Update Author Attributes
+## Contact Information
 
-In `_config.yml` remember to specify your own data:
-    
-    title : My Blog =)
-    
-    author :
-      name : Name Lastname
-      email : blah@email.test
-      github : username
-      twitter : username
+Aalto University  
+School of Electrical Engineering  
+Department of Signal Processing and Acoustics  
+Otakaari 5 A  
+FI-02150 Helsinki  
+Finland
 
-The theme should reference these variables whenever needed.
-    
+Room: G 336
+
+E-mail: {{ site.author.email }}
+
+Mobile: +358-44-322-5563
+
+GitHub: https://github.com/{{ site.author.github }}
+
 ## Sample Posts
 
 This blog contains sample posts which help stage pages and blog data.
