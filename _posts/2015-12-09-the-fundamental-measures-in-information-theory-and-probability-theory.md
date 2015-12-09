@@ -69,8 +69,22 @@ $$</div>
 
 If we model <span>$X$</span> with an approximate distribution 
 <span>$q(x)$</span>, **cross-entropy** tells us how well <span>$q(x)$</span> 
-fits the real probability distribution of X, and is defined
+fits the real probability distribution of <span>$X$</span>, and is defined
 
 <div>$$
 H(X,q) = -\sum_{x \in X} p(x) log_2(q(x)).
 $$</div>
+
+When <span>$p(x) = q(x)$</span>, cross-entropy has its minimum value, which is 
+the entropy <span>$H(p)$</span>. Another similar measure is the **Kullback-Leibler 
+divergence** or **relative entropy** (also sometimes called cross-entropy):
+
+<div>$$
+D_KL(p||q) = H(X,q) - H(X) = \sum_{x \in X} p(x) log_2(\frac{p(x)}{q(x)}).
+$$</div>
+
+Kullback-Leibler divergence is non-negative and zero if and only if <span>$p(x) 
+= q(x)$</span> almost everywhere. Intuitively Kullback-Leibler divergence can be 
+seen as a difference between two distributions, but it is not a true metric and 
+not a symmetric function. Specifically, it measures the information lost, when 
+<span>$q(x)$</span> is used to approximate <span>$p(x)$</span>.
