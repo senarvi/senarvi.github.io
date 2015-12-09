@@ -10,7 +10,7 @@ use_math: true
 
 **Entropy** measures the uncertainty in the outcome of a random process. 
 Consider the random process of tossing a coin. If the coin is fair, entropy is 
-maximized. The uncertainty \\(entropy\\) of the random process is 1, measured in 
+maximized. The uncertainty \(entropy\) of the random process is 1, measured in 
 bits. This is also the expected amount of information an outcome of the random 
 process carries. If the coin is weighted and comes up heads 100 % of the time, 
 the uncertainty of the random process is 0. In that case the outcome of the 
@@ -28,3 +28,15 @@ where <span>$x$</span> is iterated over all the possible values of
 <span>$X$</span>. In the above formula, entropy is measured with respect to base 
 2. Sometimes other bases are used—then the result will not appear in bits, but 
 otherwise it makes no difference in the following discussion.
+
+If we're able to gain some information about a random process through another 
+random variable, the uncertainty of the random process is diminished. 
+**Conditional entropy** measures how much uncertainty in the random process 
+remains, if the outcome of another random process is known. The entropy of a 
+discrete random variable <span>$X$</span> conditional on the variable 
+<span>$Y$</span> is
+
+<div>$$
+H(X|Y) = \sum_{y \in Y} p(y) H(X|Y=y) = -\sum_{y \in Y} \sum_{x \in X} p(x,y) log_2(\frac{p(x,y)}{p(y)})
+$$</div>
+
