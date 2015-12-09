@@ -128,9 +128,9 @@ probabilistic event depends only on the probability of the event:
 I(X=x) = -log_2(p(x))
 $$</div>
 
-For example, when tossing a fair coin, the probability that the outcome is head 
+For example, when tossing a fair coin, the probability that the outcome is heads 
 is 0.5, so the self-information of that event is <span>$-log_2(0.5) = 1$</span>. 
-The event “head” is said to carry 1 bit of information.
+The event “heads” is said to carry 1 bit of information.
 
 Likewise, the term cross-entropy is often used when the distribution 
 <span>$q(x)$</span> is not known, but one has an outcome from the distribution. 
@@ -147,13 +147,13 @@ sequence. In this context, cross-entropy is defined as the average
 self-information per word:
 
 <div>$$
-H(X=x,q) = -\frac{1N} log_2(p(w_1 ... w_N))
+H(X=x,q) = -\frac{1}{N} log_2(p(w_1 ... w_N))
 $$</div>
 
 and perplexity is defined as the exponent of cross-entropy:
 
 <div>$$
-PP(W) = 2^{H(X=x,q)} = 2^{-\frac{1N} log_2(p(w_1 ... w_N)) = \frac{1}{p(w_1 ... w_N)}^\frac{1N}
+PP(W) = 2^{H(X=x,q)} = 2^{-\frac{1}{N} log_2(p(w_1 ... w_N)) = \frac{1}{p(w_1 ... w_N)}^\frac{1}{N}
 $$</div>
 
 The latter form of the equation brings us another, equal, definition for the 
