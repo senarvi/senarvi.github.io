@@ -1,14 +1,14 @@
 ---
 layout: post
 title: "The fundamental measures in information theory and probability theory"
-description: "Entropy, mutual information, cross-entropy, Kullback-Leibler divergence, and perplexity"
+description: "Entropy, conditional entropy, mutual information, cross-entropy, Kullback-Leibler divergence, and perplexity"
 category: 
 tags: []
 use_math: true
 ---
 {% include JB/setup %}
 
-## Entropy, mutual information, cross-entropy, and KL divergence
+### Entropy, mutual information, cross-entropy, and KL divergence
 
 **Entropy** measures the uncertainty in the outcome of a random process. 
 Consider the random process of tossing a coin. If the coin is fair, entropy is 
@@ -82,7 +82,7 @@ the entropy <span>$H(p)$</span>. Another similar measure is the **Kullback-Leibl
 divergence** or **relative entropy** (also sometimes called cross-entropy):
 
 <div>$$
-D_KL(p||q) = H(X,q) - H(X) = \sum_{x \in X} p(x) log_2(\frac{p(x)}{q(x)}).
+D_{KL}(p||q) = H(X,q) - H(X) = \sum_{x \in X} p(x) log_2(\frac{p(x)}{q(x)}).
 $$</div>
 
 Kullback-Leibler divergence is non-negative and zero if and only if <span>$p(x) 
@@ -99,3 +99,21 @@ optimal for <span>$q(x)$</span> but the data follows <span>$p(x)$</span>, and KL
 divergence gives the extra message length when the coding scheme is optimal for 
 <span>$q(x)$</span> but the data follows <span>$p(x)$</span>.
 
+### Perplexity and self-information
+
+Perplexity is a measure for the uncertainty of a random process, closely related 
+to entropy and cross-entropy. The perplexity of a random variable 
+<span>$X$</span> is defined either
+
+<div>$$
+2^{H(X)} = 2^{-\sum_{x \in X} p(x) log_2(p(x))},
+$$</div>
+
+or
+
+<div>$$
+2^{H(X,q)} = 2^{-\sum_{x \in X} p(x) log_2(q(x))}.
+$$</div>
+
+We can easily see that the perplexity of a fair coin is 2 (we are “two ways 
+perplexed” about the outcome of the random process).
