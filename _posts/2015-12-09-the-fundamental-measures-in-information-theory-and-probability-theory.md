@@ -21,8 +21,8 @@ Formally, the entropy <span>$H$</span> of a discrete random variable
 <span>$X$</span> is defined as
 
 <div>$$
-H(X) = -\sum_{x \in X} p(x) log_2(p(x))
-$$,</div>
+H(X) = -\sum_{x \in X} p(x) log_2(p(x)),
+$$</div>
 
 where <span>$x$</span> is iterated over all the possible values of 
 <span>$X$</span>. In the above formula, entropy is measured with respect to base 
@@ -37,8 +37,8 @@ discrete random variable <span>$X$</span> conditional on the variable
 <span>$Y$</span> is
 
 <div>$$
-H(X|Y) = \sum_{y \in Y} p(y) H(X|Y=y) = -\sum_{y \in Y} \sum_{x \in X} p(x,y) log_2(\frac{p(x,y)}{p(y)})
-$$.</div>
+H(X|Y) = \sum_{y \in Y} p(y) H(X|Y=y) = -\sum_{y \in Y} \sum_{x \in X} p(x,y) log_2(\frac{p(x,y)}{p(y)}).
+$$</div>
 
 The latter form of the equation can be derived if it is understood that
 <span>$0 log(0)$</span> should be treated as being equal to zero.
@@ -51,5 +51,26 @@ was reduced by knowing the value of <span>$Y$</span> we call the mutual
 information of <span>$X$</span> and <span>$Y$</span>. Thus we can write
 
 <div>$$
-I(X;Y) = H(X) - H(X|Y)
-$$.</div>
+I(X;Y) = H(X) - H(X|Y).
+$$</div>
+
+<span>$I(X;Y)$</span>, the mutual information of <span>$X$</span> and 
+<span>$Y$</span>, is a symmetric function:
+
+<div>$$
+I(X;Y) = H(Y) - H(Y|X)
+$$</div>
+
+For discrete random variables it can be written
+
+<div>$$
+I(X;Y) = \sum_{y \in Y} \sum_{x \in X} p(x,y) log_2(\frac{p(x,y)}{p(x)p(y)}).
+$$</div>
+
+If we model <span>$X$</span> with an approximate distribution 
+<span>$q(x)$</span>, **cross-entropy** tells us how well <span>$q(x)$</span> 
+fits the real probability distribution of X, and is defined
+
+<div>$$
+H(X,q) = -\sum_{x \in X} p(x) log_2(q(x)).
+$$</div>
