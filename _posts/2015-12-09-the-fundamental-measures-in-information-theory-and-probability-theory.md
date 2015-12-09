@@ -10,14 +10,16 @@ use_math: true
 
 **Entropy** measures the uncertainty in the outcome of a random process. 
 Consider the random process of tossing a coin. If the coin is fair, entropy is 
-maximized. The uncertainty (entropy) of the random process is 1, measured in 
+maximized. The uncertainty \(entropy\) of the random process is 1, measured in 
 bits. This is also the expected amount of information an outcome of the random 
 process carries. If the coin is weighted and comes up heads 100 % of the time, 
 the uncertainty of the random process is 0. In that case the outcome of the 
 random process gives no information. If the coin is biased, the uncertainty of 
 the random process is something from between these two extremes.
 
-Formally, the entropy <span>$H$</span> of a discrete random variable X is defined as
+Formally, the entropy <span>$H$</span> of a discrete random variable 
+<span>$X$</span> is defined as
 
-<div>
-</div>
+<div>$$
+H(X) = -\sum_{x=X} p(x) log_2(p(x))
+$$</div>
