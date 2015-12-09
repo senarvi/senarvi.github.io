@@ -4,7 +4,7 @@ title: "The fundamental measures in information theory and probability theory"
 description: "Entropy, mutual information, cross-entropy, Kullback-Leibler divergence, and perplexity"
 category: 
 tags: []
-use_math: false
+use_math: true
 ---
 {% include JB/setup %}
 
