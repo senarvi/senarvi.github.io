@@ -4,7 +4,7 @@ title: "The fundamental measures in information theory and probability theory"
 description: "Entropy, mutual information, cross-entropy, Kullback-Leibler divergence, and perplexity"
 category: 
 tags: []
-use_math: true
+use_math: false
 ---
 {% include JB/setup %}
 
@@ -22,7 +22,7 @@ Formally, the entropy <span>$H$</span> of a discrete random variable
 
 <div>$$
 H(X) = -\sum_{x \in X} p(x) log_2(p(x))
-$$</div>
+$$,</div>
 
 where <span>$x$</span> is iterated over all the possible values of 
 <span>$X$</span>. In the above formula, entropy is measured with respect to base 
@@ -38,5 +38,18 @@ discrete random variable <span>$X$</span> conditional on the variable
 
 <div>$$
 H(X|Y) = \sum_{y \in Y} p(y) H(X|Y=y) = -\sum_{y \in Y} \sum_{x \in X} p(x,y) log_2(\frac{p(x,y)}{p(y)})
-$$</div>
+$$.</div>
 
+The latter form of the equation can be derived if it is understood that
+<span>$0 log(0)$</span> should be treated as being equal to zero.
+
+**Mutual information** is closely related to conditional entropy. As explained 
+above, conditional entropy measures the amount of uncertainty that still remains 
+about a random process <span>$X$</span>, when we know the value of another 
+random variable <span>$Y$</span>. The amount the uncertainty of <span>$X$</span> 
+was reduced by knowing the value of <span>$Y$</span> we call the mutual 
+information of <span>$X$</span> and <span>$Y$</span>. Thus we can write
+
+<div>$$
+I(X;Y) = H(X) - H(X|Y)
+$$.</div>
