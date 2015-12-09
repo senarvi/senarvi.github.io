@@ -39,7 +39,7 @@ discrete random variable <span>$X$</span> conditional on the variable
 <span>$Y$</span> is
 
 <div>$$
-H(X|Y) = \sum_{y \in Y} p(y) H(X|Y=y) = -\sum_{y \in Y} \sum_{x \in X} p(x,y) log_2(\frac{p(x,y)}{p(y)}).
+H(X \vert Y) = \sum_{y \in Y} p(y) H(X \vert Y=y) = -\sum_{y \in Y} \sum_{x \in X} p(x,y) log_2(\frac{p(x,y)}{p(y)}).
 $$</div>
 
 The latter form of the equation can be derived if it is understood that
@@ -53,14 +53,14 @@ was reduced by knowing the value of <span>$Y$</span> we call the mutual
 information of <span>$X$</span> and <span>$Y$</span>. Thus we can write
 
 <div>$$
-I(X;Y) = H(X) - H(X|Y).
+I(X;Y) = H(X) - H(X \vert Y).
 $$</div>
 
 <span>$I(X;Y)$</span>, the mutual information of <span>$X$</span> and 
 <span>$Y$</span>, is a symmetric function:
 
 <div>$$
-I(X;Y) = H(Y) - H(Y|X)
+I(X;Y) = H(Y) - H(Y \vert X)
 $$</div>
 
 For discrete random variables it can be written
@@ -82,7 +82,7 @@ the entropy <span>$H(p)$</span>. Another similar measure is the **Kullback-Leibl
 divergence** or **relative entropy** (also sometimes called cross-entropy):
 
 <div>$$
-D_{KL}(p||q) = H(X,q) - H(X) = \sum_{x \in X} p(x) log_2(\frac{p(x)}{q(x)}).
+D_{KL}(p \Vert q) = H(X,q) - H(X) = \sum_{x \in X} p(x) log_2(\frac{p(x)}{q(x)}).
 $$</div>
 
 Kullback-Leibler divergence is non-negative and zero if and only if <span>$p(x) 
@@ -117,3 +117,17 @@ $$</div>
 
 We can easily see that the perplexity of a fair coin is 2 (we are “two ways 
 perplexed” about the outcome of the random process).
+
+Confusingly, entropy is sometimes said to measure how much information the 
+outcome of a random variable contains. We use the term self-information to 
+denote the information content of the outcome of a random variable. Thus entropy 
+is the expected value of self-information. The self-information in a 
+probabilistic event depends only on the probability of the event:
+
+<div>$$
+I(X=x) = -log_2(p(x))
+$$</div>
+
+For example, when tossing a fair coin, the probability that the outcome is head 
+is 0.5, so the self-information of that event is <span>$-log_2(0.5) = 1$</span>. 
+The event “head” is said to carry 1 bit of information.
