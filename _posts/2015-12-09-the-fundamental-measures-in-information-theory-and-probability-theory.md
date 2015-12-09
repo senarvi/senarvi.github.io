@@ -99,7 +99,7 @@ optimal for <span>$q(x)$</span> but the data follows <span>$p(x)$</span>, and KL
 divergence gives the extra message length when the coding scheme is optimal for 
 <span>$q(x)$</span> but the data follows <span>$p(x)$</span>.
 
-### Perplexity and self-information
+### Perplexity, self-information, and language modeling
 
 Perplexity is a measure for the uncertainty of a random process, closely related 
 to entropy and cross-entropy. The perplexity of a random variable 
@@ -153,7 +153,7 @@ $$</div>
 and perplexity is defined as the exponent of cross-entropy:
 
 <div>$$
-PP(W) = 2^{H(X=x,q)} = 2^{-\frac{1}{N} log_2(p(w_1 ... w_N)) = \frac{1}{p(w_1 ... w_N)}^\frac{1}{N}
+PP(W) = 2^{H(X=x,q)} = 2^{-\frac{1}{N} log_2(p(w_1 ... w_N))} = \frac{1}{p(w_1 ... w_N)}^\frac{1}{N}
 $$</div>
 
 The latter form of the equation brings us another, equal, definition for the 
