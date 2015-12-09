@@ -8,6 +8,8 @@ use_math: true
 ---
 {% include JB/setup %}
 
+## Entropy, mutual information, cross-entropy, and KL divergence
+
 **Entropy** measures the uncertainty in the outcome of a random process. 
 Consider the random process of tossing a coin. If the coin is fair, entropy is 
 maximized. The uncertainty \(entropy\) of the random process is 1, measured in 
@@ -88,3 +90,12 @@ Kullback-Leibler divergence is non-negative and zero if and only if <span>$p(x)
 seen as a difference between two distributions, but it is not a true metric and 
 not a symmetric function. Specifically, it measures the information lost, when 
 <span>$q(x)$</span> is used to approximate <span>$p(x)$</span>.
+
+Another perspective to these measures comes from information theory, where the 
+possible values of <span>$X$</span> are seen as messages to be coded using an 
+optimal coding scheme. Entropy, then, gives the expected message length, 
+cross-entropy gives the expected message length when the coding scheme is 
+optimal for <span>$q(x)$</span> but the data follows <span>$p(x)$</span>, and KL 
+divergence gives the extra message length when the coding scheme is optimal for 
+<span>$q(x)$</span> but the data follows <span>$p(x)$</span>.
+
