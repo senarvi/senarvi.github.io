@@ -82,7 +82,7 @@ the entropy <span>$H(p)$</span>. Another similar measure is the **Kullback-Leibl
 divergence** or **relative entropy** (also sometimes called cross-entropy):
 
 <div>$$
-D_{KL}(p \Vert q) = H(X,q) - H(X) = \sum_{x \in X} p(x) log_2(\frac{p(x)}{q(x)}).
+D_{KL}(p \Vert q) = H(X,q) - H(X) = \sum_{x \in X} p(x) log_2(\frac{p(x)}{q(x)})
 $$</div>
 
 Kullback-Leibler divergence is non-negative and zero if and only if <span>$p(x) 
@@ -131,3 +131,35 @@ $$</div>
 For example, when tossing a fair coin, the probability that the outcome is head 
 is 0.5, so the self-information of that event is <span>$-log_2(0.5) = 1$</span>. 
 The event “head” is said to carry 1 bit of information.
+
+Likewise, the term cross-entropy is often used when the distribution 
+<span>$q(x)$</span> is not known, but one has an outcome from the distribution. 
+For example, in natural language processing, it is usual to model a sequence of 
+words <span>$w_1 w_2 ... w_N$</span> as a probabilistic event whose probability 
+is given by a language model:
+
+<div>$$
+p(w_1 ... w_N) = \prod_i p(w_i \vert w_1 ... w_{i-1})
+$$</div>
+
+Cross-entropy can be used to evaluate how well the model predicts a given text 
+sequence. In this context, cross-entropy is defined as the average 
+self-information per word:
+
+<div>$$
+H(X=x,q) = -\frac{1N} log_2(p(w_1 ... w_N))
+$$</div>
+
+and perplexity is defined as the exponent of cross-entropy:
+
+<div>$$
+PP(W) = 2^{H(X=x,q)} = 2^{-\frac{1N} log_2(p(w_1 ... w_N)) = \frac{1}{p(w_1 ... w_N)}^\frac{1N}
+$$</div>
+
+The latter form of the equation brings us another, equal, definition for the 
+perplexity of a word sequence as the geometric mean of the word conditional 
+probabilities:
+
+<div>$$
+PP(W) = \sqrt[N]{\frac{1}{p(w_1) p(w2 \vert w_1) ... p(w_N \vert w_1 ... w_{N-1}}}
+$$</div>
