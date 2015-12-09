@@ -161,5 +161,5 @@ perplexity of a word sequence as the geometric mean of the word conditional
 probabilities:
 
 <div>$$
-PP(W) = \sqrt[N]{\frac{1}{p(w_1) p(w2 \vert w_1) ... p(w_N \vert w_1 ... w_{N-1}}}
+PP(W) = \sqrt[N]{\frac{1}{p(w_1) p(w_2 \vert w_1) ... p(w_N \vert w_1 ... w_{N-1})}}
 $$</div>
