@@ -37,9 +37,11 @@ GitHub: [{{ site.author.github }}](https://github.com/{{ site.author.github }})
     Mikko Kurimo, Seppo Enarvi, Ottokar Tilk, Matti Varjokallio, André Mansikkaniemi, and Tanel Alumäe (2016),
     <a href="http://dx.doi.org/10.1007/s10579-016-9336-9">Modeling under-resourced languages for speech recognition</a>.
     Language Resources and Evaluation.
+    The final publication is available at Springer via <a href="http://dx.doi.org/10.1007/s10579-016-9336-9">http://dx.doi.org/10.1007/s10579-016-9336-9</a>.
     (<a href="publications/lre2016.pdf">PDF</a>,
     <a href="publications/lre2016.bib">BibTex</a>).<br />
-    RELATED CODE: <a href="https://github.com/senarvi/senarvi-speech/tree/master/filter-text">filter-text</a>.
+    RELATED CODE: <a href="https://github.com/senarvi/senarvi-speech/tree/master/filter-text">filter-text</a>,
+    <a href="https://github.com/senarvi/senarvi-speech/tree/master/filter-dictionary">filter-dictionary</a>.
   </li>
   <li>
     Seppo Enarvi and Mikko Kurimo (2013),
