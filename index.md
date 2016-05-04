@@ -34,6 +34,12 @@ GitHub: [{{ site.author.github }}](https://github.com/{{ site.author.github }})
 
 <ul>
   <li>
+    Seppo Enarvi and Mikko Kurimo (2016),
+    <a href="http://arxiv.org/abs/1605.00942">TheanoLM &mdash; An Extensible Toolkit for Neural Network Language Modeling</a>.
+    In review.
+    RELATED CODE: <a href="https://github.com/senarvi/theanolm">TheanoLM</a>.
+  </li>
+  <li>
     Mikko Kurimo, Seppo Enarvi, Ottokar Tilk, Matti Varjokallio, André Mansikkaniemi, and Tanel Alumäe (2016),
     <a href="http://dx.doi.org/10.1007/s10579-016-9336-9">Modeling under-resourced languages for speech recognition</a>.
     Language Resources and Evaluation.
