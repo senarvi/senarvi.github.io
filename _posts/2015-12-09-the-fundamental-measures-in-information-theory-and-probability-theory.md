@@ -56,7 +56,7 @@ information of <span>$X$</span> and <span>$Y$</span>. Thus we can write
 I(X;Y) = H(X) - H(X \vert Y).
 $$</div>
 
-<span>$I(X;Y)$</span>, the mutual information of <span>$X$</span> and 
+&#x20;<span>$I(X;Y)$</span>, the mutual information of <span>$X$</span> and 
 <span>$Y$</span>, is a symmetric function:
 
 <div>$$
@@ -85,11 +85,12 @@ divergence** or **relative entropy** (also sometimes called cross-entropy):
 D_{KL}(p \Vert q) = H(X,q) - H(X) = \sum_{x \in X} p(x) log_2(\frac{p(x)}{q(x)})
 $$</div>
 
-Kullback-Leibler divergence is non-negative and zero if and only if <span>$p(x) 
-= q(x)$</span> almost everywhere. Intuitively Kullback-Leibler divergence can be 
-seen as a difference between two distributions, but it is not a true metric and 
-not a symmetric function. Specifically, it measures the information lost, when 
-<span>$q(x)$</span> is used to approximate <span>$p(x)$</span>.
+Kullback-Leibler divergence is non-negative and zero if and only if
+<span>$p(x) = q(x)$</span> almost everywhere. Intuitively Kullback-Leibler
+divergence can be seen as a difference between two distributions, but it is not
+a true metric and not a symmetric function. Specifically, it measures the
+information lost, when <span>$q(x)$</span> is used to approximate
+<span>$p(x)$</span>.
 
 Another perspective to these measures comes from information theory, where the 
 possible values of <span>$X$</span> are seen as messages to be coded using an 
