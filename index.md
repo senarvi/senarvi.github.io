@@ -20,7 +20,9 @@ E-mail: {{ site.author.email }}
 
 Mobile: +358-44-322-5563
 
-GitHub: [{{ site.author.github }}](https://github.com/{{ site.author.github }})
+## Résumé
+
+<a href="resume.pdf">Résumé PDF</a>
 
 ## Posts
 
@@ -28,6 +30,15 @@ GitHub: [{{ site.author.github }}](https://github.com/{{ site.author.github }})
   {% for post in site.posts %}
     <li><span>{{ post.date | date_to_string }}</span> &raquo; <a href="{{ BASE_PATH }}{{ post.url }}">{{ post.title }}</a></li>
   {% endfor %}
+</ul>
+
+## Software Projects
+
+<ul>
+  <li><a href="https://github.com/{{ site.author.github }}/">GitHub profile</a></li>
+  <li><a href="https://github.com/senarvi/theanolm/">TheanoLM</a>, recurrent neural network language modeling using Theano</li>
+  <li><a href="https://github.com/senarvi/senarvi-freeframe/tree/master/FFGLLightBrush">FFGLLightBrush</a>, FFGL (Resolume) plug-in for light painting</li>
+  <li><a href="https://github.com/senarvi/senarvi-unix/tree/master/pm-scripts">pm-scripts</a>, common interface for Red Hat / Debian package managers</li>
 </ul>
 
 ## Publications
@@ -84,12 +95,4 @@ GitHub: [{{ site.author.github }}](https://github.com/{{ site.author.github }})
     (<a href="publications/master_enarvi_seppo_2006.pdf">PDF</a>,
     <a href="publications/master_enarvi_seppo_2006.bib">BibTeX</a>)
   </li>
-</ul>
-
-## Software Projects
-
-<ul>
-  <li><a href="https://github.com/senarvi/theanolm/">TheanoLM</a>, recurrent neural network language modeling using Theano</li>
-  <li><a href="https://github.com/senarvi/senarvi-freeframe/tree/master/FFGLLightBrush">FFGLLightBrush</a>, FFGL (Resolume) plug-in for light painting</li>
-  <li><a href="https://github.com/senarvi/senarvi-unix/tree/master/pm-scripts">pm-scripts</a>, common interface for Red Hat / Debian package managers</li>
 </ul>
