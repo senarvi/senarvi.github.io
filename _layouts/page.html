@@ -4,15 +4,10 @@ theme:
 layout: default
 ---
 
-page.theme.name 1 = "{{ page.theme.name }}" <br/>
-ASSET_PATH 1 = "{{ ASSET_PATH }}" <br/>
+page.theme = "{{ page.theme }}" <br/>
+page.theme.name = "{{ page.theme.name }}" <br/>
+page.layout = "{{ page.layout }}" <br/>
+page.title = "{{ page.title }}" <br/>
 
 {% include JB/setup %}
-
-page.theme.name 2 = "{{ page.theme.name }}" <br/>
-ASSET_PATH 2 = "{{ ASSET_PATH }}" <br/>
-
 {% include themes/the-minimum/page.html %}
-
-page.theme.name 3 = "{{ page.theme.name }}" <br/>
-ASSET_PATH 3 = "{{ ASSET_PATH }}" <br/>
