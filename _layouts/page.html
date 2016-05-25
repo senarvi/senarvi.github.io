@@ -3,8 +3,16 @@ theme:
   name: the-minimum
 layout: default
 ---
+
+page.theme.name 1 = "{{ page.theme.name }}" <br/>
+ASSET_PATH 1 = "{{ ASSET_PATH }}" <br/>
+
 {% include JB/setup %}
+
+page.theme.name 2 = "{{ page.theme.name }}" <br/>
+ASSET_PATH 2 = "{{ ASSET_PATH }}" <br/>
+
 {% include themes/the-minimum/page.html %}
 
-ASSET_PATH="{{ ASSET_PATH }}" <br/>
-page.theme.name="{{ page.theme.name }}" <br/>
+page.theme.name 3 = "{{ page.theme.name }}" <br/>
+ASSET_PATH 3 = "{{ ASSET_PATH }}" <br/>
