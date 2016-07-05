@@ -7,7 +7,7 @@ tags: []
 ---
 {% include JB/setup %}
 
-### Stack backtrace from Linux command line using GDB
+### Stack backtrace from Linux command line
 
 One of the most useful applications of GDB is to get a stack backtrace from
 Linux console, when a program crashes e.g. due to a segmentation fault. One
@@ -38,7 +38,7 @@ compiled with debugging information included in the executable. For example:
     #0  0x00000000004004fd in fail () at my-program.cc:3
     #1  0x0000000000400513 in main () at my-program.cc:7
 
-### GDB batch mode
+### GDB in batch mode
 
 The above examples expect that you start an interactive session with GDB.
 Sometimes it's useful to be able to run a program under GDB non-interactively,
@@ -62,7 +62,7 @@ program, i.e.
 ### Multi-threaded programs
 
 By default GDB shows stack trace only for the current thread. When debugging a
-**multi-threaded program**, you may want to use the command `thread apply all
+multi-threaded program, you may want to use the command `thread apply all
 backtrace` to display stack trace for all the threads. Another useful command is
 `set print thread-events off`, which disables printing a message every time a
 thread starts or exits. Finally, the command `handle <signal> nostop pass` can
