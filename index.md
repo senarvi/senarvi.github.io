@@ -48,7 +48,8 @@ Mobile: +358-44-322-5563
     Seppo Enarvi and Mikko Kurimo (2016),
     <a href="http://arxiv.org/abs/1605.00942">TheanoLM &mdash; An Extensible Toolkit for Neural Network Language Modeling</a>.
     In Proceedings of the 17th Annual Conference of the International Speech Communication Association (INTERSPEECH).
-    To be published.<br />
+    To be published.
+    (<a href="publications/interspeech2016.pdf">PDF</a>).<br />
     RELATED CODE: <a href="https://github.com/senarvi/theanolm">TheanoLM</a>.
   </li>
   <li>
