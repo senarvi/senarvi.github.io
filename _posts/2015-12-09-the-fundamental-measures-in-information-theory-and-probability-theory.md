@@ -39,7 +39,8 @@ discrete random variable <span>$X$</span> conditional on the variable
 <span>$Y$</span> is
 
 <div>$$
-H(X \vert Y) = \sum_{y \in Y} p(y) H(X \vert Y=y) = -\sum_{y \in Y} \sum_{x \in X} p(x,y) log_2(\frac{p(x,y)}{p(y)}).
+H(X \mvert Y) = \sum_{y \in Y} p(y) H(X \mvert Y=y)
+              = -\sum_{y \in Y} \sum_{x \in X} p(x,y) log_2(\frac{p(x,y)}{p(y)}).
 $$</div>
 
 The latter form of the equation can be derived if it is understood that
@@ -53,14 +54,14 @@ was reduced by knowing the value of <span>$Y$</span> we call the mutual
 information of <span>$X$</span> and <span>$Y$</span>. Thus we can write
 
 <div>$$
-I(X;Y) = H(X) - H(X \vert Y).
+I(X;Y) = H(X) - H(X \mvert Y).
 $$</div>
 
 &#x20;<span>$I(X;Y)$</span>, the mutual information of <span>$X$</span> and 
 <span>$Y$</span>, is a symmetric function:
 
 <div>$$
-I(X;Y) = H(Y) - H(Y \vert X)
+I(X;Y) = H(Y) - H(Y \mvert X)
 $$</div>
 
 For discrete random variables it can be written
@@ -82,7 +83,8 @@ the entropy <span>$H(p)$</span>. Another similar measure is the **Kullback-Leibl
 divergence** or **relative entropy** (also sometimes called cross-entropy):
 
 <div>$$
-D_{KL}(p \Vert q) = H(X,q) - H(X) = \sum_{x \in X} p(x) log_2(\frac{p(x)}{q(x)})
+D_{KL}(p \mvert q) = H(X,q) - H(X)
+                   = \sum_{x \in X} p(x) log_2(\frac{p(x)}{q(x)})
 $$</div>
 
 Kullback-Leibler divergence is non-negative and zero if and only if
@@ -135,17 +137,16 @@ The event “heads” is said to carry 1 bit of information.
 
 Likewise, the term cross-entropy is often used when the distribution
 <span>$q(x)$</span> is not known, but one has an outcome from the distribution.
-Another source of confusion is that when talking about a sequence of
-observations, we are generally interested in the average value when the sequence
-length approaches infinity. As an approximation we use the average value of a
-long sequence.
+When talking about a sequence of observations, we are treating the observations
+as samples from <span>$q(x)$</span>, and approximate the cross-entropy of the
+probability distributions using the average value over a long sequence.
 
 For example, in natural language processing, it is usual to model a sequence of
-words <span>$w_1 w_2 ... w_N$</span> as a probabilistic event whose probability
-is given by a language model:
+words <span>$w_1 w_2 \ldots w_N$</span> as a probabilistic event whose
+probability is given by a language model:
 
 <div>$$
-p(w_1 ... w_N) = \prod_i p(w_i \vert w_1 ... w_{i-1})
+p(w_1 \ldots w_N) = \prod_i p(w_i \mvert w_1 \ldots w_{i-1})
 $$</div>
 
 Cross-entropy can be used to evaluate how well the model predicts a given text
@@ -153,13 +154,15 @@ sequence. In this context, cross-entropy is defined as the average
 self-information per word:
 
 <div>$$
-H(X=x,p) = -\frac{1}{N} log_2(p(w_1 ... w_N))
+H(w_1 \ldots w_N,p) = -\frac{1}{N} log_2(p(w_1 \ldots w_N))
 $$</div>
 
 and perplexity is defined as the exponent of cross-entropy:
 
 <div>$$
-PP(W) = 2^{H(X=x,q)} = 2^{-\frac{1}{N} log_2(p(w_1 ... w_N))} = \frac{1}{p(w_1 ... w_N)}^\frac{1}{N}
+PP(w_1 \ldots w_N) = 2^{H(w_1 \ldots w_N,p)}
+                   = 2^{-\frac{1}{N} log_2(p(w_1 \ldots w_N))}
+                   = \frac{1}{p(w_1 \ldots w_N)}^\frac{1}{N}
 $$</div>
 
 The latter form of the equation brings us another, equal, definition for the 
@@ -167,5 +170,5 @@ perplexity of a word sequence as the geometric mean of the word conditional
 probabilities:
 
 <div>$$
-PP(W) = \sqrt[N]{\frac{1}{p(w_1) p(w_2 \vert w_1) ... p(w_N \vert w_1 ... w_{N-1})}}
+PP(w_1 \ldots w_N) = \sqrt[N]{\frac{1}{p(w_1) p(w_2 \mvert w_1) \ldots p(w_N \mvert w_1 \ldots w_{N-1})}}
 $$</div>
