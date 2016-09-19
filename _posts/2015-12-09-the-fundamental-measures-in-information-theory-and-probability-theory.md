@@ -39,8 +39,8 @@ discrete random variable <span>$X$</span> conditional on the variable
 <span>$Y$</span> is
 
 <div>$$
-H(X \mvert Y) = \sum_{y \in Y} p(y) H(X \mvert Y=y)
-              = -\sum_{y \in Y} \sum_{x \in X} p(x,y) log_2(\frac{p(x,y)}{p(y)}).
+H(X \vert Y) = \sum_{y \in Y} p(y) H(X \vert Y=y)
+             = -\sum_{y \in Y} \sum_{x \in X} p(x,y) log_2(\frac{p(x,y)}{p(y)}).
 $$</div>
 
 The latter form of the equation can be derived if it is understood that
@@ -54,14 +54,14 @@ was reduced by knowing the value of <span>$Y$</span> we call the mutual
 information of <span>$X$</span> and <span>$Y$</span>. Thus we can write
 
 <div>$$
-I(X;Y) = H(X) - H(X \mvert Y).
+I(X;Y) = H(X) - H(X \vert Y).
 $$</div>
 
 &#x20;<span>$I(X;Y)$</span>, the mutual information of <span>$X$</span> and 
 <span>$Y$</span>, is a symmetric function:
 
 <div>$$
-I(X;Y) = H(Y) - H(Y \mvert X)
+I(X;Y) = H(Y) - H(Y \vert X)
 $$</div>
 
 For discrete random variables it can be written
@@ -83,8 +83,8 @@ the entropy <span>$H(p)$</span>. Another similar measure is the **Kullback-Leibl
 divergence** or **relative entropy** (also sometimes called cross-entropy):
 
 <div>$$
-D_{KL}(p \mvert q) = H(X,q) - H(X)
-                   = \sum_{x \in X} p(x) log_2(\frac{p(x)}{q(x)})
+D_{KL}(p \vert q) = H(X,q) - H(X)
+                  = \sum_{x \in X} p(x) log_2(\frac{p(x)}{q(x)})
 $$</div>
 
 Kullback-Leibler divergence is non-negative and zero if and only if
@@ -146,7 +146,7 @@ words <span>$w_1 w_2 \ldots w_N$</span> as a probabilistic event whose
 probability is given by a language model:
 
 <div>$$
-p(w_1 \ldots w_N) = \prod_i p(w_i \mvert w_1 \ldots w_{i-1})
+p(w_1 \ldots w_N) = \prod_i p(w_i \vert w_1 \ldots w_{i-1})
 $$</div>
 
 Cross-entropy can be used to evaluate how well the model predicts a given text
@@ -170,5 +170,5 @@ perplexity of a word sequence as the geometric mean of the word conditional
 probabilities:
 
 <div>$$
-PP(w_1 \ldots w_N) = \sqrt[N]{\frac{1}{p(w_1) p(w_2 \mvert w_1) \ldots p(w_N \mvert w_1 \ldots w_{N-1})}}
+PP(w_1 \ldots w_N) = \sqrt[N]{\frac{1}{p(w_1) p(w_2 \vert w_1) \ldots p(w_N \vert w_1 \ldots w_{N-1})}}
 $$</div>
