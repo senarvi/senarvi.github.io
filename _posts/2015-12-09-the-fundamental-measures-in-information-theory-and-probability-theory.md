@@ -23,7 +23,7 @@ Formally, the entropy <span>$H$</span> of a discrete random variable
 <span>$X$</span> is defined as
 
 <div>$$
-H(X) = -\sum_{x \in X} p(x) log_2(p(x)),
+H(X) = -\sum_{x \in X} p(x) \log_2(p(x)),
 $$</div>
 
 where <span>$x$</span> is iterated over all the possible values of 
@@ -40,11 +40,11 @@ discrete random variable <span>$X$</span> conditional on the variable
 
 <div>$$
 H(X \mid Y) = \sum_{y \in Y} p(y) H(X \mid Y=y)
-            = -\sum_{y \in Y} \sum_{x \in X} p(x,y) log_2(\frac{p(x,y)}{p(y)}).
+            = -\sum_{y \in Y} \sum_{x \in X} p(x,y) \log_2(\frac{p(x,y)}{p(y)}).
 $$</div>
 
 The latter form of the equation can be derived if it is understood that
-<span>$0 log(0)$</span> should be treated as being equal to zero.
+<span>$0 \log(0)$</span> should be treated as being equal to zero.
 
 **Mutual information** is closely related to conditional entropy. As explained 
 above, conditional entropy measures the amount of uncertainty that still remains 
@@ -67,7 +67,7 @@ $$</div>
 For discrete random variables it can be written
 
 <div>$$
-I(X;Y) = \sum_{y \in Y} \sum_{x \in X} p(x,y) log_2(\frac{p(x,y)}{p(x)p(y)}).
+I(X;Y) = \sum_{y \in Y} \sum_{x \in X} p(x,y) \log_2(\frac{p(x,y)}{p(x)p(y)}).
 $$</div>
 
 If we model <span>$X$</span> with an approximate distribution 
@@ -75,7 +75,7 @@ If we model <span>$X$</span> with an approximate distribution
 fits the real probability distribution of <span>$X$</span>, and is defined
 
 <div>$$
-H(X,q) = -\sum_{x \in X} p(x) log_2(q(x)).
+H(X,q) = -\sum_{x \in X} p(x) \log_2(q(x)).
 $$</div>
 
 When <span>$p(x) = q(x)$</span>, cross-entropy has its minimum value, which is 
@@ -84,7 +84,7 @@ divergence** or **relative entropy** (also sometimes called cross-entropy):
 
 <div>$$
 D_{KL}(p \mid q) = H(X,q) - H(X)
-                 = \sum_{x \in X} p(x) log_2(\frac{p(x)}{q(x)})
+                 = \sum_{x \in X} p(x) \log_2(\frac{p(x)}{q(x)})
 $$</div>
 
 Kullback-Leibler divergence is non-negative and zero if and only if
@@ -109,13 +109,13 @@ to entropy and cross-entropy. The perplexity of a random variable
 <span>$X$</span> is defined either
 
 <div>$$
-2^{H(X)} = 2^{-\sum_{x \in X} p(x) log_2(p(x))},
+2^{H(X)} = 2^{-\sum_{x \in X} p(x) \log_2(p(x))},
 $$</div>
 
 or
 
 <div>$$
-2^{H(X,q)} = 2^{-\sum_{x \in X} p(x) log_2(q(x))}.
+2^{H(X,q)} = 2^{-\sum_{x \in X} p(x) \log_2(q(x))}.
 $$</div>
 
 We can easily see that the perplexity of a fair coin is 2 (we are “two ways 
@@ -128,11 +128,11 @@ is the expected value of self-information. The self-information in a
 probabilistic event depends only on the probability of the event:
 
 <div>$$
-I(X=x) = -log_2(p(x))
+I(X=x) = -\log_2(p(x))
 $$</div>
 
 For example, when tossing a fair coin, the probability that the outcome is heads
-is 0.5, so the self-information of that event is <span>$-log_2(0.5) = 1$</span>.
+is 0.5, so the self-information of that event is <span>$-\log_2(0.5) = 1$</span>.
 The event “heads” is said to carry 1 bit of information.
 
 Likewise, the term cross-entropy is often used when the distribution
@@ -154,14 +154,14 @@ sequence. In this context, cross-entropy is defined as the average
 self-information per word:
 
 <div>$$
-H(w_1 \ldots w_N,p) = -\frac{1}{N} log_2(p(w_1 \ldots w_N))
+H(w_1 \ldots w_N,p) = -\frac{1}{N} \log_2(p(w_1 \ldots w_N))
 $$</div>
 
 and perplexity is defined as the exponent of cross-entropy:
 
 <div>$$
 PP(w_1 \ldots w_N) = 2^{H(w_1 \ldots w_N,p)}
-                   = 2^{-\frac{1}{N} log_2(p(w_1 \ldots w_N))}
+                   = 2^{-\frac{1}{N} \log_2(p(w_1 \ldots w_N))}
                    = \frac{1}{p(w_1 \ldots w_N)}^\frac{1}{N}
 $$</div>
 
