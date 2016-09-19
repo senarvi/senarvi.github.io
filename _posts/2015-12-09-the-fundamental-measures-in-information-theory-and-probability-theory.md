@@ -129,26 +129,31 @@ probabilistic event depends only on the probability of the event:
 I(X=x) = -log_2(p(x))
 $$</div>
 
-For example, when tossing a fair coin, the probability that the outcome is heads 
-is 0.5, so the self-information of that event is <span>$-log_2(0.5) = 1$</span>. 
+For example, when tossing a fair coin, the probability that the outcome is heads
+is 0.5, so the self-information of that event is <span>$-log_2(0.5) = 1$</span>.
 The event “heads” is said to carry 1 bit of information.
 
-Likewise, the term cross-entropy is often used when the distribution 
-<span>$q(x)$</span> is not known, but one has an outcome from the distribution. 
-For example, in natural language processing, it is usual to model a sequence of 
-words <span>$w_1 w_2 ... w_N$</span> as a probabilistic event whose probability 
+Likewise, the term cross-entropy is often used when the distribution
+<span>$q(x)$</span> is not known, but one has an outcome from the distribution.
+Another source of confusion is that when talking about a sequence of
+observations, we are generally interested in the average value when the sequence
+length approaches infinity. As an approximation we use the average value of a
+long sequence.
+
+For example, in natural language processing, it is usual to model a sequence of
+words <span>$w_1 w_2 ... w_N$</span> as a probabilistic event whose probability
 is given by a language model:
 
 <div>$$
 p(w_1 ... w_N) = \prod_i p(w_i \vert w_1 ... w_{i-1})
 $$</div>
 
-Cross-entropy can be used to evaluate how well the model predicts a given text 
-sequence. In this context, cross-entropy is defined as the average 
+Cross-entropy can be used to evaluate how well the model predicts a given text
+sequence. In this context, cross-entropy is defined as the average
 self-information per word:
 
 <div>$$
-H(X=x,q) = -\frac{1}{N} log_2(p(w_1 ... w_N))
+H(X=x,p) = -\frac{1}{N} log_2(p(w_1 ... w_N))
 $$</div>
 
 and perplexity is defined as the exponent of cross-entropy:
