@@ -75,7 +75,8 @@ thing is that the shape and data type (and maybe the range of values) correspond
 to the data used in the actual application. Typical errors are caused by a
 mismatch in the dimensionality or shape of the arguments of an operation. The
 error messages can still be quite difficult to interpret. The nice thing is that
-you can also print the computed test values (and their data type).
+you can also print the computed test values (and their data type using the
+`dtype` attribute).
 
 Evaluation of the expressions using test values is enabled by setting the
 `compute_test_value` configuration attribute. Naturally executing the graph
@@ -86,10 +87,46 @@ value provided for the input data, while the actual data is not available yet:
 
 ```python
 import numpy
-from theano import tensor, function, config
+from theano import tensor, config
 config.compute_test_value = 'warn'
 data = tensor.matrix('data', dtype='int64')
-data.tag.test_value = numpy.random.randint(0, 10, size=(100, 100)).astype('int64')
+data.tag.test_value = numpy.random.randint(0, 10, size=(100, 100))
 maximum = data.max()
 print(maximum.tag.test_value)
+```
+
+### Printing
+
+Printing the actual value of a tensor during computation is possible using a
+`theano.printing.Print` operation. The constructor takes an optional message
+argument. The data that is given to the created operation object as an argument
+will be printed during execution of the graph, and also passed on as the output
+of the operation.
+
+That’s not very convenient. In order to print something, you have to use the
+value returned by the print operation in the computation graph, so it's not
+trivial to print e.g. the shape of a matrix. (You could use the value in e.g.
+an assertion just to get it printed.) If you encounter an error while compiling
+the function, this doesn’t help. In that case you can print the test value only.
+But the print operation can be used to print values computed from the actual
+inputs, if necessary.
+
+```python
+import numpy
+from theano import tensor, printing, function
+data = tensor.matrix('data', dtype='int64')
+identity = tensor.identity_like(data)
+print_op = printing.Print("identity:")
+identity = print_op(identity)
+f = function([data], identity.sum())
+toy_data = numpy.arange(9).reshape(3, 3)
+f(toy_data)
+```
+
+The above example prints the identity matrix in the middle of the graph:
+
+```python
+identity: __str__ = [[1 0 0]
+ [0 1 0]
+ [0 0 1]]
 ```
