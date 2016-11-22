@@ -130,3 +130,79 @@ identity: __str__ = [[1 0 0]
  [0 1 0]
  [0 0 1]]
 ```
+
+### Assertions
+
+Often one would like to make sure that the result of an operation has for
+example the shape that was intended. There is an assertion operation that works
+in the same way as the print operation. A `theano.tensor.opt.Assert` object is
+added somewhere in the graph. The constructor takes an optional message
+argument. The first argument is the data that will be passed on as the output of
+the operation, and the second argument is the assertion. Note that the assertion
+has to be a tensor, so for comparison you'll have to use `theano.tensor.eq()`,
+`theano.tensor.neq()`, etc. The example below verifies that the number of output
+and input dimensions are equal:
+
+```python
+import numpy
+from theano import tensor, function
+data = tensor.matrix('data', dtype='int64')
+identity = tensor.identity_like(data)
+assert_op = tensor.opt.Assert("Shape mismatch!")
+output = assert_op(identity, tensor.eq(identity.ndim, data.ndim))
+f = function([data], output)
+toy_data = numpy.arange(9).reshape(3, 3)
+f(toy_data)
+```
+
+Assertions are not very convenient to use either, and in case an assertion
+fails, the printed message usually gives you less information than if you simply
+let the computation continue until the next error.
+
+### Unit tests
+
+Testing the correctness of some higher level functions that use neural networks
+is difficult because of the nondeterministic nature of neural networks. I have
+separated the network structure from the classes that create and use the actual
+Theano functions. If I want to write a unit test for a function that performs
+some operation on neural network output, I replace the neural network with a
+simple dummy network.
+
+So let’s say I have a class `Processor` that uses neural network output to
+perform some task. The function `process_file()` reads input from one file and
+writes output to another file.
+
+```python
+from theano import tensor, function
+class NeuralNetwork:
+    def __init__(self):
+        self.input = tensor.scalar()
+        self.output = complex_theano_operation(self.input)
+class Processor:
+    def __init__(self, network):
+        self.compute_output = function([network.input], network.output)
+    def process_file(self, input_file, output_file):
+        for line in input_file:
+            output_file.write(str(self.compute_output(float(line)) + ‘\n’)
+```
+
+When writing unit tests for Processor, I would create a dummy neural network
+that produces simple deterministic output, then pass that dummy network to
+Processor before testing its functions. The trivial example below tries to
+illustrate this approach:
+
+```python
+class DummyNetwork:
+    def __init__(self):
+        self.input = tensor.scalar()
+        self.output = self.input + 1
+class ProcessorTest(unittest.TestCase):
+    def test_process(self):
+        network = DummyNetwork()
+        processor = Processor(network)
+        with open(‘input.txt’, ‘r’) as input_file,
+             open(‘output.txt’, ‘w’) as output_file:
+            processor.process(input_file, output_file)
+        # Assert that each line in the output file equals to the
+        # corresponding line in the input file plus one.
+```
