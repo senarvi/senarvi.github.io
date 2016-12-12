@@ -75,8 +75,8 @@ thing is that the shape and data type (and maybe the range of values) correspond
 to the data used in the actual application. Typical errors are caused by a
 mismatch in the dimensionality or shape of the arguments of an operation. The
 error messages can still be quite difficult to interpret. The nice thing is that
-you can also print the computed test values (and their data type using the
-`dtype` attribute).
+you can also print the computed test values (and their `dtype`, `shape`, etc.
+attributes).
 
 Evaluation of the expressions using test values is enabled by setting the
 `compute_test_value` configuration attribute. Naturally executing the graph
@@ -180,10 +180,12 @@ class NeuralNetwork:
         self.output = complex_theano_operation(self.input)
 class Processor:
     def __init__(self, network):
-        self.compute_output = function([network.input], network.output)
+        self.compute_output = function([network.input],
+                                       network.output)
     def process_file(self, input_file, output_file):
         for line in input_file:
-            output_file.write(str(self.compute_output(float(line)) + ‘\n’)
+            output_file.write(str(self.compute_output(float(line))
+                              + "\n")
 ```
 
 When writing unit tests for Processor, I would create a dummy neural network
@@ -200,9 +202,15 @@ class ProcessorTest(unittest.TestCase):
     def test_process(self):
         network = DummyNetwork()
         processor = Processor(network)
-        with open(‘input.txt’, ‘r’) as input_file,
-             open(‘output.txt’, ‘w’) as output_file:
+        with open('input.txt', 'r') as input_file,
+             open('output.txt', 'w') as output_file:
             processor.process(input_file, output_file)
         # Assert that each line in the output file equals to the
         # corresponding line in the input file plus one.
 ```
+
+### Performance Problems
+
+Performance problems are perhaps even more challenging to track down. Looking at
+the computation graph is necessary to know what Theano is actually doing under
+the hood.
