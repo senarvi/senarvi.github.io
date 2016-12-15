@@ -4,6 +4,7 @@ title: "Kaldi lattices"
 description: "Introduction to working with Kaldi lattices, and differences to SLF"
 category: 
 tags: []
+use_math: true
 ---
 {% include JB/setup %}
 
@@ -54,8 +55,9 @@ subtract the old language model cost from the graph cost, and add the remaining
 value to the acoustic cost (which will not be modified during rescoring).
 However, if the lexicon doesn't include pronunciation probabilities, and silence
 probabilities are not estimated, this might not be worth the trouble. The
-default silence probability of 0.5 can be compensated by a word insertion
-penalty of log(2), and the transition probabilities don't make much difference.
+default silence probability of <span>$0.5$</span> can be compensated by a word
+insertion penalty of <span>$\log(2)$</span>, and the transition probabilities
+don't make much difference.
 
 ### A look inside Kaldi lattices
 
@@ -71,7 +73,7 @@ Kaldi stores lattices in its general purpose archive format, which can be either
 binary or text. Usually the lattices are saved in binary CompactLattice form.
 `lattice-copy` command can be used for converting between binary and text
 formats, as well as Lattice and CompactLattice. One file may contain multiple
-lattices. The example decode scripts save the recognition lattices from job `N`
+lattices. The example decode scripts save the recognition lattices from job N
 into `lat.N.gz`.
 
 In order to see what a lattice file contains, one can simply convert it to text
@@ -85,7 +87,7 @@ utils/int2sym.pl -f 3 LANG-DIR/words.txt
 ```
 
 The firts line of the output contains the utterance ID. The following lines each
-contain input state, output state, word, and a comma-separated list of weights.
+contain source and destination state, word, and a comma-separated list of weights.
 If the lattice is in CompactLattice format, the weights include acoustic cost,
 graph cost, and transition IDs:
 
@@ -142,20 +144,20 @@ transcripts, one can output in text format and convert the word IDs to words
 using `int2sym.pl` (excluding the first field, which is the utterance ID):
 
 ```bash
-lattice-best-path --lm-scale=12
+lattice-best-path --lm-scale=12 \
                   --word-symbol-table=LANG-DIR/words.txt \
                   "ark:zcat DECODE-DIR/lat.N.gz |" ark,t:- |
 utils/int2sym.pl -f 2- LANG-DIR/words.txt >transcript.ref
 ```
 
-N-best list in Kaldi are represented as lattices with n distinct paths.
-`lattice-1best` command can be used to write the best path as a linear FST
-(only one path). Transition IDs, language model costs, acoustic costs, and
-transcripts can be extracted from the linear FST using `nbest-to-linear`
-utility:
+N-best list in Kaldi are represented as lattices with n distinct (linear) paths.
+A lattice with n best paths can be decoded using `lattice-nbest`, and the single
+best path can be decoded using `lattice-1best`. Transition IDs, language model
+costs, acoustic costs, and transcripts can be extracted from linear FSTs using
+`nbest-to-linear` utility:
 
 ```bash
-lattice-1best --lm-scale=12
+lattice-1best --lm-scale=12 \
               "ark:zcat DECODE-DIR/lat.N.gz |" ark:- |
 nbest-to-linear ark:- \
                 ark,t:transition-ids.txt \
@@ -171,7 +173,7 @@ First the lattice must be aligned with word boundaries. Again the word IDs (the
 fifth field) need to be converted to words:
 
 ```bash
-lattice-1best --lm-scale=12
+lattice-1best --lm-scale=12 \
               "ark:zcat DECODE-DIR/lat.N.gz |" ark:- |
 lattice-align-words LANG-DIR/phones/word_boundary.int \
                     MODEL-DIR/final.mdl \
@@ -182,3 +184,36 @@ utils/int2sym.pl -f 5 LANG-DIR/words.txt >transcript.ctm
 
 The CTM file will contain five fields on each line: utterance ID, audio channel,
 begin time in seconds, duration in seconds, and the word.
+
+### Pruning and evaluating lattices
+
+Some operations, for example rescoring with a neural network language model, can
+take a lot of time if the lattices are large. `lattice-prune` can be used to
+prune paths that are not close enough to the best path, in the same way as
+`lattice-tool -posterior-prune` does (from SRILM toolkit). The threshold for
+pruning is given in the `--beam` argument:
+
+```bash
+lattice-prune --inv-acoustic-scale=12 --beam=5 \
+              "ark:zcat DECODE-DIR/lat.N.gz |" \
+              "ark:| gzip >PRUNED-DIR/lat.N.gz"
+```
+
+When optimizing the lattice size, it is helpful to know the oracle word error
+rate. `lattice-oracle` computes the minimum error rate that can be obatined from
+the lattice, in a similar way that can be done using the SRILM command
+`lattice-tool -ref-file`. The command takes as input the lattice file and the
+reference transcript. Transcripts are expected to be in form of utterance ID
+followed by word IDs, so `utils/sym2int.pl` should be used first to map the
+words to word IDs:
+
+```bash
+utils/sym2int.pl -f 2- LANG-DIR/words.txt <transcript.ref |
+lattice-oracle --word-symbol-table=LANG-DIR/words.txt \
+               "ark:zcat PRUNED-DIR/lat.N.gz |" \
+               ark:- \
+               ark,t:oracle.ark
+```
+
+The program also displays the oracle word sequence, and writes the word IDs to
+the file given in the third positional argument.
