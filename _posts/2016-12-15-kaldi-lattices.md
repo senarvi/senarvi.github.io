@@ -120,8 +120,8 @@ utils/int2sym.pl -f 3 LANG-DIR/words.txt
 
 Now the output starts with two transitions that produce the `<eps>` token. It is
 a special token meaning that there is no word on this arc. The arcs correspond
-to the silence at the beginning of the utterance. The transition IDs on each arc
-correspond to the words:
+to the silence at the beginning of the utterance. The transition IDs on the
+other arcs correspond to the words:
 
 ```
 1-1417560
