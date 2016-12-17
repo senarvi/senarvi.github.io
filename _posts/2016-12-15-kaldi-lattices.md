@@ -82,14 +82,14 @@ output makes more sense if the IDs (third field) are converted to words using
 the mapping found from `words.txt` in the lang directory:
 
 ```bash
-lattice-copy "ark:zcat decode-baseline/lat.N.gz |" ark,t:- |
+lattice-copy "ark:zcat DECODE-DIR/lat.N.gz |" ark,t:- |
 utils/int2sym.pl -f 3 LANG-DIR/words.txt
 ```
 
 The firts line of the output contains the utterance ID. The following lines each
-contain source and destination state, word, and a comma-separated list of weights.
-If the lattice is in CompactLattice format, the weights include acoustic cost,
-graph cost, and transition IDs:
+contain start and end state, word, and a comma-separated list of weights. If the
+lattice is in CompactLattice format, the weights include acoustic cost, graph
+cost, and transition IDs:
 
 ```
 1-1417560
