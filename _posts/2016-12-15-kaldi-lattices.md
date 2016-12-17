@@ -217,3 +217,23 @@ lattice-oracle --word-symbol-table=LANG-DIR/words.txt \
 
 The program also displays the oracle word sequence, and writes the word IDs to
 the file given in the third positional argument.
+
+### Converting Kaldi lattices to SLF
+
+Kaldi lattices can be converted to SLF for processing with external tools. There
+are two scripts in the `egs/wsj/s5/utils` directory that are designed for that:
+`convert_slf.pl` converts a single lattice, and `convert_slf_parallel.sh`
+supports converting a batch of lattices in a compute cluster.
+
+The command for submitting batch jobs is given to `convert_slf_parallel.sh` in
+the `--cmd` argument as usual. The script also takes path to the data directory
+just for checking that the number of lattices matches the number of utterances,
+lang directory that contains the necessary word tables, and decode directory,
+where the lattices are:
+
+```bash
+utils/convert_slf_parallel.sh --cmd BATCH-CMD \
+                              DATA-DIR \
+                              LANG-DIR \
+                              DECODE-DIR
+```
