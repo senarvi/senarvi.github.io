@@ -73,8 +73,8 @@ Kaldi stores lattices in its general purpose archive format, which can be either
 binary or text. Usually the lattices are saved in binary CompactLattice form.
 `lattice-copy` command can be used for converting between binary and text
 formats, as well as Lattice and CompactLattice. One file may contain multiple
-lattices. The example decode scripts save the recognition lattices from job N
-into `lat.N.gz`.
+lattices. The decode scripts in the example recipes save the recognition
+lattices from job N into `lat.N.gz`.
 
 In order to see what a lattice file contains, one can simply convert it to text
 form using `lattice-copy`. Words are stored in lattices as integer IDs, so the
@@ -237,3 +237,6 @@ utils/convert_slf_parallel.sh --cmd BATCH-CMD \
                               LANG-DIR \
                               DECODE-DIR
 ```
+
+Note that the language model scores in the created SLF lattices are actually
+graph scores, as explained above.
