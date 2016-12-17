@@ -213,7 +213,7 @@ utils/sym2int.pl -f 2- LANG-DIR/words.txt <transcript.ref |
 lattice-oracle --word-symbol-table=LANG-DIR/words.txt \
                "ark:zcat PRUNED-DIR/lat.N.gz |" \
                ark:- \
-               ark,t:oracle.ark
+               ark,t:oracle-transcript.int
 ```
 
 The program also displays the oracle word sequence, and writes the word IDs to
