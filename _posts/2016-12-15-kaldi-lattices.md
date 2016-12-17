@@ -104,7 +104,7 @@ In the above example, the first transition from state 0 to state 1 is associated
 with language model cost 14.6843. The graph cost -224.556 is negative, which is
 possible because a neural network acoustic model has been used to create the
 lattice. The transition IDs start with a long sequence of silence states. There
-are no transition IDs associated with the word "on". This is because generally
+are no transition IDs associated with the word `on`. This is because generally
 the weights are not synchronized with each other and the word identities—it is
 only meaningful to look at a whole path from the initial node to the final node.
 
@@ -119,8 +119,9 @@ utils/int2sym.pl -f 3 LANG-DIR/words.txt
 ```
 
 Now the output starts with two transitions that produce the `<eps>` token. It is
-a special token meaning that there is no word on this arc. The arc corresponds
-to the silence at the beginning of the utterance:
+a special token meaning that there is no word on this arc. The arcs correspond
+to the silence at the beginning of the utterance. The transition IDs on each arc
+correspond to the words:
 
 ```
 1-1417560
