@@ -118,19 +118,19 @@ lattice-align-words LANG-DIR/phones/word_boundary.int \
 utils/int2sym.pl -f 3 LANG-DIR/words.txt
 ```
 
-Now the output starts with two transitions that produce the "<eps>" token. It is
+Now the output starts with two transitions that produce the `<eps>` token. It is
 a special token meaning that there is no word on this arc. The arc corresponds
 to the silence at the beginning of the utterance:
 
 ```
-1-1417560 
+1-1417560
 0 4 <eps> 14.6843,-224.556,3_12_18_17_17_17_17_17_17_17_17_17_17_.
 0 1 <eps> 16.5506,-256.026,3_12_18_17_17_17_17_17_17_17_17_17_17_.
 1 2 täst 0,0,22026_22025_22025_22025_22025_22152_22151_22314_22313
 2 3 on 8.15453,-140.39,17450_17449_17606_17714_16186_16226_16462
 3 7 hyvä 11.6047,-299.218,7496_7596_7760_25852_25906_25905_25972_.
 4 5 tästä 6.33317,-128.978,22026_22025_22025_22025_22025_22152_...
-5 6 on 0,0,17302_17538_17656_16186_16226_16462 
+5 6 on 0,0,17302_17538_17656_16186_16226_16462
 6 7 hyvä 11.5558,-299.218,7496_7596_7760_25852_25906_25972_25226_.
 7 8 jatkaa 0,0,11434_11433_11433_11482_11534_11533_11533_1910_1909
 ```
