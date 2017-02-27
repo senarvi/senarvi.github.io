@@ -46,7 +46,7 @@ My CV as a <a href="cv.pdf">PDF</a>
 <ul>
   <li>
     Seppo Enarvi and Mikko Kurimo (2016),
-    <a href="http://arxiv.org/abs/1605.00942">TheanoLM &mdash; An Extensible Toolkit for Neural Network Language Modeling</a>.
+    <a href="http://www.isca-speech.org/archive/Interspeech_2016/abstracts/0618.html">TheanoLM &mdash; An Extensible Toolkit for Neural Network Language Modeling</a>.
     In Proceedings of the 17th Annual Conference of the International Speech Communication Association (INTERSPEECH).
     (<a href="publications/interspeech2016.pdf">PDF</a>.
     <a href="publications/interspeech2016.bib">BibTex</a>).<br />
@@ -64,8 +64,9 @@ My CV as a <a href="cv.pdf">PDF</a>
   </li>
   <li>
     Seppo Enarvi and Mikko Kurimo (2013),
-    <a href="publications/iwslt2013.pdf">Studies on Training Text Selection for Conversational Finnish Language Modeling</a>.
-    In Proceedings of the 10th International Workshop on Spoken Language Translation (IWSLT 2013).
+    <a href="http://workshop2013.iwslt.org/downloads/Studies_on_Training_Text_Selection_for_Conversational_Finnish_Language_Modeling.pdf">
+    Studies on Training Text Selection for Conversational Finnish Language Modeling</a>.
+    In Proceedings of the 10th International Workshop on Spoken Language Translation (IWSLT).
     (<a href="publications/iwslt2013.pdf">PDF</a>,
     <a href="publications/iwslt2013.bib">BibTex</a>).<br />
     RELATED CODE: <a href="https://github.com/senarvi/senarvi-speech/tree/master/filter-text">filter-text</a>,
@@ -75,7 +76,7 @@ My CV as a <a href="cv.pdf">PDF</a>
     Seppo Enarvi and Mikko Kurimo (2013),
     <a href="http://ieeexplore.ieee.org/xpl/articleDetails.jsp?arnumber=6682659">
       A Novel Discriminative Method for Pruning Pronunciation Dictionary Entries</a>.
-    In Proceedings of the 7th International Conference on Speech Technology and Human-Computer Dialogue (SpeD 2013), pages 113&ndash;116.
+    In Proceedings of the 7th International Conference on Speech Technology and Human-Computer Dialogue (SpeD), pages 113&ndash;116.
     (<a href="publications/sped2013.pdf">PDF</a>,
     <a href="publications/sped2013.bib">BibTex</a>).<br />
     NOTE: See erratum at the end of the PDF file.<br />
