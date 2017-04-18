@@ -220,7 +220,7 @@ Print the computation graph using theano.printing.debugprint(). You can print
 the graph at any point when you’re constructing it, but only the final graph
 compiled using theano.function() shows the actual operations and memory
 transfers that will take place. You can display the compiled graph of function
-*f* using `theano.printing.debugprint(f)`. If you have Graphviz and pydot
+`f` using `theano.printing.debugprint(f)`. If you have Graphviz and pydot
 installed, you can even print a pretty image using
 `theano.printing.pydotprint(f, outfile="graph.png")`.
 
@@ -235,7 +235,7 @@ have only one `HostFromGpu` operation in the end, as in the graph below:
 HostFromGpu [id A] ''   136
  |GpuElemwise{Composite{((-i0) / i1)}}[(0, 0)] [id B] ''   133
    |GpuCAReduce{add}{1,1} [id C] ''   128
-   | |GpuElemwise{Composite{((log((i0 + (i1 / i2))) + i3) * i4)}}[(0, 3)] [id D] ''   126
+   | |GpuElemwise{Composite{((log((i0 + (i1 / i2))) + i3) * i4)}}
    |   |CudaNdarrayConstant{[[  9.99999997e-07]]} [id E]
    |   |GpuElemwise{true_div,no_inplace} [id F] ''   119
    |   | |GpuElemwise{Exp}[(0, 0)] [id G] ''   118
@@ -265,7 +265,7 @@ MultinomialFromUniform{int64} [id CH] ''
  | |GpuReshape{2} [id CJ] ''
  | ...
  |HostFromGpu [id CT] ''
- | |GPU_mrg_uniform{CudaNdarrayType(float32, vector),inplace}.1 [id CU] ''
+ | |GPU_mrg_uniform{CudaNdarrayType(float32, vector),inplace}.1 [id CU]
  |   |<CudaNdarrayType(float32, vector)> [id CV]
  |   |MakeVector{dtype='int64'} [id CW] ''
 ```
