@@ -213,4 +213,59 @@ class ProcessorTest(unittest.TestCase):
 
 Performance problems are perhaps even more challenging to track down. Looking at
 the computation graph is necessary to know what Theano is actually doing under
-the hood.
+the hood. Analyzing the graph is easier if you first try to simplify the
+computation, as long as the performance issue won't disappear.
+
+Print the computation graph using theano.printing.debugprint(). You can print
+the graph at any point when you’re constructing it, but only the final graph
+compiled using theano.function() shows the actual operations and memory
+transfers that will take place. You can display the compiled graph of function
+*f* using `theano.printing.debugprint(f)`. If you have Graphviz and pydot
+installed, you can even print a pretty image using
+`theano.printing.pydotprint(f, outfile="graph.png")`.
+
+One thing that can be immediately noted on the graph is the `HostFromGpu` and
+`GpuFromHost` operations. These are the expensive memory transfers between the
+host computer and the GPU memory. You can also notice from the names of the
+operations of the compiled graph, whether they run on GPU or not: GPU operations
+have the Gpu prefix. Ideally your shared variables are stored on the GPU and you
+have only one `HostFromGpu` operation in the end, as in the graph below:
+
+```
+HostFromGpu [id A] ''   136
+ |GpuElemwise{Composite{((-i0) / i1)}}[(0, 0)] [id B] ''   133
+   |GpuCAReduce{add}{1,1} [id C] ''   128
+   | |GpuElemwise{Composite{((log((i0 + (i1 / i2))) + i3) * i4)}}[(0, 3)] [id D] ''   126
+   |   |CudaNdarrayConstant{[[  9.99999997e-07]]} [id E]
+   |   |GpuElemwise{true_div,no_inplace} [id F] ''   119
+   |   | |GpuElemwise{Exp}[(0, 0)] [id G] ''   118
+   |   | | |GpuReshape{2} [id H] ''   116
+   |   | |   |GpuElemwise{Add}[(0, 1)] [id I] ''   114
+   |   | |   | |GpuReshape{3} [id J] ''   112
+   |   | |   | | |GpuCAReduce{add}{0,1} [id K] ''   110
+   |   | |   | | | |GpuReshape{2} [id L] ''   108
+   |   | |   | | |   |GpuElemwise{mul,no_inplace} [id M] ''   66
+   |   | |   | | |   | |GpuDimShuffle{0,1,x,2} [id N] ''   58
+   |   | |   | | |   | | |GpuReshape{3} [id O] ''   55
+   |   | |   | | |   | |   |GpuAdvancedSubtensor1 [id P] ''   35
+   |   | |   | | |   | |   | |layers/projection_layer/W [id Q]
+```
+
+Some operations force memory to be transferred back and forth. If you're still
+using the old GPU backend (`device=gpu`), chances are that reason is that the
+GPU operations are implemented for float32 only. Make sure that you set floatX
+to float32 and your shared variables are float32. All the floating point
+constants should be cast to numpy.float32 as well. Another example is
+multinomial sampling—uniform sampling is performed on GPU, but
+`MultinomialFromUniform` forces a transfer to host memory:
+
+```
+MultinomialFromUniform{int64} [id CH] ''
+ |HostFromGpu [id CI] ''
+ | |GpuReshape{2} [id CJ] ''
+ | ...
+ |HostFromGpu [id CT] ''
+ | |GPU_mrg_uniform{CudaNdarrayType(float32, vector),inplace}.1 [id CU] ''
+ |   |<CudaNdarrayType(float32, vector)> [id CV]
+ |   |MakeVector{dtype='int64'} [id CW] ''
+```
