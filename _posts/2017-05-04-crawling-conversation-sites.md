@@ -9,14 +9,14 @@ tags: []
 
 ### Scraping static web pages
 
-In the past, a common way to obtain [language model training data from the web]
-(https://ssli.ee.washington.edu/tial/projects/ears/WebData/web_data_collection.html)
+In the past, a common way to obtain
+[language model training data from the web](https://ssli.ee.washington.edu/tial/projects/ears/WebData/web_data_collection.html)
 has involved generating Google queries using in-domain data. When trying to
 collect Finnish conversations, I found this method very inefficient. It might be
 that something has changed in how Google handles queries, or less Finnish data
 is available, or that my set of in-domain n-grams was too small. In any case, I
-found crawling large conversation sites using Python and [Scrapy]
-(https://scrapy.org/) to be way more efficient.
+found crawling large conversation sites using Python and
+[Scrapy](https://scrapy.org/) to be way more efficient.
 
 Crawling a site that uses static HTML pages using Scrapy is straightforward.
 Every site structure is a bit different, though, so you'll have to customize the
