@@ -45,7 +45,7 @@ My CV as a <a href="cv.pdf">PDF</a>
 
 <ul>
   <li><a href="https://drive.google.com/file/d/0B_n3ZKMB3JrPNWZVcEM1c2VndUE/view?usp=sharing">Conversational Finnish (74 million words, 197 MB)</a></li>
-  <li><a href="https://drive.google.com/file/d/0B_n3ZKMB3JrPQ2NtbU1NSFBqNTA/view?usp=sharing" Conversational Estonian (73 million words, 183 MB)</a></li>
+  <li><a href="https://drive.google.com/file/d/0B_n3ZKMB3JrPQ2NtbU1NSFBqNTA/view?usp=sharing">Conversational Estonian (73 million words, 183 MB)</a></li>
 </ul>
 
 ## Publications
