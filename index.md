@@ -10,11 +10,11 @@ tagline:
 Aalto University  
 School of Electrical Engineering  
 Department of Signal Processing and Acoustics  
-Otakaari 5 A  
-FI-02150 Helsinki  
+Otakaari 3
+FI-02150 Espoo
 Finland
 
-Room: G 336
+Room: F415b
 
 E-mail: {{ site.author.email }}
 
