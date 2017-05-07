@@ -34,68 +34,50 @@ My CV as a <a href="cv.pdf">PDF</a>
 
 ## Software Projects
 
-<ul>
-  <li><a href="https://github.com/{{ site.author.github }}/">GitHub profile</a></li>
-  <li><a href="https://github.com/senarvi/theanolm/">TheanoLM</a>, recurrent neural network language modeling using Theano</li>
-  <li><a href="https://github.com/senarvi/senarvi-freeframe/tree/master/FFGLLightBrush">FFGLLightBrush</a>, FFGL (Resolume) plug-in for light painting</li>
-  <li><a href="https://github.com/senarvi/senarvi-unix/tree/master/pm-scripts">pm-scripts</a>, common interface for Red Hat / Debian package managers</li>
-</ul>
+* [GitHub profile](https://github.com/{{ site.author.github }}/)
+* [TheanoLM](https://github.com/senarvi/theanolm/), recurrent neural network language modeling using Theano
+* [FFGLLightBrush](https://github.com/senarvi/senarvi-freeframe/tree/master/FFGLLightBrush), FFGL (Resolume) plug-in for light painting
+* [pm-scripts](https://github.com/senarvi/senarvi-unix/tree/master/pm-scripts), common interface for Red Hat / Debian package managers
 
 ## Publications
 
-<ul>
-  <li>
-    Seppo Enarvi and Mikko Kurimo (2016),
-    <a href="http://www.isca-speech.org/archive/Interspeech_2016/abstracts/0618.html">TheanoLM &mdash; An Extensible Toolkit for Neural Network Language Modeling</a>.
-    In Proceedings of the 17th Annual Conference of the International Speech Communication Association (INTERSPEECH).
-    (<a href="publications/interspeech2016.pdf">PDF</a>.
-    <a href="publications/interspeech2016.bib">BibTex</a>).<br />
-    RELATED CODE: <a href="https://github.com/senarvi/theanolm">TheanoLM</a>.
-  </li>
-  <li>
-    Mikko Kurimo, Seppo Enarvi, Ottokar Tilk, Matti Varjokallio, André Mansikkaniemi, and Tanel Alumäe (2016),
-    <a href="http://dx.doi.org/10.1007/s10579-016-9336-9">Modeling under-resourced languages for speech recognition</a>.
-    Language Resources and Evaluation.
-    The final publication is available at Springer via <a href="http://dx.doi.org/10.1007/s10579-016-9336-9">http://dx.doi.org/10.1007/s10579-016-9336-9</a>.
-    (<a href="publications/lre2016.pdf">PDF</a>,
-    <a href="publications/lre2016.bib">BibTex</a>).<br />
-    RELATED CODE: <a href="https://github.com/senarvi/senarvi-speech/tree/master/filter-text">filter-text</a>,
-    <a href="https://github.com/senarvi/senarvi-speech/tree/master/filter-dictionary">filter-dictionary</a>.
-  </li>
-  <li>
-    Seppo Enarvi and Mikko Kurimo (2013),
-    <a href="http://workshop2013.iwslt.org/downloads/Studies_on_Training_Text_Selection_for_Conversational_Finnish_Language_Modeling.pdf">
-    Studies on Training Text Selection for Conversational Finnish Language Modeling</a>.
-    In Proceedings of the 10th International Workshop on Spoken Language Translation (IWSLT).
-    (<a href="publications/iwslt2013.pdf">PDF</a>,
-    <a href="publications/iwslt2013.bib">BibTex</a>).<br />
-    RELATED CODE: <a href="https://github.com/senarvi/senarvi-speech/tree/master/filter-text">filter-text</a>,
-    <a href="https://github.com/senarvi/senarvi-speech/tree/master/oov-stats">oov-stats</a>.
-  </li>
-  <li>
-    Seppo Enarvi and Mikko Kurimo (2013),
-    <a href="http://ieeexplore.ieee.org/xpl/articleDetails.jsp?arnumber=6682659">
-      A Novel Discriminative Method for Pruning Pronunciation Dictionary Entries</a>.
-    In Proceedings of the 7th International Conference on Speech Technology and Human-Computer Dialogue (SpeD), pages 113&ndash;116.
-    (<a href="publications/sped2013.pdf">PDF</a>,
-    <a href="publications/sped2013.bib">BibTex</a>).<br />
-    NOTE: See erratum at the end of the PDF file.<br />
-    RELATED CODE: <a href="https://github.com/senarvi/senarvi-speech/tree/master/filter-dictionary">filter-dictionary</a>.
-  </li>
-  <li>
-    Seppo Enarvi (2012),
-    <a href="https://aaltodoc.aalto.fi/handle/123456789/6044">
-      Finnish Language Speech Recognition for Dental Health Care</a>.
-    Licentiate thesis, Aalto University School of Science, Espoo.
-    (<a href="publications/lic_enarvi_seppo_2012.pdf">PDF</a>,
-    <a href="publications/lic_enarvi_seppo_2012.bib">BibTeX</a>)
-  </li>
-  <li>
-    Seppo Enarvi (2006),
-    <a href="https://aaltodoc.aalto.fi/handle/123456789/9031">
-      Image-based detection of defective logs</a>.
-    Master's thesis, Helsinki University of Technology, Espoo.
-    (<a href="publications/master_enarvi_seppo_2006.pdf">PDF</a>,
-    <a href="publications/master_enarvi_seppo_2006.bib">BibTeX</a>)
-  </li>
-</ul>
+* Seppo Enarvi and Mikko Kurimo (2016),
+  [TheanoLM — An Extensible Toolkit for Neural Network Language Modeling](http://www.isca-speech.org/archive/Interspeech_2016/abstracts/0618.html).
+  In Proceedings of the 17th Annual Conference of the International Speech Communication Association (INTERSPEECH).
+  ([PDF]({{ site.baseurl }}/publications/interspeech2016.pdf),
+  [BibTex]({{ site.baseurl }}/publications/interspeech2016.bib)).  
+  RELATED CODE: [TheanoLM](https://github.com/senarvi/theanolm">.
+* Mikko Kurimo, Seppo Enarvi, Ottokar Tilk, Matti Varjokallio, André
+  Mansikkaniemi, and Tanel Alumäe (2016),
+  [Modeling under-resourced languages for speech recognition](http://dx.doi.org/10.1007/s10579-016-9336-9).
+  Language Resources and Evaluation.
+  The final publication is available at Springer via
+  <http://dx.doi.org/10.1007/s10579-016-9336-9>.
+  ([PDF]({{ site.baseurl }}/publications/lre2016.pdf),
+  [BibTex]({{ site.baseurl }}/publications/lre2016.bib)).  
+  RELATED CODE: [filter-text](https://github.com/senarvi/senarvi-speech/tree/master/filter-text),
+  [filter-dictionary](https://github.com/senarvi/senarvi-speech/tree/master/filter-dictionary).
+* Seppo Enarvi and Mikko Kurimo (2013),
+  [Studies on Training Text Selection for Conversational Finnish Language Modeling](http://workshop2013.iwslt.org/downloads/Studies_on_Training_Text_Selection_for_Conversational_Finnish_Language_Modeling.pdf).
+  In Proceedings of the 10th International Workshop on Spoken Language Translation (IWSLT).
+  ([PDF]({{ site.baseurl }}/publications/iwslt2013.pdf),
+  [BibTex]({{ site.baseurl }}/publications/iwslt2013.bib)).  
+  RELATED CODE: [filter-text](https://github.com/senarvi/senarvi-speech/tree/master/filter-text),
+  [oov-stats](https://github.com/senarvi/senarvi-speech/tree/master/oov-stats).
+* Seppo Enarvi and Mikko Kurimo (2013),
+  [A Novel Discriminative Method for Pruning Pronunciation Dictionary Entries](http://ieeexplore.ieee.org/xpl/articleDetails.jsp?arnumber=6682659).
+  In Proceedings of the 7th International Conference on Speech Technology and Human-Computer Dialogue (SpeD).
+  ([PDF]({{ site.baseurl }}/publications/sped2013.pdf),
+  [BibTex]({{ site.baseurl }}/publications/sped2013.bib)).  
+  NOTE: See erratum at the end of the PDF file.  
+  RELATED CODE: [filter-dictionary](https://github.com/senarvi/senarvi-speech/tree/master/filter-dictionary).
+* Seppo Enarvi (2012),
+  [Finnish Language Speech Recognition for Dental Health Care](https://aaltodoc.aalto.fi/handle/123456789/6044).
+  Licentiate thesis, Aalto University School of Science, Espoo.
+  ([PDF]({{ site.baseurl }}/publications/lic_enarvi_seppo_2012.pdf),
+  [BibTex]({{ site.baseurl }}/publications/lic_enarvi_seppo_2012.bib))
+* Seppo Enarvi (2006),
+  [Image-based detection of defective logs](https://aaltodoc.aalto.fi/handle/123456789/9031).
+  Master's thesis, Helsinki University of Technology, Espoo.
+  ([PDF]({{ site.baseurl }}/publications/master_enarvi_seppo_2006.pdf),
+  [BibTex]({{ site.baseurl }}/publications/master_enarvi_seppo_2006.bib))
