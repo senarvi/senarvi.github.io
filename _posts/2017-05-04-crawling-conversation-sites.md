@@ -7,7 +7,7 @@ tags: []
 ---
 {% include JB/setup %}
 
-### Crawling static web pages
+### Creating web spiders with Scrapy
 
 In the past, a common way to obtain
 [language model training data from the web](https://ssli.ee.washington.edu/tial/projects/ears/WebData/web_data_collection.html)
@@ -16,31 +16,105 @@ collect Finnish conversations, I found this method very inefficient. It might be
 that something has changed in how Google handles queries, or Google finds less
 conversational Finnish data, or that my set of in-domain n-grams was too small.
 In any case, I found crawling large conversation sites using Python and
-[Scrapy](https://scrapy.org/) to be way more efficient.
+[Scrapy](https://scrapy.org/) to be way more efficient. Using Scrapy can
+initially seem like a lot of work, but usually the same spider can be adapted to
+different sites with only small changes. A single conversation site contains
+millions or billions of words of conversation.
 
-Crawling a site that uses static HTML pages using Scrapy is straightforward.
-Every site structure is a bit different, though, so you'll have to customize the
-spider for each site. You need to specify the rules for following links to
-different conversations, and implement a function that parses the messages
-from a conversation page. Creating a new project has been made easy. After
+Creating a new project has been made easy. After
 [installing Scrapy](https://doc.scrapy.org/en/latest/intro/install.html),
 create the directory structure using:
 
 ```bash
-scrapy startproject mysite
+scrapy startproject mybot
 ```
 
-The actual spider class you'll have to implement in
-`mysite/spiders/mysite_spider.py`. This is how the file usually starts:
+Before writing the actual spider, let's look at a few details that need to be
+filled in the files that the command created. `mybot/items.py` defines a class
+for storing a single data item, in this case a message extracted from a
+conversation site. I also extract a unique ID for each message. It can be a
+unique URL or some attribute in the HTML code that the site uses. The file looks
+like this:
+
+```python
+from scrapy.item import Item, Field
+
+class MessageItem(Item):
+    id = Field()
+    text = Field()
+```
+
+`mybot/pipelines.py` defines components of a pipeline that is used to process
+all extracted data items. Pipeline components are classes that implement
+`process_item()` method. The method is called on every extracted item by the
+Scrapy framework. I have used two components—one that filters duplicate items,
+and one that writes the item to disk:
+
+```python
+from scrapy.exceptions import DropItem
+
+class DuplicatesPipeline(object):
+    def __init__(self):
+        self.seen_ids = set()
+
+    def process_item(self, item, spider):
+        if item['id'] in self.seen_ids:
+            raise DropItem("Duplicate item: " + str(item['id']))
+        else:
+            self.seen_ids.add(item['id'])
+            return item
+
+class WriterPipeline(object):
+    def __init__(self):
+        self.output_file = open('messages.txt', 'a')
+
+    def process_item(self, item, spider):
+        self.output_file.write('###### ')
+        self.output_file.write(str(item['id']))
+        self.output_file.write('\n')
+        self.output_file.write(item['text'])
+        self.output_file.write('\n')
+        return item
+```
+
+The spider can be configured in `mybot/settings.py`, which also defines what
+pipeline components will be used to process the extracted items:
+
+```python
+BOT_NAME = 'mybot'
+DOWNLOAD_DELAY = 0.5
+SPIDER_MODULES = ['mybot.spiders']
+NEWSPIDER_MODULE = 'mybot.spiders'
+ITEM_PIPELINES = [
+    'mybot.pipelines.DuplicatesPipeline',
+    'mybot.pipelines.WriterPipeline'
+]
+```
+
+`DOWNLOAD_DELAY` specifies a time in seconds to wait before downloading
+consecutive pages from the same site. This is important because downloading too
+fast may cause your bot to overload the web server, prevent the site from being
+used, or make the site block requests from your bot.
+
+
+### Crawling static web pages
+
+The actual spider class that extracts the data items from HTML pages you'll have
+to implement in `mybot/spiders/mysite_spider.py`. Crawling a site that uses
+static HTML is straightforward. Every site structure is a bit different, though,
+so you'll have to customize the spider for each site. You need to specify the
+rules for following links to different conversations, and implement a function
+that parses the messages from a conversation page. This is how the file usually
+starts:
 
 ```python
 from scrapy.spiders import CrawlSpider, Rule
 from scrapy.linkextractors.sgml import SgmlLinkExtractor
 from scrapy.selector import Selector
-from mysite.items import MessageItem
+from mybot.items import MessageItem
 
 class MysiteSpider(CrawlSpider):
-    name = "mysite"
+    name = "mysite-spider"
     allowed_domains = ["mysite.com"]
     start_urls = ["http://mysite.com/viewforum.php"]
     extractor = SgmlLinkExtractor(allow=('viewforum\.php\?f='))
@@ -52,7 +126,7 @@ class MysiteSpider(CrawlSpider):
         # Parse messages from the response.
 ```
 
-A `CrawlSpider  automates the process of following links on the loaded web
+A `CrawlSpider` automates the process of following links on the loaded web
 pages. `start_urls` defines one or more top-level URLs, where to start crawling.
 You might want to give the start page or list all the individual conversation
 areas. `allowed_domains` limits the spider to links that point to this domain.
@@ -151,13 +225,13 @@ from scrapy.spiders import Spider
 from scrapy.selector import Selector
 from scrapy.http import Request, TextResponse
 from selenium import webdriver
-from mysite.items import MessageItem
+from mybot.items import MessageItem
 
 import time
 from collections import deque
 
 class MysiteSpider(Spider):
-    name = "mysite"
+    name = "mysite-spider"
     start_urls = ["http://mysite.com/forum"]
 
     def __init__(self):
