@@ -32,11 +32,13 @@ Mobile: +358-44-322-5563
 
 My CV as a <a href="cv.pdf">PDF</a>
 
-## Software Projects
+## Code
 
 * [GitHub profile](https://github.com/{{ site.author.github }}/)
-* [TheanoLM](https://github.com/senarvi/theanolm/), recurrent neural network language modeling using Theano
+* [TheanoLM](https://github.com/senarvi/theanolm), recurrent neural network language modeling using Theano
 * [FFGLLightBrush](https://github.com/senarvi/senarvi-freeframe/tree/master/FFGLLightBrush), FFGL (Resolume) plug-in for light painting
+* [senarvi-speech](https://github.com/senarvi/senarvi-speech), collection of scripts related to speech recognition and language modeling
+* [senarvi-image](https://github.com/senarvi/senarvi-image), C++ classes related to image processing
 * [pm-scripts](https://github.com/senarvi/senarvi-unix/tree/master/pm-scripts), common interface for Red Hat / Debian package managers
 
 ## Publications
@@ -46,7 +48,7 @@ My CV as a <a href="cv.pdf">PDF</a>
   In Proceedings of the 17th Annual Conference of the International Speech Communication Association (INTERSPEECH).
   ([PDF]({{ site.baseurl }}/publications/interspeech2016.pdf),
   [BibTex]({{ site.baseurl }}/publications/interspeech2016.bib)).  
-  RELATED CODE: [TheanoLM](https://github.com/senarvi/theanolm">.
+  RELATED CODE: [TheanoLM](https://github.com/senarvi/theanolm).
 * Mikko Kurimo, Seppo Enarvi, Ottokar Tilk, Matti Varjokallio, André
   Mansikkaniemi, and Tanel Alumäe (2016),
   [Modeling under-resourced languages for speech recognition](http://dx.doi.org/10.1007/s10579-016-9336-9).
