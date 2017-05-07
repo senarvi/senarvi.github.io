@@ -19,7 +19,7 @@ In any case, I found crawling large conversation sites using Python and
 [Scrapy](https://scrapy.org/) to be way more efficient. Using Scrapy can
 initially seem like a lot of work, but usually the same spider can be adapted to
 different sites with only small changes. A single conversation site contains
-millions or billions of words of conversation.
+millions or billions of words of conversations.
 
 Creating a new project has been made easy. After
 [installing Scrapy](https://doc.scrapy.org/en/latest/intro/install.html),
@@ -117,7 +117,7 @@ class MysiteSpider(CrawlSpider):
     name = "mysite-spider"
     allowed_domains = ["mysite.com"]
     start_urls = ["http://mysite.com/viewforum.php"]
-    extractor = SgmlLinkExtractor(allow=('viewforum\.php\?f='))
+    extractor = SgmlLinkExtractor(allow=('view(topic|forum)\.php'))
     rules = (
         Rule(extractor, callback='parse_item', follow=True),
     )
@@ -128,12 +128,12 @@ class MysiteSpider(CrawlSpider):
 
 A `CrawlSpider` automates the process of following links on the loaded web
 pages. `start_urls` defines one or more top-level URLs, where to start crawling.
-You might want to give the start page or list all the individual conversation
-areas. `allowed_domains` limits the spider to links that point to this domain.
-You probably want to stay inside the same domain. `extractor` is an object that
-extracts the links from a web page that the spider will follow. You should
-provide a regular expression in the `allow` parameter that matches only to the
-pages that display conversations.
+`allowed_domains` limits the spider to links that point to this domain name. You
+probably want to stay inside the same domain and not to follow external links.
+`extractor` is an object that extracts the links that the spider should follow
+from a web page. You should provide a regular expression in the `allow`
+parameter that matches only those pages that contain conversations or links to
+conversation threads.
 
 Implementation of the `parse_item` function depends on the HTML structure of the
 site. It should iterate through all the messages in the HTML code, and yield a
@@ -161,18 +161,16 @@ def parse_item(self, response):
         yield item
 ```
 
-As you can see, an item contains both an identifier and the message text. The
-identifier will be used to make sure that the same message won't be saved more
-than once. The XPath `//div[@class="message"]` is used to select all `<div>`
-elements from the document with class attribute set to "message". Proper
-instructions on using XPath selectors are out of the scope of this post, but
-there are a few things that can be noted from the code. The `select()` method
-always returns a list, because there can be multiple elements that match the
-search. An attractive feature is that the returned objects are selectors
-themselves that can be used to select nested objects. Without the leading `//`,
-an XPath selects child elements. In this case the `<div>` selector is used to
-select its id attribute and the text inside the element. The `extract()` method
-is used to convert a selector to a text string.
+The XPath `//div[@class="message"]` is used to select all `<div>` elements from
+the document with class attribute set to "message". Proper instructions on using
+XPath selectors are out of the scope of this post, but there are a few things
+that can be noted from the code. The `select()` method always returns a list,
+because there can be multiple elements that match the search. A useful feature
+is that the returned objects are selectors themselves that can be used to select
+nested objects. Without the leading `//`, an XPath selects child elements. In
+this case the `<div>` selector is used to select its id attribute and the text
+inside the element. `extract()` method is used to convert a selector to a text
+string.
 
 So how do you find out how the elements that you want to select can be
 identified? You could of course look at the HTML source code. An easier way, and
@@ -259,7 +257,8 @@ class MysiteSpider(Spider):
 `seen_urls` is maintained to avoid processing the same URL multiple times. URLs
 to be visited are kept in `url_queue`. `parse()` reads just the URL from the
 response, and calls `parse_url()` to load the document in a browser and process
-it. It will also call `parse_url()` for any URLs that are added to `url_queue`.
+it. It will also call `parse_url()` for any URLs that are added to `url_queue`
+while processing a page.
 
 `parse_url()` may have to wait a few seconds for the document to load. Then it
 creates a new response and XPath selector for parsing the document. It has to
