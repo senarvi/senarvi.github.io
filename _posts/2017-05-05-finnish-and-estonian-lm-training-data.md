@@ -19,7 +19,7 @@ language models:
 
 The data, originally 2.7 billion Finnish words and 340 million Estonian words,
 have been collected by
-[crawling conversation sites]({{ site.baseurl }}{% post_url 2017-05-04-crawling-conversation-sites.md %}).
+[crawling conversation sites]({{ site.baseurl }}{% post_url 2017-05-04-crawling-conversation-sites %}).
 The text has been normalized and filtered to match transcribed conversations,
 duplicate lines have been removed, and the sentences have been shuffled. The
 filtering is described in Kurimo et al. (2016),
