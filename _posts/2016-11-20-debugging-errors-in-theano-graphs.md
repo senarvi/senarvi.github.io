@@ -209,7 +209,7 @@ class ProcessorTest(unittest.TestCase):
         # corresponding line in the input file plus one.
 ```
 
-### Performance Problems
+### Performance issues in computation graph
 
 Performance problems are perhaps even more challenging to track down. Looking at
 the computation graph is necessary to know what Theano is actually doing under
@@ -268,4 +268,78 @@ MultinomialFromUniform{int64} [id CH] ''
  | |GPU_mrg_uniform{CudaNdarrayType(float32, vector),inplace}.1 [id CU]
  |   |<CudaNdarrayType(float32, vector)> [id CV]
  |   |MakeVector{dtype='int64'} [id CW] ''
+```
+
+### Profiling performance
+
+Profiling is important after making nontrivial changes to a Theano function, to
+make sure that the compiled code won't run inefficiently. Profiling can be
+enabled by setting the flag `profile=True`, or for certain functions
+individually by passing the argument `profile=True` to `theano.function`.
+
+When profiling is enabled, the function runs very slowly, so if your program
+calls it repeatedly, you probably want to exit after a few iterations. When the
+program exits, theano prints several tables. I have found the Apply table to be
+the most useful. It displays the time spent in each node of the computation
+graph, in descending order:
+
+```
+Apply
+------
+<% time> <sum %> <apply time> <time per call> <#call> <id>
+  89.2%    89.2%     383.470s       2.52e-01s   1523   116
+    input 0: dtype=float32, shape=(10001,), strides=(1,)
+    input 1: dtype=float32, shape=(18000,), strides=(1,)
+    input 2: dtype=int64, shape=(18000,), strides=c
+    output 0: dtype=float32, shape=(10001,), strides=(1,)
+   3.6%    92.8%      15.575s       1.02e-02s   1523   111
+    input 0: dtype=float32, shape=(10001,), strides=(1,)
+    input 1: dtype=float32, shape=(720,), strides=(1,)
+    input 2: dtype=int64, shape=(720,), strides=c
+    output 0: dtype=float32, shape=(10001,), strides=(1,)
+```
+
+In the above example, the most expensive operation is node 116, which consumes
+89 % of the total processing time, so there's clearly something wrong with this
+operation. The ID 116 can be used to locate this node in the computation graph:
+
+```
+GpuAdvancedIncSubtensor1{inplace,inc} [id CY] ''   116
+ |GpuAdvancedIncSubtensor1{inplace,inc} [id CZ] ''   111
+ | |GpuAlloc{memset_0=True} [id DA] ''   22
+ | | |CudaNdarrayConstant{[ 0.]} [id DB]
+ | | |Shape_i{0} [id DC] ''   13
+ | |   |bias [id BU]
+```
+
+It is essential to name all the shared variables by providing the `name`
+argument to the their constructors. This makes it easier to understand which
+function calls generated a specific part of the graph. In this case, the graph
+shows that the bottleneck `GpuAdvancedIncSubtensor1` operates on the `bias`
+variable and we can find the code that produced this operation. It looks like
+this:
+
+```python
+value = numpy.zeros(size).astype(theano.config.floatX)
+bias = theano.shared(value, name='bias')
+...
+bias = bias[targets]
+bias = bias.reshape([minibatch_size, -1])
+```
+
+`GpuAdvancedIncSubtensor1` is responsible for updating the specific elements of
+the bias vector (the elements indexed by `targets`), when the bias parameter is
+updated. So how can the performance be improved? It can be difficult to know
+what's wrong, especially while Theano is still under quite heavy development and
+some things may be broken. If you have a working version without the performance
+problem, the best bet might be to make small changes to the code to see what
+causes the problem to appear.
+
+In this particular case, turned out that a faster variant of the op,
+`GpuAdvancedIncSubtensor1_dev20` was implemented only for two-dimensional input,
+and the performance was radically improved by first converting the bias to 2D:
+
+```python
+bias = bias[:, None]
+bias = bias[targets, 0]
 ```
