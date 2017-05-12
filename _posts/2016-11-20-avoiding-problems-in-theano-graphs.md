@@ -103,33 +103,28 @@ argument. The data that is given to the created operation object as an argument
 will be printed during execution of the graph, and also passed on as the output
 of the operation.
 
-That’s not very convenient. In order to print something, you have to use the
-value returned by the print operation in the computation graph, so it's not
-trivial to print e.g. the shape of a matrix. (You could use the value in e.g.
-an assertion just to get it printed.) If you encounter an error while compiling
-the function, this doesn’t help. In that case you can print the test value only.
-But the print operation can be used to print values computed from the actual
-inputs, if necessary.
+In order to print something, the computation graph has to use the value returned
+by the print operation. Printing e.g. the shape of a matrix would be difficult,
+but luckily the `Print` constructor takes another parameter `attrs` for the
+purpose of printing certain attributes instead of the value of a tensor. If you
+encounter an error while compiling the function, this doesn’t help. In that case
+you can print the test value only. But the print operation can be used to print
+values computed from the actual inputs, if necessary.
 
 ```python
 import numpy
 from theano import tensor, printing, function
 data = tensor.matrix('data', dtype='int64')
 identity = tensor.identity_like(data)
-print_op = printing.Print("identity:")
+print_op = printing.Print("identity", attrs=['shape'])
 identity = print_op(identity)
 f = function([data], identity.sum())
 toy_data = numpy.arange(9).reshape(3, 3)
 f(toy_data)
 ```
 
-The above example prints the identity matrix in the middle of the graph:
-
-```python
-identity: __str__ = [[1 0 0]
- [0 1 0]
- [0 0 1]]
-```
+The above example prints `identity shape = (3, 3)` during the execution of the
+graph.
 
 ### Assertions
 
