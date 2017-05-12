@@ -101,15 +101,16 @@ Printing the actual value of a tensor during computation is possible using a
 `theano.printing.Print` operation. The constructor takes an optional message
 argument. The data that is given to the created operation object as an argument
 will be printed during execution of the graph, and also passed on as the output
-of the operation.
+of the operation. In order to print something, the computation graph has to use
+the value returned by the print operation. Printing e.g. the shape of a matrix
+would be difficult, but luckily the `Print` constructor takes another parameter
+`attrs` for the purpose of printing certain attributes instead of the value of a
+tensor.
 
-In order to print something, the computation graph has to use the value returned
-by the print operation. Printing e.g. the shape of a matrix would be difficult,
-but luckily the `Print` constructor takes another parameter `attrs` for the
-purpose of printing certain attributes instead of the value of a tensor. If you
-encounter an error while compiling the function, this doesn’t help. In that case
-you can print the test value only. But the print operation can be used to print
-values computed from the actual inputs, if necessary.
+If you encounter an error while compiling the function, this doesn’t help. In
+that case you can print the test value only. But the print operation can be used
+to print values computed from the actual inputs, if necessary. This example
+prints `identity shape = (3, 3)` during the execution of the graph:
 
 ```python
 import numpy
@@ -122,9 +123,6 @@ f = function([data], identity.sum())
 toy_data = numpy.arange(9).reshape(3, 3)
 f(toy_data)
 ```
-
-The above example prints `identity shape = (3, 3)` during the execution of the
-graph.
 
 ### Assertions
 
