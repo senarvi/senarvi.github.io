@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "Debugging errors in Theano graphs"
-description: "Notes about debugging errors when building computation graphs using Theano"
+title: "Avoiding problems in Theano graphs"
+description: "Notes on writing, testing, and debugging Theano computation graphs"
 category: 
 tags: []
 ---
@@ -58,7 +58,7 @@ In NumPy you could simply modify the array in place, using
 ### Test values
 
 The biggest difference when writing writing a function with Theano versus NumPy
-is of course that, when expression a mathematical operation using Theano, the
+is of course that, when expressing a mathematical operation using Theano, the
 code doesn’t handle the actual data, but symbolic variables that will be used to
 construct the computation graph. The concept is easy to understand, but also
 easy to forget when you’re writing a Theano function, and makes debugging
