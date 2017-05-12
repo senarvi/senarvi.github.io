@@ -343,3 +343,69 @@ and the performance was radically improved by first converting the bias to 2D:
 bias = bias[:, None]
 bias = bias[targets, 0]
 ```
+
+### Memory usage
+
+The memory usage of a neural network application can be crucial, current GPU
+boards usually containing no more than 12 GB of memory. When Theano runs out of
+memory, it throws an exception (`GpuArrayException` in the new backend) with the
+message `out of memory`. It means that some of the variables, either the tensor
+variables used as the input of a function, shared variables, or the intermediate
+variables created during the execution of the graph, do not fit in the GPU
+memory.
+
+The size of the shared variables, such as neural network weights, can be easily
+observed, and it is clear how the layer sizes affect the sizes of the weight
+matrices. Weight matrix dimensions are defined by the number of inputs and the
+number of outputs, so the weight matrices get large when two large layers follow
+each other (or the number of inputs/outputs and the first/last layer are large).
+
+The shared variables and inputs constitute just part of the memory usage,
+however. Theano also needs to save the intermediate results of the graph nodes,
+e.g. outputs of each layer. The size of these outputs depend on the batch size,
+as well as the layer size. When Theano fails to save an intermediate result, it
+prints a lot of useful information, including the opration that produced the
+data, the node in the computation graph, and all the variables in the memory:
+
+```python
+Apply node that caused the error: GpuDot22(GpuReshape{2}.0, layer_1/W)
+Toposort index: 62
+Inputs types: [GpuArrayType<None>(float32), GpuArrayType<None>(float32)]
+Inputs shapes: [(482112, 200), (200, 4000)]
+Inputs strides: [(800, 4), (16000, 4)]
+Inputs values: ['not shown', 'not shown']
+Inputs type_num: [11, 11]
+Outputs clients: [[GpuReshape{3}(GpuDot22.0, MakeVector{dtype='int64'}.0)]]
+
+Debugprint of the apply node:
+GpuDot22 [id A] <GpuArrayType<None>(float32)> ''
+ |GpuReshape{2} [id B] <GpuArrayType<None>(float32)> ''
+ | |GpuAdvancedSubtensor1 [id C] <GpuArrayType<None>(float32)> ''
+ | | |projection_layer/W [id D] <GpuArrayType<None>(float32)>
+ | ...
+ |layer_1/W [id BA] <GpuArrayType<None>(float32, (False, False))>
+
+Storage map footprint:
+ - GpuReshape{2}.0, Shape: (482112, 200), ElemSize: 4 Byte(s),
+   TotalSize: 385689600 Byte(s)
+ - layer_1/W, Shared Input, Shape: (200, 4000), ElemSize: 4 Byte(s),
+   TotalSize: 3200000 Byte(s)
+```
+
+The above message (slightly edited for clarity) shows that the product of two
+matrices, layer 1 weight and the output of the projection layer would not fit in
+the GPU memory. The output of the projection layer is 482112✕200, which takes
+482112✕200✕4 = 386 MB of memory. The weight matrix is 200✕4000, so the result
+would require 482112✕4000✕4 = 7714 MB of memory. Either the batch size or the
+layer size needs to be reduced.
+
+If you have multiple GPUs, the new gpuarray backend allows defining the
+*context* of shared variables, instructing Theano to place the variable in a
+specific GPU. This way you can split a large model over multiple GPUs. This also
+causes the computation to be performed and the intermediate results to be saved
+in the corresponding GPU, when possible.
+
+If your program is working but you want to observe the memory usage, you can
+enable memory profiling by setting the flags `profile=True,profile_memory=True`.
+Theano will print the peak memory usage of each function, and a list of the
+largest variables.
