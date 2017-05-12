@@ -1,21 +1,21 @@
 ---
 layout: post
-title: "Avoiding problems in Theano graphs"
+title: "Avoiding problems in Theano computation graphs"
 description: "Notes on writing, testing, and debugging Theano computation graphs"
 category: 
 tags: []
 ---
 {% include JB/setup %}
 
-### Theano and NumPy
+### NumPy as a reference
 
 Theano interface is made as similar to NumPy as possible. Theano code often
 closely resembles NumPy code, but the interface is limited and some differences
-are necessary because of how Theano works. It might not always be clear that the
-matrix operations do what you intended. It's easy to test them by running the
+are necessary because of how Theano works. If you're not confident that the
+matrix operations do what you intended, you can esily test them by running the
 same operations in an interactive Python session using NumPy.
 
-While Theano documentation is not perfect, it often helps to look a the
+While Theano documentation is not perfect, it often helps to look at the
 corresponding NumPy documentation. If you’re new to both Theano and NumPy, you
 should at least familiarize yourself with
 [broadcasting](http://docs.scipy.org/doc/numpy/user/basics.broadcasting.html), and
@@ -58,10 +58,10 @@ In NumPy you could simply modify the array in place, using
 ### Test values
 
 The biggest difference when writing writing a function with Theano versus NumPy
-is of course that, when expressing a mathematical operation using Theano, the
-code doesn’t handle the actual data, but symbolic variables that will be used to
-construct the computation graph. The concept is easy to understand, but also
-easy to forget when you’re writing a Theano function, and makes debugging
+is obviously that when expressing a mathematical operation using Theano, the
+Python code doesn’t process the actual data, but symbolic variables that will be
+used to construct the computation graph. The concept is easy to understand, but
+also easy to forget when you’re writing a Theano function, and makes debugging
 somewhat harder.
 
 The fact that the actual data is not known when building the computation graph
@@ -133,13 +133,13 @@ identity: __str__ = [[1 0 0]
 
 ### Assertions
 
-Often one would like to make sure that the result of an operation has for
-example the shape that was intended. There is an assertion operation that works
-in the same way as the print operation. A `theano.tensor.opt.Assert` object is
-added somewhere in the graph. The constructor takes an optional message
-argument. The first argument is the data that will be passed on as the output of
-the operation, and the second argument is the assertion. Note that the assertion
-has to be a tensor, so for comparison you'll have to use `theano.tensor.eq()`,
+Often one would like to make sure for example that the result of an operation
+is of the correct shape. There is an assertion operation that works in the same
+way as the print operation. A `theano.tensor.opt.Assert` object is added
+somewhere in the graph. The constructor takes an optional message argument. The
+first argument is the data that will be passed on as the output of the
+operation, and the second argument is the assertion. Note that the assertion has
+to be a tensor, so for comparison you'll have to use `theano.tensor.eq()`,
 `theano.tensor.neq()`, etc. The example below verifies that the number of output
 and input dimensions are equal:
 
@@ -211,14 +211,14 @@ class ProcessorTest(unittest.TestCase):
 
 ### Performance issues in computation graph
 
-Performance problems are perhaps even more challenging to track down. Looking at
-the computation graph is necessary to know what Theano is actually doing under
-the hood. Analyzing the graph is easier if you first try to simplify the
+Performance problems can be very challenging to track down. Looking at the
+computation graph is necessary to know what Theano is actually doing under the
+hood. Analyzing the graph is easier if you first try to simplify the
 computation, as long as the performance issue won't disappear.
 
-Print the computation graph using theano.printing.debugprint(). You can print
+Print the computation graph using `theano.printing.debugprint()`. You can print
 the graph at any point when you’re constructing it, but only the final graph
-compiled using theano.function() shows the actual operations and memory
+compiled using `theano.function()` shows the actual operations and memory
 transfers that will take place. You can display the compiled graph of function
 `f` using `theano.printing.debugprint(f)`. If you have Graphviz and pydot
 installed, you can even print a pretty image using
@@ -227,7 +227,7 @@ installed, you can even print a pretty image using
 One thing that can be immediately noted on the graph is the `HostFromGpu` and
 `GpuFromHost` operations. These are the expensive memory transfers between the
 host computer and the GPU memory. You can also notice from the names of the
-operations of the compiled graph, whether they run on GPU or not: GPU operations
+operations of the compiled graph, whether they run on GPU or not—GPU operations
 have the Gpu prefix. Ideally your shared variables are stored on the GPU and you
 have only one `HostFromGpu` operation in the end, as in the graph below:
 
@@ -252,11 +252,11 @@ HostFromGpu [id A] ''   136
 ```
 
 Some operations force memory to be transferred back and forth. If you're still
-using the old GPU backend (`device=gpu`), chances are that reason is that the
-GPU operations are implemented for float32 only. Make sure that you set floatX
-to float32 and your shared variables are float32. All the floating point
-constants should be cast to numpy.float32 as well. Another example is
-multinomial sampling—uniform sampling is performed on GPU, but
+using the old GPU backend (`device=gpu`), chances are that the reason is that
+the GPU operations are implemented for float32 only. Make sure that you set the
+flags `floatX=float32` and that your shared variables are float32. All the
+floating point constants should be cast to `numpy.float32` as well. Another
+example is multinomial sampling—uniform sampling is performed on GPU, but
 `MultinomialFromUniform` forces a transfer to host memory:
 
 ```
@@ -265,17 +265,17 @@ MultinomialFromUniform{int64} [id CH] ''
  | |GpuReshape{2} [id CJ] ''
  | ...
  |HostFromGpu [id CT] ''
- | |GPU_mrg_uniform{CudaNdarrayType(float32, vector),inplace}.1 [id CU]
+ | |GPU_mrg_uniform{CudaNdarrayType(float32, vector),inplace}.1
  |   |<CudaNdarrayType(float32, vector)> [id CV]
  |   |MakeVector{dtype='int64'} [id CW] ''
 ```
 
 ### Profiling performance
 
-Profiling is important after making nontrivial changes to a Theano function, to
-make sure that the compiled code won't run inefficiently. Profiling can be
-enabled by setting the flag `profile=True`, or for certain functions
-individually by passing the argument `profile=True` to `theano.function`.
+Profiling is important after making changes to a Theano function, to make sure
+that the compiled code won't run inefficiently. Profiling can be enabled by
+setting the flag `profile=True`, or for certain functions individually by
+passing the argument `profile=True` to `theano.function()`.
 
 When profiling is enabled, the function runs very slowly, so if your program
 calls it repeatedly, you probably want to exit after a few iterations. When the
@@ -368,14 +368,17 @@ prints a lot of useful information, including the opration that produced the
 data, the node in the computation graph, and all the variables in the memory:
 
 ```python
-Apply node that caused the error: GpuDot22(GpuReshape{2}.0, layer_1/W)
+Apply node that caused the error:
+  GpuDot22(GpuReshape{2}.0, layer_1/W)
 Toposort index: 62
-Inputs types: [GpuArrayType<None>(float32), GpuArrayType<None>(float32)]
+Inputs types: [GpuArrayType<None>(float32),
+               GpuArrayType<None>(float32)]
 Inputs shapes: [(482112, 200), (200, 4000)]
 Inputs strides: [(800, 4), (16000, 4)]
 Inputs values: ['not shown', 'not shown']
 Inputs type_num: [11, 11]
-Outputs clients: [[GpuReshape{3}(GpuDot22.0, MakeVector{dtype='int64'}.0)]]
+Outputs clients: [[GpuReshape{3}(GpuDot22.0,
+                   MakeVector{dtype='int64'}.0)]]
 
 Debugprint of the apply node:
 GpuDot22 [id A] <GpuArrayType<None>(float32)> ''
@@ -383,13 +386,13 @@ GpuDot22 [id A] <GpuArrayType<None>(float32)> ''
  | |GpuAdvancedSubtensor1 [id C] <GpuArrayType<None>(float32)> ''
  | | |projection_layer/W [id D] <GpuArrayType<None>(float32)>
  | ...
- |layer_1/W [id BA] <GpuArrayType<None>(float32, (False, False))>
+ |layer_1/W [id BA] <GpuArrayType<None>(float32)>
 
 Storage map footprint:
- - GpuReshape{2}.0, Shape: (482112, 200), ElemSize: 4 Byte(s),
-   TotalSize: 385689600 Byte(s)
- - layer_1/W, Shared Input, Shape: (200, 4000), ElemSize: 4 Byte(s),
-   TotalSize: 3200000 Byte(s)
+ - GpuReshape{2}.0, Shape: (482112, 200),
+   ElemSize: 4 Byte(s), TotalSize: 385689600 Byte(s)
+ - layer_1/W, Shared Input, Shape: (200, 4000),
+   ElemSize: 4 Byte(s), TotalSize: 3200000 Byte(s)
 ```
 
 The above message (slightly edited for clarity) shows that the product of two
@@ -400,7 +403,7 @@ would require 482112✕4000✕4 = 7714 MB of memory. Either the batch size or th
 layer size needs to be reduced.
 
 If you have multiple GPUs, the new gpuarray backend allows defining the
-*context* of shared variables, instructing Theano to place the variable in a
+_context_ of shared variables, instructing Theano to place the variable in a
 specific GPU. This way you can split a large model over multiple GPUs. This also
 causes the computation to be performed and the intermediate results to be saved
 in the corresponding GPU, when possible.
