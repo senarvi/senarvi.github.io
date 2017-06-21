@@ -205,11 +205,13 @@ rate. `lattice-oracle` computes the minimum error rate that can be obatined from
 the lattice, in a similar way that can be done using the SRILM command
 `lattice-tool -ref-file`. The command takes as input the lattice file and the
 reference transcript. Transcripts are expected to be in form of utterance ID
-followed by word IDs, so `utils/sym2int.pl` should be used first to map the
-words to word IDs:
+followed by word IDs, so `utils/sym2int.pl` should be used to map the words to
+word IDs. Any out-of-vocabulary words in the reference transcripts need to be
+mapped to the `[oov]` tag first:
 
 ```bash
-utils/sym2int.pl -f 2- LANG-DIR/words.txt <transcript.ref |
+utils/sym2int.pl --map-oov [oov] -f 2- LANG-DIR/words.txt \
+                 <transcript.ref |
 lattice-oracle --word-symbol-table=LANG-DIR/words.txt \
                "ark:zcat PRUNED-DIR/lat.N.gz |" \
                ark:- \
