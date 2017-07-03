@@ -11,35 +11,33 @@ use_math: true
 ### Entropy
 
 In mathematical statistics, **entropy** measures the uncertainty in the outcome
-of arandom process. Consider the random process of tossing a coin. If the coin
-is fair, entropy is maximized. The uncertainty \(entropy\) of the random process
-is 1, measured in bits. This is also the expected amount of information an
-outcome of the random process carries. If the coin is weighted and comes up
-heads 100 % of the time, the uncertainty of the random process is 0. In that
-case the outcome of the random process gives no information. If the coin is
-biased, the uncertainty of the random process is something from between these
-two extremes.
+of a random event. Consider the random event of tossing a coin. If the coin is
+fair, entropy is maximized. The uncertainty \(entropy\) of the random event is
+1, measured in bits. This is also the expected amount of information an outcome
+of the random event carries. If the coin is weighted and comes up heads 100 % of
+the time, the uncertainty of the random event is 0. In that case the outcome of
+the random event gives no information. If the coin is biased, the uncertainty of
+the random event is something from between these two extremes.
 
-Formally, the entropy <span>$H$</span> of a discrete random variable 
+Formally, the entropy <span>$H$</span> of a discrete random variable
 <span>$X$</span> is defined as
 
 <div>$$
 H(X) = -\sum_{x \in X} p(x) \log_2(p(x)),
 $$</div>
 
-where <span>$x$</span> is iterated over all the possible values of 
-<span>$X$</span>. In the above formula, entropy is measured with respect to base 
-2\. Sometimes other bases are used—then the result will not appear in bits, but 
+where <span>$x$</span> is iterated over all the possible values of
+<span>$X$</span>. In the above formula, entropy is measured with respect to base
+2\. Sometimes other bases are used—then the result will not appear in bits, but
 otherwise it makes no difference in the following discussion.
 
 ### Conditional entropy and mutual information
 
-If we're able to gain some information about a random process through another 
-random variable, the uncertainty of the random process is diminished. 
-**Conditional entropy** measures how much uncertainty in the random process 
-remains, if the outcome of another random process is known. The entropy of a 
-discrete random variable <span>$X$</span> conditional on the variable 
-<span>$Y$</span> is
+If we're able to gain some information about a random event through another
+random event, out uncertainty is diminished. **Conditional entropy** measures
+how much uncertainty in the random event remains, if the outcome of another
+random event is known. The entropy of a discrete random variable
+<span>$X$</span> conditional on the variable <span>$Y$</span> is
 
 <div>$$
 H(X \mid Y) = \sum_{y \in Y} p(y) H(X \mid Y=y)
@@ -51,7 +49,7 @@ The latter form of the equation can be derived if it is understood that
 
 **Mutual information** is closely related to conditional entropy. As explained 
 above, conditional entropy measures the amount of uncertainty that still remains 
-about a random process <span>$X$</span>, when we know the value of another 
+about a random variable <span>$X$</span>, when we know the value of another 
 random variable <span>$Y$</span>. The amount the uncertainty of <span>$X$</span> 
 was reduced by knowing the value of <span>$Y$</span> we call the mutual 
 information of <span>$X$</span> and <span>$Y$</span>. Thus we can write
@@ -101,8 +99,8 @@ information lost, when <span>$q(x)$</span> is used to approximate
 
 ### Perplexity
 
-Perplexity is a measure for the uncertainty of a random process, closely related 
-to entropy and cross entropy. The perplexity of a random variable 
+Perplexity is a measure for the uncertainty of a random event, closely related
+to entropy and cross entropy. The perplexity of a random variable
 <span>$X$</span> is defined either
 
 <div>$$
@@ -116,7 +114,7 @@ or
 $$</div>
 
 We can easily see that the perplexity of a fair coin is 2 (we are “two ways 
-perplexed” about the outcome of the random process).
+perplexed” about the outcome of the random event).
 
 ### Information content
 
