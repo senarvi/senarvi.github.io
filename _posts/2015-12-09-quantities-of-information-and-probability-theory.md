@@ -126,14 +126,15 @@ optimal for <span>$q(x)$</span> but the data follows <span>$p(x)$</span>, and KL
 divergence gives the extra message length when the coding scheme is optimal for 
 <span>$q(x)$</span> but the data follows <span>$p(x)$</span>.
 
-Confusingly, entropy is sometimes used to refer to the quantity information that
-the outcome of a random variable contains. Another name for this quantity is
-**self-information**. Entropy is the expected value of self-information, defined
-as
+Confusingly, entropy is sometimes used to refer to the quantity of information
+that the outcome of a random variable contains. This quantity is also called the
+**self-information**, and defined as:
 
 <div>$$
-I(X=x) = -\log_2(p(x)).
+I(X=x) = -\log_2(p(x))
 $$</div>
+
+Entropy is the expected value of self-information.
 
 For example, when tossing a fair coin, the probability that the outcome is heads
 is 0.5, so the self-information of that event is <span>$-\log_2(0.5) = 1$</span>.
