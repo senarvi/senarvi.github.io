@@ -1,23 +1,24 @@
 ---
 layout: post
-title: "The fundamental measures in information theory and probability theory"
-description: "Entropy, conditional entropy, mutual information, cross-entropy, Kullback-Leibler divergence, and perplexity"
+title: "Quantities of information and probability theory"
+description: "Entropy, conditional entropy, mutual information, cross entropy, Kullback-Leibler divergence, and perplexity"
 category: 
 tags: []
 use_math: true
 ---
 {% include JB/setup %}
 
-### Entropy, mutual information, cross-entropy, and KL divergence
+### Entropy
 
-**Entropy** measures the uncertainty in the outcome of a random process. 
-Consider the random process of tossing a coin. If the coin is fair, entropy is 
-maximized. The uncertainty \(entropy\) of the random process is 1, measured in 
-bits. This is also the expected amount of information an outcome of the random 
-process carries. If the coin is weighted and comes up heads 100 % of the time, 
-the uncertainty of the random process is 0. In that case the outcome of the 
-random process gives no information. If the coin is biased, the uncertainty of 
-the random process is something from between these two extremes.
+In mathematical statistics, **entropy** measures the uncertainty in the outcome
+of arandom process. Consider the random process of tossing a coin. If the coin
+is fair, entropy is maximized. The uncertainty \(entropy\) of the random process
+is 1, measured in bits. This is also the expected amount of information an
+outcome of the random process carries. If the coin is weighted and comes up
+heads 100 % of the time, the uncertainty of the random process is 0. In that
+case the outcome of the random process gives no information. If the coin is
+biased, the uncertainty of the random process is something from between these
+two extremes.
 
 Formally, the entropy <span>$H$</span> of a discrete random variable 
 <span>$X$</span> is defined as
@@ -28,8 +29,10 @@ $$</div>
 
 where <span>$x$</span> is iterated over all the possible values of 
 <span>$X$</span>. In the above formula, entropy is measured with respect to base 
-2. Sometimes other bases are used—then the result will not appear in bits, but 
+2\. Sometimes other bases are used—then the result will not appear in bits, but 
 otherwise it makes no difference in the following discussion.
+
+### Conditional entropy and mutual information
 
 If we're able to gain some information about a random process through another 
 random variable, the uncertainty of the random process is diminished. 
@@ -70,17 +73,19 @@ For discrete random variables it can be written
 I(X;Y) = \sum_{y \in Y} \sum_{x \in X} p(x,y) \log_2(\frac{p(x,y)}{p(x)p(y)}).
 $$</div>
 
+### Cross entropy and Kullback-Leibler divergence
+
 If we model <span>$X$</span> with an approximate distribution 
-<span>$q(x)$</span>, **cross-entropy** tells us how well <span>$q(x)$</span> 
+<span>$q(x)$</span>, **cross entropy** tells us how well <span>$q(x)$</span> 
 fits the real probability distribution of <span>$X$</span>, and is defined
 
 <div>$$
 H(X,q) = -\sum_{x \in X} p(x) \log_2(q(x)).
 $$</div>
 
-When <span>$p(x) = q(x)$</span>, cross-entropy has its minimum value, which is 
+When <span>$p(x) = q(x)$</span>, cross entropy has its minimum value, which is 
 the entropy <span>$H(p)$</span>. Another similar measure is the **Kullback-Leibler 
-divergence** or **relative entropy** (also sometimes called cross-entropy):
+divergence** or **relative entropy** (also sometimes called cross entropy):
 
 <div>$$
 D_{KL}(p \mid q) = H(X,q) - H(X)
@@ -94,18 +99,10 @@ a true metric and not a symmetric function. Specifically, it measures the
 information lost, when <span>$q(x)$</span> is used to approximate
 <span>$p(x)$</span>.
 
-Another perspective to these measures comes from information theory, where the 
-possible values of <span>$X$</span> are seen as messages to be coded using an 
-optimal coding scheme. Entropy, then, gives the expected message length, 
-cross-entropy gives the expected message length when the coding scheme is 
-optimal for <span>$q(x)$</span> but the data follows <span>$p(x)$</span>, and KL 
-divergence gives the extra message length when the coding scheme is optimal for 
-<span>$q(x)$</span> but the data follows <span>$p(x)$</span>.
-
-### Perplexity, self-information, and language modeling
+### Perplexity
 
 Perplexity is a measure for the uncertainty of a random process, closely related 
-to entropy and cross-entropy. The perplexity of a random variable 
+to entropy and cross entropy. The perplexity of a random variable 
 <span>$X$</span> is defined either
 
 <div>$$
@@ -121,43 +118,59 @@ $$</div>
 We can easily see that the perplexity of a fair coin is 2 (we are “two ways 
 perplexed” about the outcome of the random process).
 
-Confusingly, entropy is sometimes said to measure how much information the 
-outcome of a random variable contains. We use the term self-information to 
-denote the information content of the outcome of a random variable. Thus entropy 
-is the expected value of self-information. The self-information in a 
-probabilistic event depends only on the probability of the event:
+### Information content
+
+Another perspective to these measures comes from information theory, where the 
+possible values of <span>$X$</span> are seen as messages to be coded using an 
+optimal coding scheme. Entropy, then, gives the expected message length, 
+cross entropy gives the expected message length when the coding scheme is 
+optimal for <span>$q(x)$</span> but the data follows <span>$p(x)$</span>, and KL 
+divergence gives the extra message length when the coding scheme is optimal for 
+<span>$q(x)$</span> but the data follows <span>$p(x)$</span>.
+
+Confusingly, entropy is sometimes used to refer to the quantity information that
+the outcome of a random variable contains. Another name for this quantity is
+**self-information**. Entropy is the expected value of self-information, defined
+as
 
 <div>$$
-I(X=x) = -\log_2(p(x))
+I(X=x) = -\log_2(p(x)).
 $$</div>
 
 For example, when tossing a fair coin, the probability that the outcome is heads
 is 0.5, so the self-information of that event is <span>$-\log_2(0.5) = 1$</span>.
 The event “heads” is said to carry 1 bit of information.
 
-Likewise, the term cross-entropy is often used when the distribution
-<span>$q(x)$</span> is not known, but one has an outcome from the distribution.
-When talking about a sequence of observations, we are treating the observations
-as samples from <span>$q(x)$</span>, and approximate the cross-entropy of the
-probability distributions using the average value over a long sequence.
+### Estimation from a sample and language modeling
+
+Often we would like to measure these quantities, but instead of the true
+probability distribution we have a sample drawn from it. There are actually many
+ways to estimate the entropy from a sample; one is by estimating each of the
+probabilities p(x) as the fraction of x in the sample. To compare a known
+distribution <span>$p(x)$</span> to a sample <span>$x_1 x_2 \ldots x_N$</span>,
+the Monte Carlo estimate of cross entropy can be computed as:
+
+<div>$$
+H(x_1 \ldots x_N,p) = -\frac{1}{N} \sum_i \log_2(p(x_i))
+$$</div>
 
 For example, in natural language processing, it is usual to model a sequence of
-words <span>$w_1 w_2 \ldots w_N$</span> as a probabilistic event whose
+words <span>$w_1 w_2 \ldots w_N$</span> as the outcome of a random event whose
 probability is given by a language model:
 
 <div>$$
 p(w_1 \ldots w_N) = \prod_i p(w_i \mid w_1 \ldots w_{i-1})
 $$</div>
 
-Cross-entropy can be used to evaluate how well the model predicts a given text
-sequence. In this context, cross-entropy is defined as the average
-self-information per word:
+Cross entropy can be used to evaluate how well the model predicts a given text
+sequence. In this context, cross entropy is defined as if the words were
+independent observations:
 
 <div>$$
-H(w_1 \ldots w_N,p) = -\frac{1}{N} \log_2(p(w_1 \ldots w_N))
+H(w_1 \ldots w_N,p) = -\frac{1}{N} \sum_i \log_2(p(x_i)) = -\frac{1}{N} \log_2(p(w_1 \ldots w_N))
 $$</div>
 
-and perplexity is defined as the exponent of cross-entropy:
+and perplexity is defined as the exponent of cross entropy:
 
 <div>$$
 PP(w_1 \ldots w_N) = 2^{H(w_1 \ldots w_N,p)}
