@@ -49,11 +49,11 @@ My CV as a <a href="cv.pdf">PDF</a>
 * Peter Smit, Siva Reddy Gangireddy, Seppo Enarvi, Sami Virpioja, Mikko Kurimo (2017),
   Character-Based Units for Unlimited Vocabulary Continuous Speech Recognition.
   In Proceedings of the 2017 IEEE Automatic Speech Recognition and Understanding Workshop (ASRU).
-  [BibTex]({{ site.baseurl }}/publications/asru2017.bib)).
+  ([BibTex]({{ site.baseurl }}/publications/asru2017.bib)).
 * Peter Smit, Siva Reddy Gangireddy, Seppo Enarvi, Sami Virpioja, Mikko Kurimo (2017),
   Aalto System for the 2017 Arabic Multi-Genre Broadcast Challenge.
   In Proceedings of the 2017 IEEE Automatic Speech Recognition and Understanding Workshop (ASRU).
-  [BibTex]({{ site.baseurl }}/publications/asru2017challenge.bib)).
+  ([BibTex]({{ site.baseurl }}/publications/asru2017challenge.bib)).
 * Seppo Enarvi and Mikko Kurimo (2016),
   [TheanoLM — An Extensible Toolkit for Neural Network Language Modeling](http://www.isca-speech.org/archive/Interspeech_2016/abstracts/0618.html).
   In Proceedings of the 17th Annual Conference of the International Speech Communication Association (INTERSPEECH).
