@@ -53,7 +53,7 @@ My CV as a <a href="cv.pdf">PDF</a>
 * Peter Smit, Siva Reddy Gangireddy, Seppo Enarvi, Sami Virpioja, Mikko Kurimo (2017),
   Aalto System for the 2017 Arabic Multi-Genre Broadcast Challenge.
   In Proceedings of the 2017 IEEE Automatic Speech Recognition and Understanding Workshop (ASRU).
-  ([BibTex]({{ site.baseurl }}/publications/asru2017challenge.bib)).
+  ([BibTex]({{ site.baseurl }}/publications/asru2017mgb.bib)).
 * Seppo Enarvi and Mikko Kurimo (2016),
   [TheanoLM — An Extensible Toolkit for Neural Network Language Modeling](http://www.isca-speech.org/archive/Interspeech_2016/abstracts/0618.html).
   In Proceedings of the 17th Annual Conference of the International Speech Communication Association (INTERSPEECH).
@@ -78,19 +78,19 @@ My CV as a <a href="cv.pdf">PDF</a>
   RELATED CODE: [filter-text](https://github.com/senarvi/senarvi-speech/tree/master/filter-text),
   [oov-stats](https://github.com/senarvi/senarvi-speech/tree/master/oov-stats).
 * Seppo Enarvi and Mikko Kurimo (2013),
-  [A Novel Discriminative Method for Pruning Pronunciation Dictionary Entries](http://ieeexplore.ieee.org/xpl/articleDetails.jsp?arnumber=6682659).
-  In Proceedings of the 7th International Conference on Speech Technology and Human-Computer Dialogue (SpeD).
+  [A Novel Discriminative Method for Pruning Pronunciation Dictionary Entries](http://dx.doi.org/10.1109/SpeD.2013.6682659).
+  In Proceedings of the 7th Conference on Speech Technology and Human-Computer Dialogue (SpeD).
   ([PDF]({{ site.baseurl }}/publications/sped2013.pdf),
   [BibTex]({{ site.baseurl }}/publications/sped2013.bib)).  
   NOTE: See erratum at the end of the PDF file.  
   RELATED CODE: [filter-dictionary](https://github.com/senarvi/senarvi-speech/tree/master/filter-dictionary).
 * Seppo Enarvi (2012),
-  [Finnish Language Speech Recognition for Dental Health Care](https://aaltodoc.aalto.fi/handle/123456789/6044).
+  [Finnish Language Speech Recognition for Dental Health Care](http://urn.fi/URN:NBN:fi:aalto-201210203324).
   Licentiate thesis, Aalto University School of Science, Espoo.
   ([PDF]({{ site.baseurl }}/publications/lic_enarvi_seppo_2012.pdf),
   [BibTex]({{ site.baseurl }}/publications/lic_enarvi_seppo_2012.bib))
 * Seppo Enarvi (2006),
-  [Image-based detection of defective logs](https://aaltodoc.aalto.fi/handle/123456789/9031).
+  [Image-based detection of defective logs](http://urn.fi/URN:NBN:fi:aalto-201304271936).
   Master's thesis, Helsinki University of Technology, Espoo.
   ([PDF]({{ site.baseurl }}/publications/master_enarvi_seppo_2006.pdf),
   [BibTex]({{ site.baseurl }}/publications/master_enarvi_seppo_2006.bib))
