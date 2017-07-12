@@ -56,7 +56,7 @@ My CV as a <a href="cv.pdf">PDF</a>
   ([BibTex]({{ site.baseurl }}/publications/asru2017mgb.bib)).
 * Seppo Enarvi and Mikko Kurimo (2016),
   [TheanoLM — An Extensible Toolkit for Neural Network Language Modeling](http://www.isca-speech.org/archive/Interspeech_2016/abstracts/0618.html).
-  In Proceedings of the 17th Annual Conference of the International Speech Communication Association (INTERSPEECH).
+  In Proceedings of the 17th Annual Conference of the International Speech Communication Association (INTERSPEECH), pp. 3052–3056.
   ([PDF]({{ site.baseurl }}/publications/interspeech2016.pdf),
   [BibTex]({{ site.baseurl }}/publications/interspeech2016.bib)).  
   RELATED CODE: [TheanoLM](https://github.com/senarvi/theanolm).
@@ -64,22 +64,20 @@ My CV as a <a href="cv.pdf">PDF</a>
   Mansikkaniemi, and Tanel Alumäe (2016),
   [Modeling under-resourced languages for speech recognition](http://dx.doi.org/10.1007/s10579-016-9336-9).
   Language Resources and Evaluation.
-  The final publication is available at Springer via
-  <http://dx.doi.org/10.1007/s10579-016-9336-9>.
   ([PDF]({{ site.baseurl }}/publications/lre2016.pdf),
   [BibTex]({{ site.baseurl }}/publications/lre2016.bib)).  
   RELATED CODE: [filter-text](https://github.com/senarvi/senarvi-speech/tree/master/filter-text),
   [filter-dictionary](https://github.com/senarvi/senarvi-speech/tree/master/filter-dictionary).
 * Seppo Enarvi and Mikko Kurimo (2013),
   [Studies on Training Text Selection for Conversational Finnish Language Modeling](http://workshop2013.iwslt.org/downloads/Studies_on_Training_Text_Selection_for_Conversational_Finnish_Language_Modeling.pdf).
-  In Proceedings of the 10th International Workshop on Spoken Language Translation (IWSLT).
+  In Proceedings of the 10th International Workshop on Spoken Language Translation (IWSLT), pp. 256–263.
   ([PDF]({{ site.baseurl }}/publications/iwslt2013.pdf),
   [BibTex]({{ site.baseurl }}/publications/iwslt2013.bib)).  
   RELATED CODE: [filter-text](https://github.com/senarvi/senarvi-speech/tree/master/filter-text),
   [oov-stats](https://github.com/senarvi/senarvi-speech/tree/master/oov-stats).
 * Seppo Enarvi and Mikko Kurimo (2013),
   [A Novel Discriminative Method for Pruning Pronunciation Dictionary Entries](http://dx.doi.org/10.1109/SpeD.2013.6682659).
-  In Proceedings of the 7th Conference on Speech Technology and Human-Computer Dialogue (SpeD).
+  In Proceedings of the 7th Conference on Speech Technology and Human-Computer Dialogue (SpeD), pp. 113–116.
   ([PDF]({{ site.baseurl }}/publications/sped2013.pdf),
   [BibTex]({{ site.baseurl }}/publications/sped2013.bib)).  
   NOTE: See erratum at the end of the PDF file.  
