@@ -11,13 +11,14 @@ use_math: true
 ### Entropy
 
 In mathematical statistics, **entropy** measures the uncertainty in the outcome
-of a random event. Consider the random event of tossing a coin. If the coin is
-fair, entropy is maximized. The uncertainty \(entropy\) of the random event is
-1, measured in bits. This is also the expected amount of information an outcome
-of the random event carries. If the coin is weighted and comes up heads 100 % of
-the time, the uncertainty of the random event is 0. In that case the outcome of
-the random event gives no information. If the coin is biased, the uncertainty of
-the random event is something from between these two extremes.
+of a random phenomenon. Consider the random experiment of tossing a coin. If the
+coin is fair, entropy is maximized. The uncertainty \(entropy\) in the
+experiment is 1, measured in bits. This is also the expected amount of
+information an outcome of the random experiment carries. If the coin is weighted
+and comes up heads 100 % of the time, the uncertainty of the random experiment
+is 0. In that case the outcome of the random experiment gives no information. If
+the coin is biased, the uncertainty of the random experiment is something from
+between these two extremes.
 
 Formally, the entropy <span>$H$</span> of a discrete random variable
 <span>$X$</span> is defined as
@@ -33,11 +34,11 @@ otherwise it makes no difference in the following discussion.
 
 ### Conditional entropy and mutual information
 
-If we're able to gain some information about a random event through another
-random event, out uncertainty is diminished. **Conditional entropy** measures
-how much uncertainty in the random event remains, if the outcome of another
-random event is known. The entropy of a discrete random variable
-<span>$X$</span> conditional on the variable <span>$Y$</span> is
+If we're able to gain some information about a random phenomenon through another
+random phenomenon, our uncertainty is diminished. **Conditional entropy**
+measures how much uncertainty in the outcome of one random phenomenon remains,
+if the outcome of another random phenomenon is known. The entropy of a discrete
+random variable <span>$X$</span> conditional on the variable <span>$Y$</span> is
 
 <div>$$
 H(X \mid Y) = \sum_{y \in Y} p(y) H(X \mid Y=y)
@@ -99,8 +100,8 @@ information lost, when <span>$q(x)$</span> is used to approximate
 
 ### Perplexity
 
-Perplexity is a measure for the uncertainty of a random event, closely related
-to entropy and cross entropy. The perplexity of a random variable
+Perplexity is a measure for the uncertainty of a random phenomenon, closely
+related to entropy and cross entropy. The perplexity of a random variable
 <span>$X$</span> is defined either
 
 <div>$$
@@ -114,7 +115,7 @@ or
 $$</div>
 
 We can easily see that the perplexity of a fair coin is 2 (we are “two ways 
-perplexed” about the outcome of the random event).
+perplexed” about the outcome of the random experiment).
 
 ### Information content
 
@@ -155,8 +156,8 @@ H(x_1 \ldots x_N,p) = -\frac{1}{N} \sum_i \log_2(p(x_i))
 $$</div>
 
 For example, in natural language processing, it is usual to model a sequence of
-words <span>$w_1 w_2 \ldots w_N$</span> as the outcome of a random event whose
-probability is given by a language model:
+words <span>$w_1 w_2 \ldots w_N$</span> as the outcome of a random phenomenon
+whose probability is given by a language model:
 
 <div>$$
 p(w_1 \ldots w_N) = \prod_i p(w_i \mid w_1 \ldots w_{i-1})
