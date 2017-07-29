@@ -87,8 +87,8 @@ the entropy <span>$H(p)$</span>. Another similar measure is the **Kullback-Leibl
 divergence** or **relative entropy** (also sometimes called cross entropy):
 
 <div>$$
-D_{KL}(p \mid q) = H(X,q) - H(X)
-                 = \sum_{x \in X} p(x) \log_2(\frac{p(x)}{q(x)})
+D_{KL}(p \parallel q) = H(X,q) - H(X)
+                      = \sum_{x \in X} p(x) \log_2(\frac{p(x)}{q(x)})
 $$</div>
 
 Kullback-Leibler divergence is non-negative and zero if and only if
