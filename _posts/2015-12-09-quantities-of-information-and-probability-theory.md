@@ -105,7 +105,7 @@ related to entropy and cross entropy. The perplexity of a random variable
 <span>$X$</span> is defined as the exponent of entropy:
 
 <div>$$
-2^{H(X)} = 2^{-\sum_{x \in X} p(x) \log_2(p(x))},
+2^{H(X)} = 2^{-\sum_{x \in X} p(x) \log_2(p(x))}
 $$</div>
 
 We can easily see that the perplexity of a fair coin is 2 (we are “two ways
@@ -115,7 +115,7 @@ many sides we need on a fair dice to get the same uncertainty.
 The exponent of cross entropy is also called perplexity:
 
 <div>$$
-2^{H(X,q)} = 2^{-\sum_{x \in X} p(x) \log_2(q(x))}.
+2^{H(X,q)} = 2^{-\sum_{x \in X} p(x) \log_2(q(x))}
 $$</div>
 
 This is another measure for how well <span>$q(x)$</span> approximates the
