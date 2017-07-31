@@ -100,9 +100,23 @@ information lost, when <span>$q(x)$</span> is used to approximate
 
 ### Perplexity
 
-Perplexity is a measure for the uncertainty of a random phenomenon, closely
-related to entropy and cross entropy. The perplexity of a random variable
-<span>$X$</span> is defined as the exponent of entropy:
+Perplexity is defined as the exponent of entropy or cross entropy. The
+perplexity of model <span>$q(x)$</span> on the random variable <span>$X$</span>
+is the exponent of cross entropy:
+
+<div>$$
+2^{H(X,q)} = 2^{-\sum_{x \in X} p(x) \log_2(q(x))}.
+$$</div>
+
+This is another measure for how well <span>$q(x)$</span> approximates the
+distribution <span>$p(x)$</span>. Usually the true distribution
+<span>$p(x)$</span> is not known, but instead we have an empirical distribution
+from observed data, or cross entropy is estimated directly from the data as
+explained later.
+
+Another application of perplexity is to measure the uncertainty of a random
+phenomenon. In this case the model is evaluated on the distribution it embodies.
+The perplexity of a random variable <span>$X$</span> is the exponent of entropy:
 
 <div>$$
 2^{H(X)} = 2^{-\sum_{x \in X} p(x) \log_2(p(x))}
@@ -111,19 +125,6 @@ $$</div>
 We can easily see that the perplexity of a fair coin is 2 (we are “two ways
 perplexed” about the outcome of the random experiment). Perplexity tells us how
 many sides we need on a fair dice to get the same uncertainty.
-
-The exponent of cross entropy is also called perplexity:
-
-<div>$$
-2^{H(X,q)} = 2^{-\sum_{x \in X} p(x) \log_2(q(x))}
-$$</div>
-
-This is another measure for how well <span>$q(x)$</span> approximates the
-distribution <span>$p(x)$</span>. Usually the true distribution
-<span>$p(x)$</span> is not known, but instead we have an empirical distribution
-from observed data, or cross entropy is estimated directly from the data as
-explained below.
-
 
 ### Information content
 
