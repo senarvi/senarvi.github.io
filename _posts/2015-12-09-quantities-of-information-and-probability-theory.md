@@ -122,9 +122,10 @@ The perplexity of a random variable <span>$X$</span> is the exponent of entropy:
 2^{H(X)} = 2^{-\sum_{x \in X} p(x) \log_2(p(x))}
 $$</div>
 
-We can easily see that the perplexity of a fair coin is 2 (we are “two ways
-perplexed” about the outcome of the random experiment). Perplexity tells us how
-many sides we need on a fair dice to get the same uncertainty.
+Perplexity tells us how many sides we need on a fair dice to get the same
+uncertainty as we have on the random variable. We can easily see that the
+perplexity of a fair coin is 2 (we are “two ways perplexed” about the outcome of
+the random experiment).
 
 ### Information content
 
