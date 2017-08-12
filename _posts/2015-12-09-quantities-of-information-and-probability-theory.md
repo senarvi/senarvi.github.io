@@ -155,11 +155,13 @@ The event “heads” is said to carry 1 bit of information.
 
 Often we would like to measure these quantities, but instead of the true
 probability distribution we have a sample drawn from it. There are actually many
-ways to estimate the entropy from a sample; one possibility is to estimate each
-of the probabilities <span>$p(x)$</span> as the fraction of <span>$x$<span> in
-the sample. To compare a known distribution <span>$p(x)$</span> to a sample
-<span>$x_1 x_2 \ldots x_N$</span>, the Monte Carlo estimate of cross entropy can
-be computed as:
+ways to estimate the entropy from a sample. One possible way to compute the
+empirical entropy is to estimate each of the probabilities <span>$p(x)$</span>
+as the fraction of <span>$x$<span> in the sample.
+
+A known distribution <span>$p(x)$</span> can be compared to a sample
+<span>$x_1 x_2 \ldots x_N$</span> using empirical cross entropy, defined as the
+Monte Carlo estimate of cross entropy:
 
 <div>$$
 H(x_1 \ldots x_N,p) = -\frac{1}{N} \sum_i \log_2(p(x_i))
