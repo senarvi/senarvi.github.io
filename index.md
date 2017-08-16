@@ -67,6 +67,7 @@ My CV as a <a href="cv.pdf">PDF</a>
   Language Resources and Evaluation.
   ([PDF]({{ site.baseurl }}/publications/lre2016.pdf),
   [BibTex]({{ site.baseurl }}/publications/lre2016.bib)).  
+  NOTE: See erratum at the end of the PDF file.  
   RELATED CODE: [filter-text](https://github.com/senarvi/senarvi-speech/tree/master/filter-text),
   [filter-dictionary](https://github.com/senarvi/senarvi-speech/tree/master/filter-dictionary).
 * Seppo Enarvi and Mikko Kurimo (2013),
