@@ -44,9 +44,10 @@ My CV as a <a href="cv.pdf">PDF</a>
 ## Publications
 
 * Seppo Enarvi, Peter Smit, Sami Virpioja, Mikko Kurimo (2017),
-  [Automatic Speech Recognition with Very Large Conversational Finnish and Estonian Vocabularies](https://arxiv.org/abs/1707.04227) [In Review].
+  [Automatic Speech Recognition with Very Large Conversational Finnish and Estonian Vocabularies](https://arxiv.org/abs/1707.04227).
   In IEEE/ACM Transactions on Audio, Speech, and Language Processing.
-  ([PDF](https://arxiv.org/pdf/1707.04227)).
+  ([PDF]({{ site.baseurl }}/publications/taslp2017.pdf),
+  [BibTex]({{ site.baseurl }}/publications/taslp2017.bib)).
 * Peter Smit, Siva Reddy Gangireddy, Seppo Enarvi, Sami Virpioja, Mikko Kurimo (2017),
   Character-Based Units for Unlimited Vocabulary Continuous Speech Recognition.
   In Proceedings of the 2017 IEEE Automatic Speech Recognition and Understanding Workshop (ASRU).
