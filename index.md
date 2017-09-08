@@ -43,10 +43,6 @@ My CV as a <a href="cv.pdf">PDF</a>
 
 ## Publications
 
-* Seppo Enarvi, Peter Smit, Sami Virpioja, Mikko Kurimo (2017),
-  [Automatic Speech Recognition with Very Large Conversational Finnish and Estonian Vocabularies](https://arxiv.org/abs/1707.04227) [In Review].
-  In IEEE/ACM Transactions on Audio, Speech, and Language Processing.
-  ([PDF](https://arxiv.org/pdf/1707.04227)).
 * Peter Smit, Siva Reddy Gangireddy, Seppo Enarvi, Sami Virpioja, Mikko Kurimo (2017),
   Character-Based Units for Unlimited Vocabulary Continuous Speech Recognition.
   In Proceedings of the 2017 IEEE Automatic Speech Recognition and Understanding Workshop (ASRU).
@@ -55,6 +51,11 @@ My CV as a <a href="cv.pdf">PDF</a>
   Aalto System for the 2017 Arabic Multi-Genre Broadcast Challenge.
   In Proceedings of the 2017 IEEE Automatic Speech Recognition and Understanding Workshop (ASRU).
   ([BibTex]({{ site.baseurl }}/publications/asru2017mgb.bib)).
+* Seppo Enarvi, Peter Smit, Sami Virpioja, Mikko Kurimo (2017),
+  [Automatic Speech Recognition with Very Large Conversational Finnish and Estonian Vocabularies](http://dx.doi.org/10.1109/TASLP.2017.2743344).
+  In IEEE/ACM Transactions on Audio, Speech, and Language Processing.
+  ([PDF]({{ site.baseurl }}/publications/taslp2017.pdf),
+  [BibTex]({{ site.baseurl }}/publications/taslp2017.bib)).
 * Seppo Enarvi and Mikko Kurimo (2016),
   [TheanoLM — An Extensible Toolkit for Neural Network Language Modeling](http://www.isca-speech.org/archive/Interspeech_2016/abstracts/0618.html).
   In Proceedings of the 17th Annual Conference of the International Speech Communication Association (INTERSPEECH), pp. 3052–3056.
