@@ -43,15 +43,15 @@ My CV as a <a href="cv.pdf">PDF</a>
 
 ## Publications
 
-* Peter Smit, Siva Reddy Gangireddy, Seppo Enarvi, Sami Virpioja, Mikko Kurimo (2017),
+* Peter Smit, Siva Reddy Gangireddy, Seppo Enarvi, Sami Virpioja, and Mikko Kurimo (2017),
   Character-Based Units for Unlimited Vocabulary Continuous Speech Recognition.
   In Proceedings of the 2017 IEEE Automatic Speech Recognition and Understanding Workshop (ASRU).
   ([BibTex]({{ site.baseurl }}/publications/asru2017.bib)).
-* Peter Smit, Siva Reddy Gangireddy, Seppo Enarvi, Sami Virpioja, Mikko Kurimo (2017),
+* Peter Smit, Siva Reddy Gangireddy, Seppo Enarvi, Sami Virpioja, and Mikko Kurimo (2017),
   Aalto System for the 2017 Arabic Multi-Genre Broadcast Challenge.
   In Proceedings of the 2017 IEEE Automatic Speech Recognition and Understanding Workshop (ASRU).
   ([BibTex]({{ site.baseurl }}/publications/asru2017mgb.bib)).
-* Seppo Enarvi, Peter Smit, Sami Virpioja, Mikko Kurimo (2017),
+* Seppo Enarvi, Peter Smit, Sami Virpioja, and Mikko Kurimo (2017),
   [Automatic Speech Recognition with Very Large Conversational Finnish and Estonian Vocabularies](http://dx.doi.org/10.1109/TASLP.2017.2743344).
   In IEEE/ACM Transactions on Audio, Speech, and Language Processing.
   ([PDF]({{ site.baseurl }}/publications/taslp2017.pdf),
