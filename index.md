@@ -55,7 +55,8 @@ My CV as a <a href="cv.pdf">PDF</a>
   [Automatic Speech Recognition with Very Large Conversational Finnish and Estonian Vocabularies](http://dx.doi.org/10.1109/TASLP.2017.2743344).
   In IEEE/ACM Transactions on Audio, Speech, and Language Processing.
   ([PDF]({{ site.baseurl }}/publications/taslp2017.pdf),
-  [BibTex]({{ site.baseurl }}/publications/taslp2017.bib)).
+  [BibTex]({{ site.baseurl }}/publications/taslp2017.bib)).  
+  NOTE: See erratum at the end of the PDF file.
 * Seppo Enarvi and Mikko Kurimo (2016),
   [TheanoLM — An Extensible Toolkit for Neural Network Language Modeling](http://www.isca-speech.org/archive/Interspeech_2016/abstracts/0618.html).
   In Proceedings of the 17th Annual Conference of the International Speech Communication Association (INTERSPEECH), pp. 3052–3056.
