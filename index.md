@@ -63,8 +63,8 @@ My CV as a <a href="cv.pdf">PDF</a>
   Mansikkaniemi, and Tanel Alumäe (2017),
   [Modeling under-resourced languages for speech recognition](http://dx.doi.org/10.1007/s10579-016-9336-9).
   Language Resources and Evaluation.
-  ([PDF]({{ site.baseurl }}/publications/lre2016.pdf),
-  [BibTex]({{ site.baseurl }}/publications/lre2016.bib)).  
+  ([PDF]({{ site.baseurl }}/publications/lre2017.pdf),
+  [BibTex]({{ site.baseurl }}/publications/lre2017.bib)).  
   NOTE: See erratum at the end of the PDF file.  
   RELATED CODE: [filter-text](https://github.com/senarvi/senarvi-speech/tree/master/filter-text),
   [filter-dictionary](https://github.com/senarvi/senarvi-speech/tree/master/filter-dictionary).
