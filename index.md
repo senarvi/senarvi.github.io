@@ -45,24 +45,24 @@ My CV as a <a href="cv.pdf">PDF</a>
 
 * Peter Smit, Siva Reddy Gangireddy, Seppo Enarvi, Sami Virpioja, and Mikko Kurimo (2017),
   [Character-Based Units for Unlimited Vocabulary Continuous Speech Recognition](http://dx.doi.org/10.1109/ASRU.2017.8268929).
-  In Proceedings of the 2017 IEEE Automatic Speech Recognition and Understanding Workshop (ASRU).
+  In Proceedings of the 2017 IEEE Automatic Speech Recognition and Understanding Workshop (ASRU), pp. 149–156.
   ([PDF]({{ site.baseurl }}/publications/asru2017.pdf),
   [BibTex]({{ site.baseurl }}/publications/asru2017.bib)).
 * Peter Smit, Siva Reddy Gangireddy, Seppo Enarvi, Sami Virpioja, and Mikko Kurimo (2017),
   [Aalto System for the 2017 Arabic Multi-Genre Broadcast Challenge](http://dx.doi.org/10.1109/ASRU.2017.8268955).
-  In Proceedings of the 2017 IEEE Automatic Speech Recognition and Understanding Workshop (ASRU).
+  In Proceedings of the 2017 IEEE Automatic Speech Recognition and Understanding Workshop (ASRU), pp. 338–345.
   ([PDF]({{ site.baseurl }}/publications/asru2017mgb.pdf),
   [BibTex]({{ site.baseurl }}/publications/asru2017mgb.bib)).
 * Seppo Enarvi, Peter Smit, Sami Virpioja, and Mikko Kurimo (2017),
   [Automatic Speech Recognition with Very Large Conversational Finnish and Estonian Vocabularies](http://dx.doi.org/10.1109/TASLP.2017.2743344).
-  In IEEE/ACM Transactions on Audio, Speech, and Language Processing.
+  In IEEE/ACM Transactions on Audio, Speech, and Language Processing, 25(11), pp. 2085–2097.
   ([PDF]({{ site.baseurl }}/publications/taslp2017.pdf),
   [BibTex]({{ site.baseurl }}/publications/taslp2017.bib)).  
   NOTE: See erratum at the end of the PDF file.
 * Mikko Kurimo, Seppo Enarvi, Ottokar Tilk, Matti Varjokallio, André
   Mansikkaniemi, and Tanel Alumäe (2017),
   [Modeling under-resourced languages for speech recognition](http://dx.doi.org/10.1007/s10579-016-9336-9).
-  Language Resources and Evaluation.
+  Language Resources and Evaluation, 51(4), pp. 961–987.
   ([PDF]({{ site.baseurl }}/publications/lre2017.pdf),
   [BibTex]({{ site.baseurl }}/publications/lre2017.bib)).  
   NOTE: See erratum at the end of the PDF file.  
