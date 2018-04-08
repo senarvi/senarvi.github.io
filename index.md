@@ -43,6 +43,9 @@ My CV as a <a href="cv.pdf">PDF</a>
 
 ## Publications
 
+* Maria Uther, Anna-Riikka Smolander, Katja Junttila, Mikko Kurimo, Reima Karhila, Seppo Enarvi, Sari Ylinen (2018),
+  User Experiences from Children Using a Speech Learning Application: Implications for Designers of Speech Training Applications for Children.
+  In Proceedings of EuroCALL 2018.
 * Peter Smit, Siva Reddy Gangireddy, Seppo Enarvi, Sami Virpioja, and Mikko Kurimo (2017),
   [Character-Based Units for Unlimited Vocabulary Continuous Speech Recognition](http://dx.doi.org/10.1109/ASRU.2017.8268929).
   In Proceedings of the 2017 IEEE Automatic Speech Recognition and Understanding Workshop (ASRU), pp. 149–156.
