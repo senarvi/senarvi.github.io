@@ -1,3 +1,27 @@
+# For technical reasons, this file is *NOT* reloaded automatically when you use
+# 'bundle exec jekyll serve'. If you change this file, please restart the server process.
+
+# Site settings
+# These are used to personalize your new site. If you look in the HTML files,
+# you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
+# You can create any custom variable you would like, and they will be accessible
+# in the templates via {{ site.myvariable }}.
+title: "Seppo Enarvi"
+description: >- # this means to ignore newlines until "baseurl:"
+  Write an awesome description for your new site here. You can edit this
+  line in _config.yml. It will appear in your document head meta (for
+  Google search results) and in your feed.xml site description.
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "" # the base hostname & protocol for your site, e.g. http://example.com
+twitter_username: jekyllrb
+github_username:  jekyll
+
+# Build settings
+markdown: kramdown
+theme: jekyll-theme-slate
+plugins:
+  - jekyll-feed
+
 # This is the default format. 
 # For more see: http://jekyllrb.com/docs/permalinks/
 permalink: /:categories/:year/:month/:day/:title 
@@ -5,14 +29,10 @@ permalink: /:categories/:year/:month/:day/:title
 exclude: [".rvmrc", ".rbenv-version", "README.md", "Rakefile", "changelog.md"]
 highlighter: rouge
 
-# Themes are encouraged to use these universal variables 
-# so be sure to set them if your theme uses them.
-#
-title: "Seppo Enarvi"
 tagline:
 author:
   name: "Seppo Enarvi"
-  email: "firstname.lastname@aalto.fi"
+  email: "seppo2018@marjaniemi.com"
   github: "senarvi"
   twitter: "@SeppoEnarvi"
 
@@ -81,20 +101,8 @@ JB:
   # Set 'provider' to false to turn commenting off globally.
   #
   comments:
-    provider: disqus
     disqus:
       short_name: senarvi
-    livefyre:
-      site_id: 123
-    intensedebate:
-      account: 123abc
-    facebook:
-      appid: 123
-      num_posts: 5
-      width: 580
-      colorscheme: light
-    duoshuo:
-      short_name: jekyllbootstrap
    
   # Settings for analytics helper
   # Set 'provider' to the analytics provider you want to use.
@@ -132,6 +140,3 @@ JB:
   # and include your custom code. Your custom file must be defined at:
   #   ./_includes/custom/[HELPER]
   # where [HELPER] is the name of the helper you are overriding.
-
-
-theme: jekyll-theme-slate
