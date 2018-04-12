@@ -1,12 +1,9 @@
 ---
-layout: post
 title: "Quantities of information and probability theory"
-description: "Entropy, conditional entropy, mutual information, cross entropy, Kullback-Leibler divergence, and perplexity"
-category: 
-tags: []
-use_math: true
+math: true
 ---
-{% include setup %}
+
+## Entropy, conditional entropy, mutual information, cross entropy, Kullback-Leibler divergence, and perplexity
 
 ### Entropy
 

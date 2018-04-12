@@ -1,4 +1,0 @@
-{% include is_production %}
-{% if is_production and page.JB.analytics != false %}
-{% include google-analytics %}
-{% endif %}

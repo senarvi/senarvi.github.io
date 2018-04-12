@@ -1,11 +1,8 @@
 ---
-layout: post
 title: "Stack trace with GDB"
-description: "How to find the location where a program has crashed from Linux command line"
-category: 
-tags: []
 ---
-{% include setup %}
+
+## How to find the location where a program has crashed from Linux command line
 
 ### Stack backtrace from Linux command line
 

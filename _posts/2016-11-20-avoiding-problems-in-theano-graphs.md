@@ -1,11 +1,8 @@
 ---
-layout: post
 title: "Avoiding problems in Theano computation graphs"
-description: "Notes on writing, testing, and debugging Theano computation graphs"
-category: 
-tags: []
 ---
-{% include setup %}
+
+## Notes on writing, testing, and debugging Theano computation graphs
 
 ### NumPy as a reference
 

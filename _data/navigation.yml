@@ -1,0 +1,7 @@
+main:
+  - title: "Publications"
+    url: /publications/
+  - title: "Code"
+    url: /code/
+  - title: "About"
+    url: /about/

@@ -1,46 +1,8 @@
 ---
-layout: page
-title: Seppo Enarvi
+title: "Publications"
+permalink: /publications/
+author_profile: true
 ---
-{% include setup %}
-
-## Contact Information
-
-Aalto University  
-School of Electrical Engineering  
-Department of Signal Processing and Acoustics  
-Otakaari 3  
-FI-02150 Espoo  
-Finland
-
-Room: F415b
-
-E-mail: {{ site.email }}
-
-Mobile: +358-44-322-5563
-
-## Posts
-
-<ul class="posts">
-  {% for post in site.posts %}
-    <li><span>{{ post.date | date_to_string }}</span> &raquo; <a href="{{ BASE_PATH }}{{ post.url }}">{{ post.title }}</a></li>
-  {% endfor %}
-</ul>
-
-## Experience
-
-My CV as a <a href="cv.pdf">PDF</a>
-
-## Code
-
-* [GitHub profile](https://github.com/{{ site.github_username }}/)
-* [TheanoLM](https://github.com/senarvi/theanolm), recurrent neural network language modeling using Theano
-* [FFGLLightBrush](https://github.com/senarvi/senarvi-freeframe/tree/master/FFGLLightBrush), FFGL (Resolume) plug-in for light painting
-* [senarvi-speech](https://github.com/senarvi/senarvi-speech), collection of scripts related to speech recognition and language modeling
-* [senarvi-image](https://github.com/senarvi/senarvi-image), C++ classes related to image processing
-* [pm-scripts](https://github.com/senarvi/senarvi-unix/tree/master/pm-scripts), common interface for Red Hat / Debian package managers
-
-## Publications
 
 * Maria Uther, Anna-Riikka Smolander, Katja Junttila, Mikko Kurimo, Reima Karhila, Seppo Enarvi, Sari Ylinen (2018),
   User Experiences from Children Using a Speech Learning Application: Implications for Designers of Speech Training Applications for Children.

@@ -1,12 +1,9 @@
 ---
-layout: post
 title: "Kaldi lattices"
-description: "Introduction to working with Kaldi lattices, and differences to SLF"
-category: 
-tags: []
-use_math: true
+math: true
 ---
-{% include setup %}
+
+## Introduction to working with Kaldi lattices, and differences to SLF
 
 ### Differences between SLF and Kaldi lattices
 

@@ -1,11 +1,8 @@
 ---
-layout: post
 title: "Crawling conversation sites for language modeling data"
-description: "How to use Scrapy to obtain vast amounts of data for language modeling"
-category: 
-tags: []
 ---
-{% include setup %}
+
+## How to use Scrapy to obtain vast amounts of data for language modeling
 
 ### Creating web spiders with Scrapy
 

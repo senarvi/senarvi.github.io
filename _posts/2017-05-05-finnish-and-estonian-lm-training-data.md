@@ -1,13 +1,8 @@
 ---
-layout: post
 title: "Finnish and Estonian LM training data"
-description: ""
-category: 
-tags: []
 ---
-{% include setup %}
 
-### Conversational Finnish and Estonian data sets
+## Conversational Finnish and Estonian data sets
 
 Here are a couple of data sets that I have collected from the web for training
 language models:
