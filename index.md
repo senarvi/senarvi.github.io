@@ -16,7 +16,7 @@ Finland
 
 Room: F415b
 
-E-mail: {{ site.author.email }}
+E-mail: {{ site.email }}
 
 Mobile: +358-44-322-5563
 
@@ -34,7 +34,7 @@ My CV as a <a href="cv.pdf">PDF</a>
 
 ## Code
 
-* [GitHub profile](https://github.com/{{ site.author.github }}/)
+* [GitHub profile](https://github.com/{{ site.github_username }}/)
 * [TheanoLM](https://github.com/senarvi/theanolm), recurrent neural network language modeling using Theano
 * [FFGLLightBrush](https://github.com/senarvi/senarvi-freeframe/tree/master/FFGLLightBrush), FFGL (Resolume) plug-in for light painting
 * [senarvi-speech](https://github.com/senarvi/senarvi-speech), collection of scripts related to speech recognition and language modeling
