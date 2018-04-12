@@ -15,7 +15,7 @@
     <ul class="tag_box inline">
       <li><i class="icon-folder-open"></i></li>
       {% assign categories_list = page.categories %}
-      {% include JB/categories_list %}
+      {% include categories_list %}
     </ul>
   {% endunless %}  
 
@@ -23,7 +23,7 @@
     <ul class="tag_box inline">
       <li><i class="icon-tags"></i></li>
       {% assign tags_list = page.tags %}
-      {% include JB/tags_list %}
+      {% include tags_list %}
     </ul>
   {% endunless %}  
 
@@ -44,6 +44,6 @@
       </ul>
     </div>
     <hr>
-    {% include JB/comments %}
+    {% include comments %}
   </div>
 </div>

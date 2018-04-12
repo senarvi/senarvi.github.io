@@ -3,7 +3,7 @@ layout: page
 title: Seppo Enarvi
 tagline:
 ---
-{% include JB/setup %}
+{% include setup %}
 
 ## Contact Information
 

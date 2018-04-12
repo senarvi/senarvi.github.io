@@ -5,7 +5,7 @@ description: "How to use Scrapy to obtain vast amounts of data for language mode
 category: 
 tags: []
 ---
-{% include JB/setup %}
+{% include setup %}
 
 ### Creating web spiders with Scrapy
 

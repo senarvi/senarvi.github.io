@@ -2,11 +2,11 @@
 The pages_list include is a listing helper.
 Usage:
   1) assign the 'pages_list' variable to a valid array of pages or posts.
-  2) include JB/pages_list
+  2) include pages_list
   example:
     <ul>
   	  {% assign pages_list = site.pages %}  
-  	  {% include JB/pages_list %}
+  	  {% include pages_list %}
   	</ul>
   	
   Grouping: (optional): 

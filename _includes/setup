@@ -2,7 +2,7 @@
   <!--
   - Dynamically set liquid variables for working with URLs/paths
   -->
-  {% include JB/is_production %}
+  {% include is_production %}
   {% if site.JB.setup.provider == "custom" %}
     {% include custom/setup %}
   {% else %}

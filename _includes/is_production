@@ -11,7 +11,7 @@
 
   Examples:
   
-    {% include JB/is_production %}
+    {% include is_production %}
     
     {% if is_production != true %}
       <h3>This is Private</h3>

@@ -5,7 +5,7 @@ description: ""
 category: 
 tags: []
 ---
-{% include JB/setup %}
+{% include setup %}
 
 ### Conversational Finnish and Estonian data sets
 

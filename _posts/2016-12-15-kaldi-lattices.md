@@ -6,7 +6,7 @@ category:
 tags: []
 use_math: true
 ---
-{% include JB/setup %}
+{% include setup %}
 
 ### Differences between SLF and Kaldi lattices
 

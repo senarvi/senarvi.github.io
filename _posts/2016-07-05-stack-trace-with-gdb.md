@@ -5,7 +5,7 @@ description: "How to find the location where a program has crashed from Linux co
 category: 
 tags: []
 ---
-{% include JB/setup %}
+{% include setup %}
 
 ### Stack backtrace from Linux command line
 

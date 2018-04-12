@@ -5,7 +5,7 @@ description: "Notes on writing, testing, and debugging Theano computation graphs
 category: 
 tags: []
 ---
-{% include JB/setup %}
+{% include setup %}
 
 ### NumPy as a reference
 
