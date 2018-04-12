@@ -1,7 +1,6 @@
 ---
 layout: page
 title: Seppo Enarvi
-tagline:
 ---
 {% include setup %}
 
