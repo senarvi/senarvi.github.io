@@ -1,5 +1,6 @@
 ---
 title: "Crawling conversation sites for language modeling data"
+classes: wide
 ---
 
 ## How to use Scrapy to obtain vast amounts of data for language modeling

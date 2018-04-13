@@ -1,5 +1,6 @@
 ---
 title: "Kaldi lattices"
+classes: wide
 math: true
 ---
 

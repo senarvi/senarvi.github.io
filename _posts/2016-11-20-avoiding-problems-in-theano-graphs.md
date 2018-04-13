@@ -1,5 +1,6 @@
 ---
 title: "Avoiding problems in Theano computation graphs"
+classes: wide
 ---
 
 ## Notes on writing, testing, and debugging Theano computation graphs
