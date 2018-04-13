@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+{% include slides/head.html %}
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+      <section data-markdown data-separator="^\n---\n$" data-vertical="^\n--\n$">
+        <textarea data-template>
+{{ content }}
+        </textarea>
+      </section>
+    </div>
+  </div>
+{% include slides/script.html %}
+</body>
+</html>
