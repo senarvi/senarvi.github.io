@@ -1,0 +1,15 @@
+.table-border th, .table-border td, .table-border tr {
+  border-collapse: collapse;
+  border: 1px solid black;
+}
+
+.reveal pre code {
+  font-size: 1.3em;
+  line-height: 1.4;
+}
+
+.reveal code {
+  font-family: monospace;
+  font-weight: bold;
+  text-transform: none;
+}
