@@ -5,64 +5,77 @@ layout: slides
 
 ## Gentle Introduction to TensorFlow
 
-* Devices
-* Broadcasting
+* Sessions
 * Variables
+* Broadcasting
+* Optimization
+* Devices
 * Recurrency
 * Debugging
 * TensorBoard
 
 ---
 
-## Devices
+## Introduction
 
-* An operation can run on a CPU (`"/cpu:0"`) or a GPU (`"/device:GPU:0"`).
-* By default, the first GPU device is selected, if the operation has a GPU
-  implementation (and you have a GPU).
-* `with tf.device('/device:GPU:N')` can be used to select GPU `N`.
-* Setting configuration variable `log_device_placement=True` causes the device
-  mapping to be printed.
-* By default, TensorFlow maps all memory of all GPUs.
-    * Set `CUDA_VISIBLE_DEVICES=N` unless job scheduler is allocating a GPU for
-      your process.
-
----
-
-<!-- .slide: data-transition="fade-in none-out" -->
-## Broadcasting
-
-![Addition of a matrix and a vector](../assets/images/tensorflow-slides/matrix-vector-addition.png)
-<!-- .element: class="plain" -->
-
-* Convert tensors to the same shape to make operations compatible.
-* Elementwise binary operations follow NumPy broadcasting.
-    * The shape of the low-rank tensor must match the trailing dimensions of the
-      high-rank tensor.
+* Numerous machine learning toolkits utilize the same principle—The user
+  describes a neural network using a graph consisting of operations (forward
+  pass) and the toolkit performs automatic differentiation (backward pass).
+    * Theano, Torch, Keras, Caffe, CNTK, MXNet
+* Development is by far most active around TensorFlow.
+    * Tensor2Tensor for sequence-to-sequence modeling.
+* C++ API can be used to execute graphs built using the Python API in a
+  production environment.
+* Earlier experience on some toolkit is assumed.
 
 ---
 
-<!-- .slide: data-transition="none-in fade-out" -->
-## Broadcasting
+## Basic Concepts
 
-* Matrix multiplication `tf.matmul()` does not broadcast. The tensors have to be
-  converted to 2D first.
+* `tf.Graph` class represents a computation graph.
+    * By default all operations and variables are placed in the default graph.
+* `tf.Tensor` represents the output of an operation.
+* `tf.Variable` represents persistent state.
+* `tf.Session` is a class for performing computation on a graph.
+    * By default, the default graph is used.
+    * Maintains the state of the variables between `run()` calls.
 
 ```python
-x = tf.random_normal([i, j, k])
-y = tf.random_normal([k, l])
-x = tf.reshape(x, [-1, k])
-z = tf.matmul(x, y)
-z = tf.reshape(z, [i, j, l])‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍
+a = tf.constant(1.0)
+b = tf.constant(2.0)
+c = a + b
+
+sess = tf.Session()
+print(sess.run(c))  # 3.0
 ```
 
-* Note that if you want a linear layer / multiplication by a weight matrix, it's
-  easier to use `tf.layers.dense(x, size, use_bias=False)`.
+---
+
+## Variables
+
+* Before using variables, they have to be initialized.
+    * `init_op` sets them to the initial value given in the constructor.
+    * Alternatively their state can be read from a *checkpoint* file.
+
+```python
+a = tf.Variable(0.0)
+b = tf.constant(1.0)
+c = tf.assign(a, a + b)
+
+sess = tf.Session()
+init_op = tf.global_variables_initializer()
+
+sess.run(init_op)
+print(sess.run(c))  # 1.0
+print(sess.run(c))  # 2.0
+```
 
 ---
 
 <!-- .slide: data-transition="fade-in none-out" -->
 ## Model Parameters
 
+* Usually model parameters are created using `tf.get_variable(name, shape)`.
 * "Traditional" way of constructing a layer is by creating a class.
 
 ```python
@@ -102,7 +115,7 @@ with tf.variable_scope(name):‍‍
 ## Model Parameters
 
 * What if we want to apply the same layer to different inputs (without creating
-new weights)?
+  new weights)?
 * Proper naming of variables is important also for debugging.
 
 ```python
@@ -126,6 +139,69 @@ inputs = tf.zeros((batch_size, length))
 static_shape = inputs.get_shape()  # TensorShape; (16, ?)
 dynamic_shape = tf.shape(inputs)   # Tensor; [16, length]‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍
 ```
+
+---
+
+<!-- .slide: data-transition="fade-in none-out" -->
+## Broadcasting
+
+![Addition of a matrix and a vector](../assets/images/tensorflow-slides/matrix-vector-addition.png)
+<!-- .element: class="plain" -->
+
+* Convert tensors to the same shape to make operations compatible.
+* Elementwise binary operations follow NumPy broadcasting.
+    * The shape of the low-rank tensor must match the trailing dimensions of the
+      high-rank tensor.
+
+---
+
+<!-- .slide: data-transition="none-in fade-out" -->
+## Broadcasting
+
+* Matrix multiplication `tf.matmul()` does not broadcast. The tensors have to be
+  converted to 2D first.
+
+```python
+x = tf.random_normal([i, j, k])
+y = tf.random_normal([k, l])
+x = tf.reshape(x, [-1, k])
+z = tf.matmul(x, y)
+z = tf.reshape(z, [i, j, l])
+```
+
+* Note that if you want a linear layer / multiplication by a weight matrix, it's
+  easier to use `tf.layers.dense(x, size, use_bias=False)`.
+
+---
+
+## Optimization
+
+* Common optimization methods are implemented in various subclasses of
+  `tf.train.Optimizer`.
+* By default all *trainable* variables are optimized.
+* `minimize(cost)` returns an operation that performs one training step.
+
+```python
+optimizer = GradientDescentOptimizer(learning_rate=0.1)
+optimizer_op = optimizer.minimize(cost)
+
+for i in range(training_steps):
+  sess.run(optimizer_op)
+```
+
+---
+
+## Devices
+
+* An operation can run on a CPU (`"/cpu:0"`) or a GPU (`"/device:GPU:0"`).
+* By default, the first GPU device is selected, if the operation has a GPU
+  implementation (and you have a GPU).
+* `with tf.device('/device:GPU:N')` assigns variables and operations to GPU `N`.
+* Setting configuration variable `log_device_placement=True` causes the device
+  mapping to be printed.
+* By default, TensorFlow maps all memory of all GPUs.
+    * Set `CUDA_VISIBLE_DEVICES=N` unless job scheduler is allocating a GPU for
+      your process.
 
 ---
 
@@ -249,6 +325,24 @@ ex = experiment.Experiment(..., train_monitors=[LocalCLIDebugHook()])‍‍‍�
 * Enable by placing e.g. `import ipdb; ipdb.set_trace()` where you want to debug.
 
 ![Screenshot of ipdb console](../assets/images/tensorflow-slides/ipdb.png)
+
+---
+
+## Custom Operation
+
+* `py_func` can convert a Python function into a TensorFlow operation.
+* Should take NumPy arrays as input and return NumPy arrays as outputs.
+* Print values, draw a plot using matplotlib, use Python debugger.
+
+```python
+def debug_fn(x):
+  print "x.shape={}".format(x.shape)
+  if (x > 100).any():
+    import ipdb; ipdb.set_trace()
+  return x
+
+output = tf.py_func(debug_fn, [input], tf.float32)
+```
 
 ---
 
