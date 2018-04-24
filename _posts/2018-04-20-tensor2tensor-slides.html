@@ -1,0 +1,317 @@
+---
+title: "Tensor2Tensor presentation slides"
+layout: slides
+---
+
+## Gentle Introduction to Tensor2Tensor
+
+* Models
+* Modalities
+* Estimators
+* Datasets
+* Experiments
+* Problems
+* Metrics
+
+---
+
+<!-- .slide: data-transition="fade-in none-out" -->
+## Tensor2Tensor Models
+
+* A model in Tensor2Tensor is divided into three parts: input modality, model
+  body, and output modality.
+* Modalities abstract away the type of source and target data (words, audio,
+  images, ...).
+    * Input modality converts input into feature vectors, e.g. word embeddings.
+    * Output modality converts activations into outputs, e.g. word IDs.
+    * Output modality also implements the loss function.
+* The model body defines the architecture for low-dimensional input/output, i.e.
+  everything between the modalities.
+
+---
+
+<!-- .slide: data-transition="none-in fade-out" -->
+## Tensor2Tensor Models
+
+![Input, body, and output of an encoder-decoder model](../assets/images/tensorflow-slides/tensor2tensor-modalities.png)
+<!-- .element: class="plain" -->
+
+---
+
+## Model Body
+
+* Base class for the model body is `T2TModel`.
+* The toolkit recognizes models that are registered using
+  `@registry.register_model` decorator.
+* Subclasses, e.g. `LSTMSeq2SeqAttention`, override `body()`.
+* `model_fn()` stacks the bottom modality, body, and top modality on top of each
+  other.
+    * During training returns the loss.
+    * During decoding returns the output distribution for the last time step.
+
+---
+
+## Modalities
+
+* Base class for modalities is `Modality`.
+* Subclasses implement some of `bottom()`, `top()`, `loss()`.
+* Bottom modality provides the features, e.g. word embeddings.
+* Top modality provides the output distribution (and loss during training).
+
+---
+
+## Data Parallelism
+
+* `T2TModel` supports data parallelism.
+* The data that is moved between the model parts is represented as a list of
+  tensors, one for each shard.
+* `expert_utils.Parallelism` is a helper class that calls a function on each
+  element of a list and collects the results into a list.
+
+---
+
+## Estimator
+
+* `Estimator` class is a TensorFlow abstraction that combines a model with
+  instructions how to use it.
+* Takes care of the training loop, variable initialization, checkpointing /
+  restoring training, saving summaries for TensorBoard.
+* Three modes:
+    * `TRAIN` estimates model parameters.
+    * `PREDICT` predicts the output distribution using a trained model.
+    * `EVAL` computes the loss and possible other evaluation metrics.
+* The user provides an input function `input_fn`, which the estimator uses to
+  read the input data. When called, an input function returns two variables:
+    * `features`, a mapping from feature name to an array of values, and
+    * `labels`, an array of labels.
+
+---
+
+## Estimator Example
+
+* TensorFlow provides `Estimator` subclasses that implement some common models.
+* There are functions for creating `input_fn` from e.g. NumPy and pandas tables.
+* `feature_columns` defines what features to use and how to handle e.g.
+  categorical data.
+* `model_dir` specifies a directory where checkpoints are created.
+    * A checkpoint contains everything needed to continue training or evaluate
+      the model.
+
+```python
+feature_cols = [tf.feature_column.numeric_column("x", shape=[28, 28])]
+dnn = tf.estimator.DNNClassifier([32, 64, 32],
+                                 feature_cols,
+                                 model_dir,
+                                 n_classes,
+dnn.train(input_fn=train_input_fn, steps=2000)
+accuracy = dnn_classifier.evaluate(input_fn=eval_input_fn)["accuracy"]‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍
+```
+
+---
+
+## Dataset
+
+* `tf.data.Dataset` class represents a sequence of elements (for example
+  input-output sentence pairs).
+* The data can be for example in tensors, text files, or binary files.
+* A new `Dataset` can be created by applying a transformation to another
+  `Dataset`.
+    * `shuffle(buffer_size)` randomizes the order of the elements.
+    * `repeat()` iterates the dataset repeatedly.
+    * `batch(batch_size)` always takes the next `batch_size` elements and
+      creates a tensor with one more dimension.
+    * `group_by_window(key_func, reduce_func, window_size)` creates batches of
+      `window_size` elements with matching key.
+    * `map(map_func)` performs the function `map_func` on the elements.
+
+---
+
+## Dataset Iterators
+
+* `tf.data.Iterator` is an interface for reading the sequence one element at a
+  time.
+    * Can be created from a `Dataset` using `make_one_shot_iterator()`.
+* Mimics Python iterator interface, which makes it confusing.
+    * `get_next()` is called only once—it returns a `Tensor` that represents
+      the next element.
+    * The value of the Tensor changes on each evaluation of the graph.
+
+---
+
+## Input Function Example
+
+<pre class="stretch"><code data-trim>
+images = tf.constant(["train/img1.png", "train/img2.png", "train/img3.png",
+                      "train/img4.png", "train/img5.png", "train/img6.png"])
+labels = tf.constant([0, 0, 0, 1, 1, 1])
+
+def preprocess(image_path, label):
+  image_data = tf.read_file(image_path)
+  image = tf.image.decode_image(image_data, channels=3)
+  return image, label
+
+def train_input_fn():
+  dataset = tf.data.Dataset.from_tensor_slices((images, labels))
+  dataset = dataset.map(preprocess)
+  dataset = dataset.shuffle(6)
+  dataset = dataset.repeat()
+  dataset = dataset.batch(2)
+  iter = dataset.make_one_shot_iterator()
+  return iter.get_next()‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍
+</code></pre>
+
+---
+
+## Bucketing
+
+* It would be efficient to have as little padding in mini-batches as possible.
+* Tensor2Tensor uses `group_by_window()` to create mini-batches of sequences that
+  are similar in length.
+
+```
+def get_bucket_id(example):
+  seq_length = get_length(example)
+  cond = tf.logical_and(
+      tf.less_equal(buckets_min, seq_length),
+      tf.less(seq_length, buckets_max))
+  return tf.reduce_min(tf.where(cond))
+
+def create_batch(bucket_id, dataset):
+  padded_shapes = dict(
+      [(name, [None] * len(shape))
+       for name, shape in dataset.output_shapes.items()])
+  return dataset.padded_batch(batch_size, padded_shapes)
+
+dataset = dataset.apply(group_by_window(get_bucket_id,
+                                        create_batch,
+                                        batch_size))
+```
+
+---
+
+## TFRecord
+
+* Before training a model with Tensor2Tensor, the dataset is converted into
+  TFRecord format (using t2t-datagen).
+* The data is already in raw binary format and training will be faster.
+* Words are converted to integer IDs, meaning that the TFRecord files are
+  created using a specific vocabulary.
+* The data can be read and passed to an Estimator using `TFRecordDataset`.
+
+---
+
+<!-- .slide: data-transition="fade-in none-out" -->
+## Custom Estimators
+
+* Tensor2Tensor uses the base `Estimator` class, which takes `model_fn`,
+  hyperparameters, and configuration (e.g. model directory) in constructor.
+* `model_fn` specifies how to compute model output, given the input and the mode.
+    * Such a function is given by `T2TModel` as the `estimator_model_fn()`
+      method.
+    * Returns a slightly different graph depending on the mode.
+
+---
+
+<!-- .slide: data-transition="none-in fade-out" -->
+## Custom Estimators
+
+* `model_fn` takes the following arguments:
+    * `features`: feature tensors returned by the `input_fn`
+    * `labels`: label tensor returned by the `input_fn`
+    * `mode`: `TRAIN`, `PREDICT`, or `EVAL`
+    * `params`: model hyperparameters
+    * Tensor2Tensor adds `hparams` and `decode_hparams`.
+* `model_fn` returns an `EstimatorSpec` that describes the output of the model
+  using the input tensors:
+    * In `PREDICT` mode that includes the predicted probabilities.
+    * In `EVAL` mode that includes the loss and possibly a dictionary of
+      operations that are used to compute other evaluation metrics.
+    * In `TRAIN` mode that includes the loss and `train_op` that defines the
+      optimization step.
+
+---
+
+## Model Function Example
+
+<pre class="stretch"><code data-trim>
+def model_fn(features, labels, mode, params):
+  hidden_activations = tf.layers.dense(features["inputs"], 256)
+  logits = tf.layers.dense(hidden_activations, params["num_classes"])
+  predicted_classes = tf.argmax(logits, 1)
+
+  # For PREDICT, the predicted classes and probabilities are needed.
+  if mode == tf.estimator.ModeKeys.PREDICT:
+    predictions = {"class_ids": predicted_classes[:, tf.newaxis],
+                   "probabilities": tf.nn.softmax(logits),
+                   "logits": logits}
+    return EstimatorSpec(mode, predictions=predictions)
+
+  # For TRAIN and EVAL, compute the loss.
+  loss = sparse_softmax_cross_entropy(labels, logits)
+
+  # For EVAL, compute the evaluation metrics.
+  if mode == tf.estimator.ModeKeys.EVAL:
+    accuracy = tf.metrics.accuracy(labels, predicted_classes)
+    metrics = {"accuracy": accuracy}
+    return EstimatorSpec(mode, loss=loss, eval_metric_ops=metrics)
+
+  # For TRAIN, return also the optimizer.
+  optimizer = tf.train.AdagradOptimizer(learning_rate=0.1)
+  train_op = optimizer.minimize(loss)
+  return EstimatorSpec(mode, loss=loss, train_op=train_op)‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍‍
+</code></pre>
+
+---
+
+## Experiment
+
+* Yet another abstraction in TensorFlow that combines an `Estimator` with
+  training and evaluation inputs, *hooks*, and hyperparameters for training and
+  evaluation.
+
+```python
+exp = tf.contrib.learn.Experiment(estimator,
+                                  train_input_fn, eval_input_fn,
+                                  train_steps, eval_steps,
+                                  min_eval_frequency,
+                                  train_monitors, eval_hooks)
+exp.train_and_evaluate()
+```
+
+---
+
+## Experiment Hooks
+
+* Hooks are attached to a certain point of the execution.
+    * Can be used to initialize, save, and monitor things.
+    * Often derived from `SessionRunHook`, which calls a method when a session
+      is created or `run()` is called.
+* Tensor2Tensor implements `MetricsBasedHook`, which quits training after loss
+  has stopped decreasing.
+* A dataset can be parameterized using a `tf.placeholder()` and initialized at
+  the beginning of a session.
+
+---
+
+## Problems
+
+* Problem is a Tensor2Tensor concept that defines data processing and the
+  evaluation metrics that are computed during training.
+* Problem classes are registered using `@registry.register_problem` decorator
+  and selected using the `--problem` command line flag.
+* For example, a `Text2TextProblem` typically creates a vocabulary and maps OOV
+  words to UNK token.
+* The data processing is done by `t2t-datagen` tool, which creates TFRecord
+  files.
+* Training is done by `t2t-trainer`, which operates on the binary files.
+
+---
+
+## Evaluation Metrics
+
+* The metrics computed at each validation are defined at `eval_metrics()`.
+    * Can be monitored using TensorBoard.
+* The metric that is used for early stopping is specified using the
+  `--eval_early_stopping_metric` flag.
+    * If not set, the loss function is used.
+    * Otherwise has to be one of those returned by `eval_metrics()`.
