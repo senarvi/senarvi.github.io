@@ -26,7 +26,6 @@ layout: slides
     * Tensor2Tensor for sequence-to-sequence modeling.
 * C++ API can be used to execute graphs built using the Python API in a
   production environment.
-* Earlier experience on some toolkit is assumed.
 
 ---
 
@@ -60,14 +59,14 @@ print(sess.run(c))  # 3.0
 ```python
 a = tf.Variable(0.0)
 b = tf.constant(1.0)
-c = tf.assign(a, a + b)
+assign_op = tf.assign(a, a + b)
 
-sess = tf.Session()
 init_op = tf.global_variables_initializer()
 
+sess = tf.Session()
 sess.run(init_op)
-print(sess.run(c))  # 1.0
-print(sess.run(c))  # 2.0
+print(sess.run(assign_op))  # 1.0
+print(sess.run(assign_op))  # 2.0
 ```
 
 ---
@@ -96,6 +95,9 @@ class MyLayer(base.Layer):
 ## Model Parameters
 
 * Most of the time another convention is used in TensorFlow.
+* Trainable variables are collected automatically.
+* `with tf.variable_scope()` is convenient for creating name hierarchies.
+    * Makes debugging a lot easier.
 
 ```python
 def my_layer(input, units):
@@ -116,7 +118,6 @@ with tf.variable_scope(name):‍‍
 
 * What if we want to apply the same layer to different inputs (without creating
   new weights)?
-* Proper naming of variables is important also for debugging.
 
 ```python
 with tf.variable_scope(name):‍‍
