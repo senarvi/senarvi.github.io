@@ -179,6 +179,7 @@ z = tf.reshape(z, [i, j, l])
 
 * Common optimization methods are implemented in various subclasses of
   `tf.train.Optimizer`.
+    * AdadeltaOptimizer, AdagradOptimizer, MomentumOptimizer, AdamOptimizer
 * By default all *trainable* variables are optimized.
 * `minimize(cost)` returns an operation that performs one training step.
 
