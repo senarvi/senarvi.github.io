@@ -15,13 +15,30 @@ layout: slides
 
 ---
 
+## Introduction
+
+* Training models is a very complex process and for large part similar in
+  different projects.
+    * Layers, optimizers, checkpointing.
+* TensorFlow offers many constructs on top of the basic functionality that make
+  modeling easier.
+* `tf.contrib` module for volatile or experimental code.
+* Tensor2Tensor is a toolkit for sequence-to-sequence modeling.
+    * Very flexible: machine translation, end-to-end ASR, image classification,
+      language modeling, abstractive summarization.
+    * Should be easy to get started—can even download the data automatically.
+    * Maintained by Google Brain team.
+    * Frequent contributions.
+    * Bugs and incomplete documentation.
+
+---
+
 <!-- .slide: data-transition="fade-in none-out" -->
 ## Tensor2Tensor Models
 
-* A model in Tensor2Tensor is divided into three parts: input modality, model
-  body, and output modality.
+* Consist of three parts: input modality, model body, and output modality.
 * Modalities abstract away the type of source and target data (words, audio,
-  images, ...).
+  images).
     * Input modality converts input into feature vectors, e.g. word embeddings.
     * Output modality converts activations into outputs, e.g. word IDs.
     * Output modality also implements the loss function.
@@ -162,6 +179,7 @@ def train_input_fn():
 
 ---
 
+<!-- .slide: data-transition="fade-in none-out" -->
 ## Bucketing
 
 * It would be efficient to have as little padding in mini-batches as possible.
@@ -186,6 +204,14 @@ dataset = dataset.apply(group_by_window(get_bucket_id,
                                         create_batch,
                                         batch_size))
 ```
+
+---
+
+<!-- .slide: data-transition="none-in fade-out" -->
+## Bucketing
+
+![Illustration of batching using group_by_window() dataset transformation](../assets/images/tensorflow-slides/group-by-window.png)
+<!-- .element: class="plain" -->
 
 ---
 
@@ -280,7 +306,7 @@ exp.train_and_evaluate()
 
 ---
 
-## Experiment Hooks
+## Experiment – Hooks
 
 * Hooks are attached to a certain point of the execution.
     * Can be used to initialize, save, and monitor things.
@@ -293,21 +319,20 @@ exp.train_and_evaluate()
 
 ---
 
-## Problems
+## Problem
 
-* Problem is a Tensor2Tensor concept that defines data processing and the
+* `Problem` is a Tensor2Tensor concept that defines data generation and the
   evaluation metrics that are computed during training.
-* Problem classes are registered using `@registry.register_problem` decorator
-  and selected using the `--problem` command line flag.
-* For example, a `Text2TextProblem` typically creates a vocabulary and maps OOV
-  words to UNK token.
-* The data processing is done by `t2t-datagen` tool, which creates TFRecord
-  files.
-* Training is done by `t2t-trainer`, which operates on the binary files.
+    * These cannot be changed using hyperparameters, but many other aspects can.
+* Subclasses implement `generate_data()` method that generates train and dev
+  sets.
+    * Normally downloads the data from the Internet.
+* `Text2TextProblem` typically creates a vocabulary and encodes text.
+    * `SubwordTextEncoder` encodes text using a subword vocabulary.
 
 ---
 
-## Evaluation Metrics
+## Problem – Metrics
 
 * The metrics computed at each validation are defined at `eval_metrics()`.
     * Can be monitored using TensorBoard.
@@ -315,3 +340,24 @@ exp.train_and_evaluate()
   `--eval_early_stopping_metric` flag.
     * If not set, the loss function is used.
     * Otherwise has to be one of those returned by `eval_metrics()`.
+
+---
+
+## Problem – Applying 
+
+* Problem classes are registered using `@registry.register_problem` decorator
+  and selected using the `--problem` command line flag.
+* The data processing is done by `t2t-datagen` tool, which creates TFRecord
+  files.
+* Training is done by `t2t-trainer`, which operates on the binary files.
+
+---
+
+## Code Organization
+
+* `data_generators`: `Problem` and subclasses
+* `data_generators/text_problems.py`: `Text2TextProblem`
+* `layers/modalities.py`: `Modality` subclasses
+* `models`: `T2TModel` subclasses
+* `utils/modality.py`: Base `Modality` class
+* `utils/t2t_model.py`: Base `T2TModel` class
