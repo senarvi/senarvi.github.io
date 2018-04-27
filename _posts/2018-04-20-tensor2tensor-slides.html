@@ -343,7 +343,7 @@ exp.train_and_evaluate()
 
 ---
 
-## Problem – Applying 
+## Problem – Applying
 
 * Problem classes are registered using `@registry.register_problem` decorator
   and selected using the `--problem` command line flag.
@@ -353,11 +353,31 @@ exp.train_and_evaluate()
 
 ---
 
+## Hyperparameters
+
+* Hyperparameters are used by the problem (e.g. vocabulary size) and the model
+  (e.g. layer size).
+* Typically a set of default hyperparameters are defined for each model in a
+  function that returns a `tf.contrib.training.HParams` object.
+    * Registered using `@registry.register_hparams` decorator and selected using
+      the `--hparams_set` flag.
+* The default values can be overridden using configuration flags.
+
+---
+
 ## Code Organization
 
 * `data_generators`: `Problem` and subclasses
 * `data_generators/text_problems.py`: `Text2TextProblem`
+* `layers/common_hparams.py`: A common set of hyperparameters
 * `layers/modalities.py`: `Modality` subclasses
 * `models`: `T2TModel` subclasses
+* `models/lstm.py`: LSTM models and their default hyperparameter sets
+* `utils/beam_search.py`: Beam search decoder
+* `utils/data_reader.py`: Bucketing functions
+* `utils/flags.py`: Configuration flags (other than hyperparameters)
+* `utils/metrics.py`: Evaluation metrics
 * `utils/modality.py`: Base `Modality` class
+* `utils/rouge.py`: Functions for ROUGE score computation
 * `utils/t2t_model.py`: Base `T2TModel` class
+* `utils/trainer_lib.py`: Functions for creating estimator, experiment, hooks
