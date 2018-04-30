@@ -59,10 +59,9 @@ layout: slides
 
 * Base class for the model body is `T2TModel`.
 * The toolkit recognizes models that are registered using
-  `@registry.register_model` decorator.
+  `@registry.register_model` decorator (can be selected using `--model` flag).
 * Subclasses, e.g. `LSTMSeq2SeqAttention`, override `body()`.
-* `model_fn()` stacks the bottom modality, body, and top modality on top of each
-  other.
+* `model_fn()` stacks the body function between given modalities.
     * During training returns the loss.
     * During decoding returns the output distribution for the last time step.
 
@@ -72,8 +71,10 @@ layout: slides
 
 * Base class for modalities is `Modality`.
 * Subclasses implement some of `bottom()`, `top()`, `loss()`.
-* Bottom modality provides the features, e.g. word embeddings.
-* Top modality provides the output distribution (and loss during training).
+* Input modality provides the features, e.g. word embeddings, through `bottom()`
+  method.
+* Output modality provides the logits through `top()` method.
+    * During training `loss()` is used.
 
 ---
 
