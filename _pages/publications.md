@@ -4,6 +4,11 @@ permalink: /publications/
 author_profile: true
 ---
 
+* Seppo Enarvi (2017),
+  [Modeling Conversational Finnish for Automatic Speech Recognition](http://urn.fi/URN:ISBN:978-952-60-7908-0).
+  Doctoral dissertation, Aalto University, Espoo.
+  ([PDF]({{ site.baseurl }}/publications/phd_enarvi_seppo_2018.pdf),
+  [BibTex]({{ site.baseurl }}/publications/phd_enarvi_seppo_2018.bib))
 * Maria Uther, Anna-Riikka Smolander, Katja Junttila, Mikko Kurimo, Reima Karhila, Seppo Enarvi, Sari Ylinen (2018),
   User Experiences from Children Using a Speech Learning Application: Implications for Designers of Speech Training Applications for Children.
   In Proceedings of EuroCALL 2018.
