@@ -9,7 +9,6 @@ layout: slides
 * Modalities
 * Estimators
 * Datasets
-* Experiments
 * Problems
 * Metrics
 
@@ -290,24 +289,23 @@ def model_fn(features, labels, mode, params):
 
 ---
 
-## Experiment
+## Estimator – Training
 
-* Yet another abstraction in TensorFlow that combines an `Estimator` with
-  training and evaluation inputs, *hooks*, and hyperparameters for training and
-  evaluation.
+* `train_and_evaluate()` performs training, periodically evaluating the model
+  and possibly executing other *hooks*.
 
 ```python
-exp = tf.contrib.learn.Experiment(estimator,
-                                  train_input_fn, eval_input_fn,
-                                  train_steps, eval_steps,
-                                  min_eval_frequency,
-                                  train_monitors, eval_hooks)
-exp.train_and_evaluate()
+train_spec = tf.estimator.TrainSpec(train_input_fn, max_steps, hooks)
+eval_spec = tf.estimator.EvalSpec(eval_input_fn)
+tf.estimator.train_and_evaluate(estimator, train_spec, eval_spec)
 ```
+
+* Recently changed; Tensor2Tensor uses the deprecated
+  `tf.contrib.learn.Experiment` class.
 
 ---
 
-## Experiment – Hooks
+## Estimator – Hooks
 
 * Hooks are attached to a certain point of the execution.
     * Can be used to initialize, save, and monitor things.
