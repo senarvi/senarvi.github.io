@@ -309,8 +309,8 @@ tf.estimator.train_and_evaluate(estimator, train_spec, eval_spec)
 
 * Hooks are attached to a certain point of the execution.
     * Can be used to initialize, save, and monitor things.
-    * Often derived from `SessionRunHook`, which calls a method when a session
-      is created or `run()` is called.
+    * Derived from `SessionRunHook`, which calls a method when a session is
+      created or `run()` is called.
 * Tensor2Tensor implements `MetricsBasedHook`, which quits training after loss
   has stopped decreasing.
 * A dataset can be parameterized using a `tf.placeholder()` and initialized at
@@ -354,8 +354,8 @@ tf.estimator.train_and_evaluate(estimator, train_spec, eval_spec)
 
 ## Hyperparameters
 
-* Hyperparameters are used by the problem (e.g. vocabulary size) and the model
-  (e.g. layer size).
+* Hyperparameters are used by the problem (e.g. vocabulary size, sampling rate)
+  and the model (e.g. number of layers, layer size).
 * Typically a set of default hyperparameters are defined for each model in a
   function that returns a `tf.contrib.training.HParams` object.
     * Registered using `@registry.register_hparams` decorator and selected using
