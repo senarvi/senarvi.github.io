@@ -68,13 +68,13 @@ However, approximating the objective function is not enough, but in order to tra
 Stochastic gradient descent only requires that the expectation of the sampled gradients is proportional to the actual gradient (section 13.3 in [Sutton and Barto][]).
 Let's start by writing the gradient as an expectation over the word sequences:
 
-<div>
+<div>$$
 \begin{align}
-\nabla_{\theta} J(\theta) &= \sum_W \nabla_{\theta} p_{\theta}(W) R(W) \
-                          &= \sum_W p_{\theta}(W) \frac{\nabla_{\theta} p_{\theta}(W)}{p_{\theta}(W)} R(W) \
+\nabla_{\theta} J(\theta) &= \sum_W \nabla_{\theta} p_{\theta}(W) R(W) \\
+                          &= \sum_W p_{\theta}(W) \frac{\nabla_{\theta} p_{\theta}(W)}{p_{\theta}(W)} R(W) \\
                           &= E_W R(W) \nabla_{\theta} \log p_{\theta}(W)
 \end{align}
-</div>
+$$</div>
 
 where we have used <span>$\frac{\nabla x}{x} = \log \nabla x$</span>.
 This brings us to the REINFORCE algorithm, which is essentially an approximation of the gradient using a single sample <span>$W$</span>:
