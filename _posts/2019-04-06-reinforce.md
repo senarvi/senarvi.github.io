@@ -70,8 +70,8 @@ Let's start by writing the gradient as an expectation over the word sequences:
 
 <div>
 \begin{align}
-\nabla_{\theta} J(\theta) &= \sum_W \nabla_{\theta} p_{\theta}(W) R(W)
-                          &= \sum_W p_{\theta}(W) \frac{\nabla_{\theta} p_{\theta}(W)}{p_{\theta}(W)} R(W)
+\nabla_{\theta} J(\theta) &= \sum_W \nabla_{\theta} p_{\theta}(W) R(W) \
+                          &= \sum_W p_{\theta}(W) \frac{\nabla_{\theta} p_{\theta}(W)}{p_{\theta}(W)} R(W) \
                           &= E_W R(W) \nabla_{\theta} \log p_{\theta}(W)
 \end{align}
 </div>
@@ -122,7 +122,7 @@ $$</div>
 The third equation above was obtained by reordering the sums:
 
 <div>$$
-  \sum_{t=1}^T r_t \nabla_{\theta} \sum_{i=1}^t \log p_{\theta}(w_i \mid w_1 \ldots w_{i-1})
+  \sum_{t=1}^T r_t \sum_{i=1}^t \nabla_{\theta} \log p_{\theta}(w_i \mid w_1 \ldots w_{i-1})
 = \sum_{t=1}^T \sum_{i=t}^T r_i \nabla_{\theta} \log p_{\theta}(w_t \mid w_1 \ldots w_{t-1})
 $$</div>
 
