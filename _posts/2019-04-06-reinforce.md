@@ -31,7 +31,7 @@ This second problem was named **exposure bias** by [Ranzato et al][].
 
 ### Formulation as a decision making problem
 
-Metrics such as BLEU and ROUGE are not differentiable, so we cannot just generate a sequence and use one of them as the training objective.
+Metrics such as BLEU and ROUGE are not differentiable, so we cannot just compute one of them on generated word sequences and use that as the training objective.
 It is possible, however, to approach a sequence-to-sequence task using reinforcement learning, using the metric to reward the network based on sequences it would generate.
 
 The idea is to formulate the problem as a decision making problem in the following way.
@@ -42,14 +42,14 @@ The model is seen as a **policy** <span>$p_\theta$</span>, which dictates the ne
 The REINFORCE method is episodic.
 One episode ends when the agent generates the end-of-sequence token at time <span>$T$</span>.
 Generally speaking, the agent receives a **reward** <span>$r_t$</span> after performing an action at time <span>$t$</span>.
-The **return**, or **cumulative reward**, from time <span>$t$</span>, is the sum of the rewards:
+The **return**, or **cumulative reward**, from time <span>$t$</span> onwards, is the sum of the rewards:
 
 <div>$$
 G_t = \sum_{i=t}^T r_i
 $$</div>
 
 The **value** of a state is the expected cumulative reward by following policy <span>$p_\theta$</span>.
-In this kind of task we can only observe the cumulative reward <span>$G_1 = R(W)$</span>, for example the ROUGE score, after generating the entire word sequence <span>$W$</span>.
+Usually, when the task is to generate word sequences, can only observe the cumulative reward <span>$G_1 = R(W)$</span>, for example the ROUGE score, after generating the entire sequence <span>$W$</span>.
 
 
 ### REINFORCE objective and its gradient
