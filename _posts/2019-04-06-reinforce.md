@@ -66,7 +66,7 @@ The summation over word sequences makes direct computation of the objective, as 
 The objective could be approximated by sampling a sequence and computing the cumulative reward.
 However, for training a model we actually don't need to approximate the objective function but its gradient.
 Stochastic gradient descent only requires that the expectation of the sampled gradients is proportional to the actual gradient (section 13.3 in [Sutton and Barto][]).
-Let's start by writing the gradient as an expectation over the word sequences:
+Let's start by writing the gradient as an expectation over word sequences:
 
 <div>$$
 \begin{align}
@@ -77,6 +77,7 @@ Let's start by writing the gradient as an expectation over the word sequences:
 $$</div>
 
 where we have used <span>$\frac{\nabla x}{x} = \log \nabla x$</span>.
+
 This brings us to the REINFORCE algorithm, which is essentially an approximation of the gradient using a single sample <span>$W$</span>:
 
 <div>$$
@@ -94,10 +95,12 @@ We use <span>$1(w_t)$</span> to denote a one-hot vector where the value correspo
 Then the following gives an expression for the gradient with regard to the softmax input:
 
 <div>$$
-\nabla_{o_t} J(\theta) \approx R(W) \nabla_{o_t} \log p_{\theta}(W)
-                             = R(W) \nabla_{o_t} \sum_t \log p_{\theta}(w_t \mid w_1 \ldots w_{t-1})
-                             = R(W) \nabla_{o_t} \log p_{\theta}(w_t \mid w_1 \ldots w_{t-1})
-                             = R(W) (1(w_t) - p_{\theta}(w_t \mid w_1 \ldots w_{t-1}))
+\begin{align}
+\nabla_{o_t} J(\theta) &\approx R(W) \nabla_{o_t} \log p_{\theta}(W) \\
+                             &= R(W) \nabla_{o_t} \sum_t \log p_{\theta}(w_t \mid w_1 \ldots w_{t-1}) \\
+                             &= R(W) \nabla_{o_t} \log p_{\theta}(w_t \mid w_1 \ldots w_{t-1}) \\
+                             &= R(W) (1(w_t) - p_{\theta}(w_t \mid w_1 \ldots w_{t-1}))
+\end{align}
 $$</div>
 
 
