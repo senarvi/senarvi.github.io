@@ -112,8 +112,7 @@ The parameter update in REINFORCE is based on a single random output sequence sa
 It's easy to reason that the longer the output sequences are, the less likely it is to obtain a sequence that results in an accurate estimate.
 Actually, the variance of the gradient estimate grows cubically with the sequence length (section 3 in [Peters and Schaal][]).
 
-We start with a generalization of the loss function that takes into account that the cumulative reward is accumulated from rewards <span>$r_t$</span> from individual time steps.
-[Zaremba and Sutskever][] show in Appendix A that because actions cannot influence past rewards, the following holds:
+We start by rewriting the loss function, taking into account that the cumulative reward is accumulated from rewards <span>$r_t$</span> from individual time steps:
 
 <div>$$
 \begin{align}
@@ -124,11 +123,14 @@ We start with a generalization of the loss function that takes into account that
 \end{align}
 $$</div>
 
-The third equation above was obtained by reordering the sums:
+[Zaremba and Sutskever][] show in Appendix A that the second equation abvoe holds because actions cannot influence past rewards.
+The third equation was obtained by reordering the sums:
 
 <div>$$
-  \sum_{t=1}^T r_t \sum_{i=1}^t \nabla_{\theta} \log p_{\theta}(w_i \mid w_1 \ldots w_{i-1})
-= \sum_{t=1}^T \sum_{i=t}^T r_i \nabla_{\theta} \log p_{\theta}(w_t \mid w_1 \ldots w_{t-1})
+\begin{align}
+  &\sum_{t=1}^T r_t \sum_{i=1}^t \nabla_{\theta} \log p_{\theta}(w_i \mid w_1 \ldots w_{i-1}) \\
+= &\sum_{t=1}^T \sum_{i=t}^T r_i \nabla_{\theta} \log p_{\theta}(w_t \mid w_1 \ldots w_{t-1})
+\end{align}
 $$</div>
 
 At certain states all actions have a higher value than in other states.
