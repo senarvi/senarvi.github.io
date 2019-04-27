@@ -88,7 +88,7 @@ This quantity can be used as a sample of the gradient, since its expectation is 
 Implementation is quite easy with a library that supports automatic differentiation.
 One can simply take the gradient of <span>$R(W) \log p_{\theta}(W)$</span> instead of the gradient of the actual objective.
 
-Writing a differentiation operator for the backpropagation is not too difficult either.
+Writing a differentiation operator for backpropagation is not too difficult either.
 Let's say the input to the softmax at time <span>$t$</span> is <span>$o_t$</span>.
 There is a simple expression for the partial derivatives of [cross entropy over softmax output][], assuming the reference output is a one-hot vector.
 We use <span>$1(w_t)$</span> to denote a one-hot vector where the value corresponding to the word <span>$w_t$</span> is one and other values are zero.
@@ -106,7 +106,7 @@ $$</div>
 
 ### REINFORCE with baseline
 
-While in theory it is enough that the expectation of the gradient sample is proportional to the actual gradient, having the training converge in a reasonable time is in practice a whole another thing.
+While in theory it is enough that the expectation of the gradient sample is proportional to the actual gradient, having the training converge in a reasonable time is a whole another thing.
 A good estimate of the gradient should have low variance (variance measures how spread out the estimates are around the mean).
 The parameter update in REINFORCE is based on a single random output sequence sampled from the action space.
 It's easy to reason that the longer the output sequences are, the less likely it is to obtain a sequence that results in an accurate estimate.
@@ -116,10 +116,12 @@ We start with a generalization of the loss function that takes into account that
 [Zaremba and Sutskever][] show in Appendix A that because actions cannot influence past rewards, the following holds:
 
 <div>$$
-\nabla_{\theta} J(\theta) = E_W R(W) \nabla_{\theta} \log p_{\theta}(W)
-                          = E_W \sum_t r_t \nabla_{\theta} \log p_{\theta}(W)
-                          = E_W \sum_t G_t \nabla_{\theta} \log p_{\theta}(w_t \mid w_1 \ldots w_{t-1})
-                          = \sum_t E_{w_t} G_t \nabla_{\theta} \log p_{\theta}(w_t \mid w_1 \ldots w_{t-1})
+\begin{align}
+\nabla_{\theta} J(\theta) &= E_W R(W) \nabla_{\theta} \log p_{\theta}(W) \\
+                          &= E_W \sum_t r_t \nabla_{\theta} \log p_{\theta}(W) \\
+                          &= E_W \sum_t G_t \nabla_{\theta} \log p_{\theta}(w_t \mid w_1 \ldots w_{t-1}) \\
+                          &= \sum_t E_{w_t} G_t \nabla_{\theta} \log p_{\theta}(w_t \mid w_1 \ldots w_{t-1})
+\end{align}
 $$</div>
 
 The third equation above was obtained by reordering the sums:
