@@ -118,13 +118,14 @@ We start by rewriting the loss function, taking into account that the cumulative
 \begin{align}
 \nabla_{\theta} J(\theta) &= E_W R(W) \nabla_{\theta} \log p_{\theta}(W) \\
                           &= E_W \sum_t r_t \nabla_{\theta} \log p_{\theta}(W) \\
+                          &= E_W \sum_t r_t \nabla_{\theta} \log p_{\theta}(w_1 \ldots w_t) \\
                           &= E_W \sum_t G_t \nabla_{\theta} \log p_{\theta}(w_t \mid w_1 \ldots w_{t-1}) \\
                           &= \sum_t E_{w_t} G_t \nabla_{\theta} \log p_{\theta}(w_t \mid w_1 \ldots w_{t-1})
 \end{align}
 $$</div>
 
-[Zaremba and Sutskever][] show in Appendix A that the second equation abvoe holds because actions cannot influence past rewards.
-The third equation was obtained by reordering the sums:
+[Zaremba and Sutskever][] show in Appendix A that the third equation above holds because actions cannot influence past rewards.
+The fourth equation was obtained by reordering the sums:
 
 <div>$$
 \begin{align}
