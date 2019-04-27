@@ -107,7 +107,7 @@ $$</div>
 ### REINFORCE with baseline
 
 While in theory it is enough that the expectation of the gradient sample is proportional to the actual gradient, having the training converge in a reasonable time is a whole another thing.
-A good estimate of the gradient should have low variance (variance measures how spread out the estimates are around the mean).
+A good estimate of the gradient generally has a low variance (variance measures how spread out the estimates are around the mean), meaning that the parameter updates have a low variance as well.
 The parameter update in REINFORCE is based on a single random output sequence sampled from the action space.
 It's easy to reason that the longer the output sequences are, the less likely it is to obtain a sequence that results in an accurate estimate.
 Actually, the variance of the gradient estimate grows cubically with the sequence length (section 3 in [Peters and Schaal][]).
@@ -136,7 +136,7 @@ $$</div>
 
 At certain states all actions have a higher value than in other states.
 It makes no difference with regard to the gradient, if the value of all actions in a particular state is changed by the same amount.
-In other words, we can subtract a quantity <span>$b_t$</span> from the cumulative reward of all the possible words <span>$w_t$</span> that follow a certain partial output sequence <span>$w_1 \ldots w_{t-1}$</span>, without changing the gradient:
+In other words, we can subtract a quantity <span>$b_t$</span> from the reward or cumulative reward of all the possible words <span>$w_t$</span> that follow a certain partial output sequence <span>$w_1 \ldots w_{t-1}$</span>, without changing the gradient:
 
 <div>$$
 \nabla_{\theta} J(\theta) = \sum_t E_{w_t} (G_t - b_t) \nabla_{\theta} \log p_{\theta}(w_t \mid w_1 \ldots w_{t-1})
@@ -148,12 +148,14 @@ This can be shown formally by taking <span>$b_t$</span> outside of the expectati
 It will then be multiplied by the following term, meaning that the subtracted quantity is zero ([Rennie et al][]):
 
 <div>$$
-  E_{w_t} \nabla_{\theta} \log p_{\theta}(w_t \mid w_1 \ldots w_{t-1})
-= \sum_{w_t} p_{\theta}(w_t \mid w_1 \ldots w_{t-1}) \nabla_{\theta} \log p_{\theta}(w_t \mid w_1 \ldots w_{t-1})
-= \sum_{w_t} \nabla_{\theta} p_{\theta}(w_t \mid w_1 \ldots w_{t-1})
-= \nabla_{\theta} \sum_{w_t} p_{\theta}(w_t \mid w_1 \ldots w_{t-1})
-= \nabla_{\theta} 1
-= 0
+\begin{align}
+  &E_{w_t} \nabla_{\theta} \log p_{\theta}(w_t \mid w_1 \ldots w_{t-1}) \\
+= &\sum_{w_t} p_{\theta}(w_t \mid w_1 \ldots w_{t-1}) \nabla_{\theta} \log p_{\theta}(w_t \mid w_1 \ldots w_{t-1}) \\
+= &\sum_{w_t} \nabla_{\theta} p_{\theta}(w_t \mid w_1 \ldots w_{t-1}) \\
+= &\nabla_{\theta} \sum_{w_t} p_{\theta}(w_t \mid w_1 \ldots w_{t-1}) \\
+= &\nabla_{\theta} 1 \\
+= &0
+\end{align}
 $$</div>
 
 where we have used <span>$\nabla \log f(x) = \frac{\nabla f(x)}{f(x)}$</span>.
