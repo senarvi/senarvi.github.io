@@ -63,8 +63,8 @@ J(\theta) = E[G_1] = \sum_W p_{\theta}(W) R(W)
 $$</div>
 
 The summation over word sequences makes direct computation of the objective, as well as the gradient, unfeasible, but they can be approximated by sampling.
-The objective can be approximated by sampling a sequence and computing the cumulative reward.
-However, approximating the objective function is not enough, but in order to train a model we need to approximate its gradient.
+The objective could be approximated by sampling a sequence and computing the cumulative reward.
+However, for training a model we actually don't need to approximate the objective function but its gradient.
 Stochastic gradient descent only requires that the expectation of the sampled gradients is proportional to the actual gradient (section 13.3 in [Sutton and Barto][]).
 Let's start by writing the gradient as an expectation over the word sequences:
 
