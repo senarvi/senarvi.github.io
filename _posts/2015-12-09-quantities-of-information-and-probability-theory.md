@@ -38,8 +38,10 @@ if the outcome of another random phenomenon is known. The entropy of a discrete
 random variable <span>$X$</span> conditional on the variable <span>$Y$</span> is
 
 <div>$$
-H(X \mid Y) = \sum_{y \in Y} p(y) H(X \mid Y=y)
-            = -\sum_{y \in Y} \sum_{x \in X} p(x,y) \log_2(\frac{p(x,y)}{p(y)}).
+\begin{align}
+H(X \mid Y) &= \sum_{y \in Y} p(y) H(X \mid Y=y) \\
+            &= -\sum_{y \in Y} \sum_{x \in X} p(x,y) \log_2(\frac{p(x,y)}{p(y)}).
+\end{align}
 $$</div>
 
 The latter form of the equation can be derived if it is understood that
@@ -84,8 +86,10 @@ the entropy <span>$H(p)$</span>. Another similar measure is the **Kullback-Leibl
 divergence** or **relative entropy** (also sometimes called cross entropy):
 
 <div>$$
-D_{KL}(p \parallel q) = H(X,q) - H(X)
-                      = \sum_{x \in X} p(x) \log_2(\frac{p(x)}{q(x)})
+\begin{align}
+D_{KL}(p \parallel q) &= H(X,q) - H(X) \\
+                      &= \sum_{x \in X} p(x) \log_2(\frac{p(x)}{q(x)})
+\end{align}
 $$</div>
 
 Kullback-Leibler divergence is non-negative and zero if and only if
@@ -177,15 +181,20 @@ sequence. In this context, cross entropy is defined as if the words were
 independent observations:
 
 <div>$$
-H(w_1 \ldots w_N,p) = -\frac{1}{N} \sum_i \log_2(p(x_i)) = -\frac{1}{N} \log_2(p(w_1 \ldots w_N))
+\begin{align}
+H(w_1 \ldots w_N,p) &= -\frac{1}{N} \sum_i \log_2(p(x_i)) \\
+                    &= -\frac{1}{N} \log_2(p(w_1 \ldots w_N))
+\end{align}
 $$</div>
 
 and perplexity is defined as the exponent of cross entropy:
 
 <div>$$
-PP(w_1 \ldots w_N) = 2^{H(w_1 \ldots w_N,p)}
-                   = 2^{-\frac{1}{N} \log_2(p(w_1 \ldots w_N))}
-                   = \frac{1}{p(w_1 \ldots w_N)}^\frac{1}{N}
+\begin{align}
+PP(w_1 \ldots w_N) &= 2^{H(w_1 \ldots w_N,p)} \\
+                   &= 2^{-\frac{1}{N} \log_2(p(w_1 \ldots w_N))} \\
+                   &= \frac{1}{p(w_1 \ldots w_N)}^\frac{1}{N}
+\end{align}
 $$</div>
 
 The latter form of the equation brings us another, equal, definition for the 
