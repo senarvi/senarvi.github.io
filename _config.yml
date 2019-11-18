@@ -11,7 +11,7 @@
 # https://mmistakes.github.io/minimal-mistakes/docs/quick-start-guide/#installing-the-theme
 
 remote_theme             : "mmistakes/minimal-mistakes"
-minimal_mistakes_skin    : "contrast" # "air", "aqua", "contrast", "dark", "dirt", "neon", "mint", "plum", "sunrise"
+minimal_mistakes_skin    : "dirt" # "air", "aqua", "contrast", "dark", "dirt", "neon", "mint", "plum", "sunrise"
 
 # Site Settings
 locale                   : "en-US"
@@ -23,6 +23,8 @@ url                      : "https://senarvi.github.io"
 baseurl                  : # the subpath of your site, e.g. "/blog"
 repository               : "senarvi/senarvi.github.io"
 teaser                   : # path of fallback teaser image, e.g. "/assets/images/500x300.png"
+logo                     : "/assets/images/site-logo.jpg"
+masthead_title           : # overrides the website title displayed in the masthead, use " " for no title
 # breadcrumbs            : false # true, false (default)
 words_per_minute         : 150
 comments:
@@ -98,7 +100,7 @@ analytics:
 author:
   name             : "Seppo Enarvi"
   avatar           : "/assets/images/bio-portrait.jpg"
-  bio              : "NLU, machine learning, deep learning"
+  bio              : "natural language processing, machine learning, deep learning"
   location         : "Berlin, DE"
   email            : "seppo2019@marjaniemi.com"
   uri              :
