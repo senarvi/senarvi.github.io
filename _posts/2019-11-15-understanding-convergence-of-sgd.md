@@ -104,8 +104,13 @@ They found two reasons for the worse generalization performance:
 They illustrate the generalization capability of flat and sharp minima using a loss function <span>$f(x)$</span> with only a single parameter <span>$x$</span>:
 
 <figure>
-  ![]({{ site.url }}/assets/images/flat-vs-sharp-minimum.png)
-  <figcaption>Generalization capability of a flat and a sharp minimum. [Keskar et al.][]</figcaption>
+<img src="/assets/images/flat-vs-sharp-minimum.png">
+<figcaption>
+
+Generalization capability of a flat and a sharp minimum.
+[Keskar et al.][]
+
+</figcaption>
 </figure>
 
 Both minima reach the same loss value, but the flat minimum is less sensitive to perturbations in the parameter space.
@@ -157,8 +162,13 @@ The model parameters are saved after each decay cycle.
 They observed that the model parameters are traversing around the minimum, but never quite reaching the optimal point.
 
 <figure>
-  ![]({{ site.url }}/assets/images/stochastic-weight-averaging.png)
-  <figcaption>Three models (<span>$W_1, W_2, W_3$</span>) obtained by training using cyclical learning rate, and an average model (<span>$W_{SWA}$</span>). [Izmailov et al.][]</figcaption>
+<img src="/assets/images/stochastic-weight-averaging.png">
+<figcaption>
+
+Three models (<span>$W_1, W_2, W_3$</span>) obtained by training using cyclical learning rate, and an average model (<span>$W_{SWA}$</span>).
+[Izmailov et al.][]
+
+</figcaption>
 </figure>
 
 This suggests that an improved model can be obtained by taking the averages of the values of each parameter in the intermediate models.
