@@ -38,7 +38,7 @@ At each step SGD moves the model parameters <span>$\theta$</span> towards the ne
 Optimal step size would of course be one that minimizes the new loss <span>$L(\theta - \epsilon G)$</span>.
 [McCandlish et al.][] show how we could estimate the optimal step size if we had access to the true gradient <span>$G$</span> and the true Hessian <span>$H$</span>.
 They approximate the new loss using the second-order Taylor expansion.
-The second-order Taylor expansion of function f(x) with a real argument can be written
+The second-order Taylor expansion of function <span>$f(x)$</span> with a real argument can be written
 
 <div>$$
 f(a + x) \approx f(a) + x f'(a) + \frac{1}{2} x^2 f''(a).
@@ -51,7 +51,7 @@ We'll just write it in matrix form:
 L(\theta - \epsilon G) \approx L(\theta) - \epsilon G^T G + \frac{1}{2} \epsilon^2 G^T H G
 $$</div>
 
-This function can minimized by setting the derivative to zero.
+This function can be minimized by setting the derivative to zero.
 This gives the optimal step size for the true gradient:
 
 <div>$$
@@ -66,10 +66,10 @@ When using SGD with batch size <span>$B$</span>, the gradient estimates are nois
 [McCandlish et al.][] also derive the optimal step size in this case, which can be expressed:
 
 <div>$$
-\epsilon_{opt}(B) = \frac{\epsilon_{max}}{1 + B_{noise} / B},
+\epsilon_{opt}(B) = \frac{\epsilon_{max}}{1 + B_{noise} / B}
 $$</div>
 
-where the quantity <span>$B_{noise}$</span> is called the *gradient noise scale*.
+They call the quantity <span>$B_{noise}$</span> the *gradient noise scale*.
 The noise scale depends on the true gradient and Hessian, and the variance of the gradient.
 
 Some observations they make about the noise scale:
@@ -78,10 +78,10 @@ Some observations they make about the noise scale:
 * It doesn't depend on the size of the data set. Model size shouldn't have much effect either.
 * During training the magnitude of the gradient decreases, so the noise scale grows.
 
-There is a similar relation between the best possible improvement in loss with true gradient, <span>$\delta L_{max}$</span>, and the best possible improvement under noise, <span>$\delta L_{opt}(B)$</span>:
+There is a similar relation between the best possible improvement in loss with true gradient, <span>$\Delta L_{max}$</span>, and the best possible improvement under noise, <span>$\Delta L_{opt}(B)$</span>:
 
 <div>$$
-\delta L_{opt}(B) = \frac{\delta L_{max}}{1 + B_{noise} / B}
+\Delta L_{opt}(B) = \frac{\Delta L_{max}}{1 + B_{noise} / B}
 $$</div>
 
 Some interesting points that are made about selecting batch size and learning rate:
@@ -120,7 +120,7 @@ They try to assess the noise level in SGD by interpreting it as integration of a
 With true gradient <span>$d C / d \omega$</span> the gradient descent update can be written
 
 <div>$$
-\delta \omega = - \frac{\epsilon}{N} \frac{d C}{d \omega},
+\Delta \omega = - \frac{\epsilon}{N} \frac{d C}{d \omega},
 $$</div>
 
 where normalization by the training set size <span>$N$</span> comes from the fact that we define the cost as the sum of the costs from individual training examples, but in practice we want to take the average.
