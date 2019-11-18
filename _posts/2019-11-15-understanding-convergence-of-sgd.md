@@ -104,13 +104,11 @@ They found two reasons for the worse generalization performance:
 They illustrate the generalization capability of flat and sharp minima using a loss function <span>$f(x)$</span> with only a single parameter <span>$x$</span>:
 
 <figure>
-<img src="/assets/images/flat-vs-sharp-minimum.png">
-<figcaption>
-
-Generalization capability of a flat and a sharp minimum.
-[Keskar et al.][]
-
-</figcaption>
+  <img src="/assets/images/flat-vs-sharp-minimum.png">
+  <figcaption>
+    Generalization capability of a flat and a sharp minimum.
+    <a href="https://arxiv.org/abs/1609.04836">Keskar et al.</a>
+  </figcaption>
 </figure>
 
 Both minima reach the same loss value, but the flat minimum is less sensitive to perturbations in the parameter space.
@@ -159,20 +157,20 @@ A very interesting approach for finding flat minima was recently proposed by [Iz
 Instead of continuously decaying the learning rate, it's possible to find several different models by using a cyclical learning rate schedule.
 This means simply that the learning rate is repeatedly decayed to zero, and then raised again to a higher value.
 The model parameters are saved after each decay cycle.
-They observed that the model parameters are traversing around the minimum, but never quite reaching the optimal point.
-
-<figure>
-<img src="/assets/images/stochastic-weight-averaging.png">
-<figcaption>
-
-Three models (<span>$W_1, W_2, W_3$</span>) obtained by training using cyclical learning rate, and an average model (<span>$W_{SWA}$</span>).
-[Izmailov et al.][]
-
-</figcaption>
-</figure>
+They observed that the model parameters traverse around the minimum, but never quite reaching the optimal point.
 
 This suggests that an improved model can be obtained by taking the averages of the values of each parameter in the intermediate models.
-[Izmailov et al.][] call this stochastic weight averaging (SWA), and observe that the solutions found by SWA are broader in the sense that even if the training loss might be slightly higher, the model is not as sensitive to perturbations of the parameters.
+The figure below shows three intermediate models (<span>$W_1, W_2, W_3$</span>) and an average model (<span>$W_{SWA}$</span>) in the parameter space.
+
+<figure>
+  <img src="/assets/images/stochastic-weight-averaging.png">
+  <figcaption>
+    Three models obtained by training using cyclical learning rate, and an average model.
+    <a href="https://arxiv.org/abs/1803.05407">Izmailov et al.</a>
+  </figcaption>
+</figure>
+
+[Izmailov et al.][] call this method stochastic weight averaging (SWA), and observe that the solutions found by SWA are broader in the sense that even if the training loss might be slightly higher, the model is not as sensitive to perturbations of the parameters.
 This improves the generalization of the model, with no extra cost, except for storing the intermediate models.
 
 
