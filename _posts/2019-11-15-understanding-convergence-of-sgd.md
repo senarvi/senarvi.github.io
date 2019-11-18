@@ -9,11 +9,11 @@ math: true
 
 This article discusses several papers that I recently found, that analyze stochastic gradient descent optimization, make interesting observations about its convergence, and help understanding the significance of batch size and learning rate:
 
-* [McCandlish et al.](https://arxiv.org/abs/1812.06162) 2018. An Empirical Model of Large-Batch Training.
-* [Keskar et al.](https://arxiv.org/abs/1609.04836) 2017. On Large-Batch Training for Deep Learning: Generalization Gap and Sharp Minima.
-* [Smith and Le](https://arxiv.org/abs/1710.06451) 2018. A Bayesian Perspective on Generalization and Stochastic Gradient Descent.
-* [Smith et al.](https://arxiv.org/abs/1711.00489) 2018. Don't Decay the Learning Rate, Increase the Batch Size.
-* [Izmailov et al.](https://arxiv.org/abs/1803.05407) 2018. Averaging Weights Leads to Wider Optima and Better Generalization.
+* [McCandlish et al.][] 2018. An Empirical Model of Large-Batch Training.
+* [Keskar et al.][] 2017. On Large-Batch Training for Deep Learning: Generalization Gap and Sharp Minima.
+* [Smith and Le][] 2018. A Bayesian Perspective on Generalization and Stochastic Gradient Descent.
+* [Smith et al.][] 2018. Don't Decay the Learning Rate, Increase the Batch Size.
+* [Izmailov et al.][] 2018. Averaging Weights Leads to Wider Optima and Better Generalization.
 
 ### Training batch size
 
@@ -36,7 +36,7 @@ The next section tries to quantify the noise introduced to gradient estimates by
 
 At each step SGD moves the model parameters <span>$\theta$</span> towards the negative gradient an amount specified by the learning rate or step size <span>$\epsilon$</span>.
 Optimal step size would of course be one that minimizes the new loss <span>$L(\theta - \epsilon G)$</span>.
-[McCandlish et al.] show how we could estimate the optimal step size if we had access to the true gradient <span>$G$</span> and the true Hessian <span>$H$</span>.
+[McCandlish et al.][] show how we could estimate the optimal step size if we had access to the true gradient <span>$G$</span> and the true Hessian <span>$H$</span>.
 They approximate the new loss using the second-order Taylor expansion.
 The second-order Taylor expansion of function f(x) with a real argument can be written
 
@@ -63,7 +63,7 @@ In fact, this starts to look a lot like second-order optimization, which is not 
 However, now we're just trying to understand what happens to the optimal learning rate and batch size under noise.
 
 When using SGD with batch size <span>$B$</span>, the gradient estimates are noisy and we need to consider the expectation of <span>$L(\theta - \epsilon G)$</span>.
-[McCandlish et al.] also derive the optimal step size in this case, which can be expressed:
+[McCandlish et al.][] also derive the optimal step size in this case, which can be expressed:
 
 <div>$$
 \epsilon_{opt}(B) = \frac{\epsilon_{max}}{1 + B_{noise} / B},
@@ -95,7 +95,7 @@ Some interesting points that are made about selecting batch size and learning ra
 
 Intuitively it's easy to understand that larger batches lead to faster convergence, but after certain point growing the batch size doesn't really help anymore.
 However, this doesn't explain the well known fact that a too large batch size can even hurt the model performance.
-[Keskar et al.] observed that large batches yield a similar training loss, but generalize worse than small-batch training.
+[Keskar et al.][] observed that large batches yield a similar training loss, but generalize worse than small-batch training.
 They found two reasons for the worse generalization performance:
 
 * Large-batch training tends to converge to a minimum close to the initial parameter values, instead of exploring all the parameter space.
@@ -103,7 +103,7 @@ They found two reasons for the worse generalization performance:
 
 They illustrate the generalization capability of flat and sharp minima using a loss function <span>$f(x)$</span> with only a single parameter <span>$x$</span>:
 
-![Generalization capability of a flat and a sharp minimum. [Keskar et al.]]({{ site.url }}/assets/images/flat-vs-sharp-minimum.png)
+![Generalization capability of a flat and a sharp minimum. [Keskar et al.][]]({{ site.url }}/assets/images/flat-vs-sharp-minimum.png)
 
 Both minima reach the same loss value, but the flat minimum is less sensitive to perturbations in the parameter space.
 The provide experimental evidence that training with large batch sizes converges more likely to sharp minima and minima close the starting point.
@@ -111,11 +111,11 @@ They argue that the inherent noise in small-batch training helps to push the par
 
 ### Useful random fluctuations
 
-[McCandlish et al.] looked at how noise degrades gradient estimates and found for a point of diminished returns for batch size.
+[McCandlish et al.][] looked at how noise degrades gradient estimates and found for a point of diminished returns for batch size.
 In Appendix C they make an empirical observation that the noise scale primarily depends on the learning rate and batch size, and under some assumptions is approximately proportional to <span>$B / \epsilon$</span>.
 Their definition of the noise scale is independent of the training set size.
 
-[Smith and Le] observed that some amount of noise is helpful, so there is an optimal value for batch size, when other hyperparameters are kept fixed.
+[Smith and Le][] observed that some amount of noise is helpful, so there is an optimal value for batch size, when other hyperparameters are kept fixed.
 They try to assess the noise level in SGD by interpreting it as integration of a stochastic differential equation.
 With true gradient <span>$d C / d \omega$</span> the gradient descent update can be written
 
@@ -143,18 +143,25 @@ Similarly, when increasing batch size, learning rate should be increased proport
 So essentially a small batch size and a high learning rate serve the same purpose—increase the fluctuations that are helpful for learning.
 In this sense decaying learning rate during training is very similar to simulated annealing.
 A larger learning rate will explore a larger area of the parameter space, while decaying it will allow training to converge to a minimum.
-In another paper [Smith et al.] suggest to increase the batch size instead of annealing learning rate, which makes sense if there's more GPU memory available than what the optimal batch size can initially utilize.
+In another paper [Smith et al.][] suggest to increase the batch size instead of annealing learning rate, which makes sense if there's more GPU memory available than what the optimal batch size can initially utilize.
 
 ### Averaging model parameters
 
-A very interesting approach for finding flat minima was recently proposed by [Izmailov et al.].
+A very interesting approach for finding flat minima was recently proposed by [Izmailov et al.][].
 Instead of continuously decaying the learning rate, it's possible to find several different models by using a cyclical learning rate schedule.
 This means simply that the learning rate is repeatedly decayed to zero, and then raised again to a higher value.
 The model parameters are saved after each decay cycle.
 They observed that the model parameters are traversing around the minimum, but never quite reaching the optimal point.
 
-![Three models (<span>$W_1, W_2, W_3$</span>) obtained by training using cyclical learning rate, and an average model (<span>$W_{SWA}$</span>). [Izmailov et al.]]({{ site.url }}/assets/images/stochastic-weight-averaging.png)
+![Three models (<span>$W_1, W_2, W_3$</span>) obtained by training using cyclical learning rate, and an average model (<span>$W_{SWA}$</span>). [Izmailov et al.][]]({{ site.url }}/assets/images/stochastic-weight-averaging.png)
 
 This suggests that an improved model can be obtained by taking the averages of the values of each parameter in the intermediate models.
-[Izmailov et al.] call this stochastic weight averaging (SWA), and observe that the solutions found by SWA are broader in the sense that even if the training loss might be slightly higher, the model is not as sensitive to perturbations of the parameters.
+[Izmailov et al.][] call this stochastic weight averaging (SWA), and observe that the solutions found by SWA are broader in the sense that even if the training loss might be slightly higher, the model is not as sensitive to perturbations of the parameters.
 This improves the generalization of the model, with no extra cost, except for storing the intermediate models.
+
+
+[McCandlish et al.]: https://arxiv.org/abs/1812.06162
+[Keskar et al.]: https://arxiv.org/abs/1609.04836
+[Smith and Le]: https://arxiv.org/abs/1710.06451
+[Smith et al.]: https://arxiv.org/abs/1711.00489
+[Izmailov et al.]: https://arxiv.org/abs/1803.05407
