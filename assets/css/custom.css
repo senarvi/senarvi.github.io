@@ -1,6 +1,11 @@
-img {
+.author__avatar img {
+  max-width: 150px;
+  border-radius: 0%;
+}
+
+.page__content img {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  border: solid white 20px;
+  border: solid white 15px;
 }
