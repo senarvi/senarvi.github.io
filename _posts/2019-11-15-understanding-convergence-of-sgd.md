@@ -106,7 +106,7 @@ They illustrate the generalization capability of flat and sharp minima using a l
 ![Generalization capability of a flat and a sharp minimum. [Keskar et al.][]]({{ site.url }}/assets/images/flat-vs-sharp-minimum.png)
 
 Both minima reach the same loss value, but the flat minimum is less sensitive to perturbations in the parameter space.
-The provide experimental evidence that training with large batch sizes converges more likely to sharp minima and minima close the starting point.
+They provide experimental evidence that large-batch training converges more likely to sharp minima and minima close the starting point.
 They argue that the inherent noise in small-batch training helps to push the parameters out of a sharp basin.
 
 ### Useful random fluctuations
