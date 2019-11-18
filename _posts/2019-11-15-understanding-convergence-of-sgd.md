@@ -103,15 +103,18 @@ They found two reasons for the worse generalization performance:
 
 They illustrate the generalization capability of flat and sharp minima using a loss function <span>$f(x)$</span> with only a single parameter <span>$x$</span>:
 
-![Generalization capability of a flat and a sharp minimum. [Keskar et al.][]]({{ site.url }}/assets/images/flat-vs-sharp-minimum.png)
+<figure>
+  ![]({{ site.url }}/assets/images/flat-vs-sharp-minimum.png)
+  <figcaption>Generalization capability of a flat and a sharp minimum. [Keskar et al.][]</figcaption>
+</figure>
 
 Both minima reach the same loss value, but the flat minimum is less sensitive to perturbations in the parameter space.
-They provide experimental evidence that large-batch training converges more likely to sharp minima and minima close the starting point.
+They provide experimental evidence that large-batch training converges more likely to sharp minima and minima close to the starting point.
 They argue that the inherent noise in small-batch training helps to push the parameters out of a sharp basin.
 
 ### Useful random fluctuations
 
-[McCandlish et al.][] looked at how noise degrades gradient estimates and found for a point of diminished returns for batch size.
+[McCandlish et al.][] looked at how noise degrades gradient estimates and found a point of diminished returns for batch size.
 In Appendix C they make an empirical observation that the noise scale primarily depends on the learning rate and batch size, and under some assumptions is approximately proportional to <span>$B / \epsilon$</span>.
 Their definition of the noise scale is independent of the training set size.
 
@@ -153,7 +156,10 @@ This means simply that the learning rate is repeatedly decayed to zero, and then
 The model parameters are saved after each decay cycle.
 They observed that the model parameters are traversing around the minimum, but never quite reaching the optimal point.
 
-![Three models (<span>$W_1, W_2, W_3$</span>) obtained by training using cyclical learning rate, and an average model (<span>$W_{SWA}$</span>). [Izmailov et al.][]]({{ site.url }}/assets/images/stochastic-weight-averaging.png)
+<figure>
+  ![]({{ site.url }}/assets/images/stochastic-weight-averaging.png)
+  <figcaption>Three models (<span>$W_1, W_2, W_3$</span>) obtained by training using cyclical learning rate, and an average model (<span>$W_{SWA}$</span>). [Izmailov et al.][]</figcaption>
+</figure>
 
 This suggests that an improved model can be obtained by taking the averages of the values of each parameter in the intermediate models.
 [Izmailov et al.][] call this stochastic weight averaging (SWA), and observe that the solutions found by SWA are broader in the sense that even if the training loss might be slightly higher, the model is not as sensitive to perturbations of the parameters.
