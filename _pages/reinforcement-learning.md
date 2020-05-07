@@ -98,8 +98,9 @@ $$</div>
 * A value function may be used to learn the policy parameters, but is not required for action selection
 
 ### Actor-Critic Methods
-* A more general idea of which the policy-gradient is a special case
-* In policy-gradient methods the loss consists of a policy (the actor) and a reward (the critic)
+* An actor chooses an action to take and a critic evaluates being in a state
+* For example [a neural network with actor and critic output layers](https://github.com/pytorch/examples/blob/master/reinforcement_learning/actor_critic.py)
+* Policy-gradient is a special case of this more general idea, where the policy is the actor and the reward is used as the critic
 
 ### Reflex Agents
 * Learn a mapping from states to actions
