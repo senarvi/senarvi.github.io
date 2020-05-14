@@ -4,13 +4,18 @@ permalink: /publications/
 author_profile: true
 ---
 
+* Seppo Enarvi, Mariliisa Amoia, Miguel Del-Agua Teba, Brian Delaney, Frank Diehl, Guido Gallopyn, Stefan Hahn, Kristina Harris, Liam McGrath, Yue Pan, Joel Pinto, Luca Rubini, Miguel Ruiz, Gagandeep Singh, Fabian Stemmer, Weiyi Sun, Paul Vozila, Thomas Lin, and Ranjani Ramamurthy (2020),
+  Generating Medical Reports from Patient-Doctor Conversations using Sequence-to-Sequence Models.
+  In Proceedings of the Workshop on NLP for Medical Conversations.
+  ([PDF]({{ site.baseurl }}/publications/acl2020.pdf),
+  [BibTex]({{ site.baseurl }}/publications/acl2020.bib)).
 * Seppo Enarvi (2017),
   [Modeling Conversational Finnish for Automatic Speech Recognition](http://urn.fi/URN:ISBN:978-952-60-7908-0).
   Doctoral dissertation, Aalto University, Espoo.
   ([PDF]({{ site.baseurl }}/publications/phd_enarvi_seppo_2018.pdf),
   [BibTex]({{ site.baseurl }}/publications/phd_enarvi_seppo_2018.bib))
 * Maria Uther, Anna-Riikka Smolander, Katja Junttila, Mikko Kurimo, Reima Karhila, Seppo Enarvi, Sari Ylinen (2018),
-  User Experiences from Children Using a Speech Learning Application: Implications for Designers of Speech Training Applications for Children.
+  [User Experiences from Children Using a Speech Learning Application: Implications for Designers of Speech Training Applications for Children](http://dx.doi.org/10.1155/2018/7345397).
   In Proceedings of EuroCALL 2018.
 * Peter Smit, Siva Reddy Gangireddy, Seppo Enarvi, Sami Virpioja, and Mikko Kurimo (2017),
   [Character-Based Units for Unlimited Vocabulary Continuous Speech Recognition](http://dx.doi.org/10.1109/ASRU.2017.8268929).
