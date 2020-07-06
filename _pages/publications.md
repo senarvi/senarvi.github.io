@@ -5,7 +5,7 @@ author_profile: true
 ---
 
 * Seppo Enarvi, Mariliisa Amoia, Miguel Del-Agua Teba, Brian Delaney, Frank Diehl, Guido Gallopyn, Stefan Hahn, Kristina Harris, Liam McGrath, Yue Pan, Joel Pinto, Luca Rubini, Miguel Ruiz, Gagandeep Singh, Fabian Stemmer, Weiyi Sun, Paul Vozila, Thomas Lin, and Ranjani Ramamurthy (2020),
-  Generating Medical Reports from Patient-Doctor Conversations using Sequence-to-Sequence Models.
+  [Generating Medical Reports from Patient-Doctor Conversations using Sequence-to-Sequence Models](https://www.aclweb.org/anthology/2020.nlpmc-1.4/).
   In Proceedings of the First Workshop on Natural Language Processing for Medical Conversations.
   ([PDF](https://www.aclweb.org/anthology/2020.nlpmc-1.4.pdf),
   [BibTex](https://www.aclweb.org/anthology/2020.nlpmc-1.4.bib)).
