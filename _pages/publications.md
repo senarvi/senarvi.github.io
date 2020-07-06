@@ -6,9 +6,9 @@ author_profile: true
 
 * Seppo Enarvi, Mariliisa Amoia, Miguel Del-Agua Teba, Brian Delaney, Frank Diehl, Guido Gallopyn, Stefan Hahn, Kristina Harris, Liam McGrath, Yue Pan, Joel Pinto, Luca Rubini, Miguel Ruiz, Gagandeep Singh, Fabian Stemmer, Weiyi Sun, Paul Vozila, Thomas Lin, and Ranjani Ramamurthy (2020),
   Generating Medical Reports from Patient-Doctor Conversations using Sequence-to-Sequence Models.
-  In Proceedings of the Workshop on NLP for Medical Conversations.
-  ([PDF]({{ site.baseurl }}/publications/acl2020.pdf),
-  [BibTex]({{ site.baseurl }}/publications/acl2020.bib)).
+  In Proceedings of the First Workshop on Natural Language Processing for Medical Conversations.
+  ([PDF](https://www.aclweb.org/anthology/2020.nlpmc-1.4.pdf),
+  [BibTex](https://www.aclweb.org/anthology/2020.nlpmc-1.4.bib)).
 * Seppo Enarvi (2017),
   [Modeling Conversational Finnish for Automatic Speech Recognition](http://urn.fi/URN:ISBN:978-952-60-7908-0).
   Doctoral dissertation, Aalto University, Espoo.
