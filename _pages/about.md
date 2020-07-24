@@ -6,9 +6,9 @@ author_profile: true
 
 Seppo Enarvi  
 Nuance Communications  
-Aachen, Germany  
+Berlin, Germany  
 
 E-mail: {{ site.author.email }}  
-Mobile: +49-176-4202-4940
+Mobile: +358-44-322-5563
 
 <a href="{{ site.url }}/cv.pdf">Download my CV</a>
