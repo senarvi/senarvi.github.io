@@ -55,7 +55,7 @@ math: true
 * 1x1 convolutions are also performed to reduce the depth before the 3x3 and 5x5 convolutions
 
 <figure>
-  <img src="https://www.researchgate.net/profile/Debaditya_Acharya/publication/323796590/figure/fig1/AS:606593536258049@1521634577318/The-architecture-of-a-VGGNet-CNN-after-Wang-et-al-2017_W640.jpg">
+  <img src="https://www.researchgate.net/profile/Ahmed_Abdelbaki5/publication/335443279/figure/fig12/AS:796779360559116@1566978411258/Inception-module-with-dimension-reductions-79_W640.jpg">
   <figcaption>
     Inception module.
     <a href="https://arxiv.org/abs/1409.4842">Szegedy et al. 2014</a>
