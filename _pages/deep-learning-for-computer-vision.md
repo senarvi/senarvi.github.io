@@ -83,7 +83,7 @@ math: true
 * Predict a segmentation map given an image
 * The output is the same size as the input
 
-### [U-Net]()
+### [U-Net](https://arxiv.org/abs/1505.04597)
 
 * After reducing resolutiong using the usual convolutional layers, increase the resolution by upsampling
 * Cross connections (not part of the original U-Net architecture) from the downsampling part of the network to the same-sized image in the upsampling part
