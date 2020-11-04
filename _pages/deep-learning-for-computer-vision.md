@@ -8,7 +8,8 @@ math: true
 ## Image Classification
 
 * Assign a label to an image
-* ImageNet Large Scale Visual Recognition Challenge: 1000 different classes
+* ImageNet Large Scale Visual Recognition Challenge
+    - 1000 categories
 
 ### [AlexNet](https://papers.nips.cc/paper/4824-imagenet-classification-with-deep-convolutional-neural-networks)
 
@@ -67,6 +68,10 @@ math: true
 
 * Finding and classifying a variable number of objects in an image
 * Variable number of outputs: a list of bounding boxes with associated labels (and probabilities for the labels and bounding boxes)
+* [Microsoft COCO](https://arxiv.org/abs/1405.0312)
+    - Complex everyday scenes containing common objects in their natural context
+    - 80 object categories
+    - 1.5 million object instances in 330k images
 
 ### [Faster R-CNN](https://arxiv.org/abs/1506.01497)
 
@@ -76,6 +81,14 @@ math: true
 * RPN learns to predict a probability that a reference region contains an object, and x, y, width, and height offset from the reference
 * The extracted features are reused for classifying the regions using a region-based CNN (R-CNN)
 * R-CNN consists of two fully-connected layers of size 4096, followed by two output layers—one predicting the class (including "background") and one predicting the region offset
+
+### [YOLO](https://arxiv.org/abs/1506.02640)
+
+* The input image is conceptually divided into a grid of cells (e.g. 7x7)
+* For each cell, the model predicts multiple bounding boxes (e.g. two), whose center falls into the cell, and one set of class probabilities
+* A bounding box defines coordinates x and y (between 0 and 1, relative to the cell), width and height (between 0 and 1, relative to the image), and confidence
+* At training time, the bounding box with highest Intersection over Union with the ground truth is responsible for predicting the object
+* At test time, the confidences are multiplied by the class probabilities to get a set of class scores for each bounding box
 
 
 ## Image Segmentation
