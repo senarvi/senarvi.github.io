@@ -72,6 +72,8 @@ math: true
     - Complex everyday scenes containing common objects in their natural context
     - 80 object categories
     - 1.5 million object instances in 330k images
+* [PASCAL Visual Object Classes challenge](http://host.robots.ox.ac.uk/pascal/VOC/pubs/everingham15.pdf)
+    - 20 object categories
 
 ### [Faster R-CNN](https://arxiv.org/abs/1506.01497)
 
