@@ -24,7 +24,7 @@ author_profile: true
 * [torchvision](https://github.com/pytorch/vision/tree/master/torchvision/datasets) contains a collection of standard datasets
 * As an example, see the [PASCAL VOC dataset](https://github.com/pytorch/vision/blob/master/torchvision/datasets/voc.py)
 * The [constructor](https://github.com/pytorch/vision/blob/release/0.8.0/torchvision/datasets/voc.py#L157) downloads and extracts the tar archive
-* The [__getitem__ method](https://github.com/pytorch/vision/blob/release/0.8.0/torchvision/datasets/voc.py#L202) parses the XML annotations, applies any transforms, and returns a data point
+* The [\_\_getitem\_\_ method](https://github.com/pytorch/vision/blob/release/0.8.0/torchvision/datasets/voc.py#L202) parses the XML annotations, applies any transforms, and returns a data point
 
 ### Transform
 
