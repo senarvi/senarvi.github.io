@@ -4,8 +4,6 @@ permalink: /notes/pytorch-lightning/
 author_profile: true
 ---
 
-# [PyTorch Lightning](https://github.com/PyTorchLightning/pytorch-lightning)
-
 ## Data Pipeline
 
 ### [LightningDataModule](https://github.com/PyTorchLightning/pytorch-lightning/blob/master/pytorch_lightning/core/datamodule.py)
