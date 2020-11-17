@@ -10,6 +10,7 @@ author_profile: true
 
 * Contains data loaders for training, validation, and test sets
 * As an example, see the [PASCAL VOC data module](https://github.com/PyTorchLightning/pytorch-lightning-bolts/blob/master/pl_bolts/datamodules/vocdetection_datamodule.py)
+* The optional `train_transforms`, `val_transforms`, and `test_transforms` arguments are passed to the [`LightningDataModule`](https://github.com/PyTorchLightning/pytorch-lightning/blob/master/pytorch_lightning/core/datamodule.py) super class, allowing you to decouple the data and its transforms
 
 ### [DataLoader](https://github.com/pytorch/pytorch/blob/master/torch/utils/data/dataloader.py)
 
@@ -24,7 +25,7 @@ author_profile: true
 * [torchvision](https://github.com/pytorch/vision/tree/master/torchvision/datasets) contains a collection of standard datasets
 * As an example, see the [PASCAL VOC dataset](https://github.com/pytorch/vision/blob/master/torchvision/datasets/voc.py)
 * The [constructor](https://github.com/pytorch/vision/blob/release/0.8.0/torchvision/datasets/voc.py#L157) downloads and extracts the tar archive
-* The [`\_\_getitem\_\_`](https://github.com/pytorch/vision/blob/release/0.8.0/torchvision/datasets/voc.py#L202) method parses the XML annotations, applies any transforms, and returns a data point
+* The [`__getitem__`](https://github.com/pytorch/vision/blob/release/0.8.0/torchvision/datasets/voc.py#L202) method parses the XML annotations, applies any transforms, and returns a data point
 
 ### Transform
 

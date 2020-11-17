@@ -88,8 +88,25 @@ author_profile: true
 * The input image is conceptually divided into a grid of cells (e.g. 7x7)
 * For each cell, the model predicts multiple bounding boxes (e.g. two), whose center falls into the cell, and one set of class probabilities
 * A bounding box defines coordinates x and y (between 0 and 1, relative to the cell), width and height (between 0 and 1, relative to the image), and confidence
-* At training time, the bounding box with highest Intersection over Union with the ground truth is responsible for predicting the object
 * At test time, the confidences are multiplied by the class probabilities to get a set of class scores for each bounding box
+* For every bounding box, keeps only the class with the highest score
+* Overlapping bounding boxes are filtered using non-maximum suppression
+* At training time, the bounding box with highest Intersection over Union with a ground truth bounding box is "responsible for predicting the object", i.e. takes part in the loss calculation
+* Target for the confidence score is the Intersection over Union between the predicted and ground truth bounding boxes
+* The loss from a bounding box consists of MSE losses its coordinates and dimensions, confidence score, and class probabilities
+
+### Non-Maximum Suppression
+
+* Bounding boxes that lie in the same area and predict the same class, are sorted by probability, and iterated starting from the one with the highest probability
+* At each step, calculates Intersection over Union (IoU) with the next bounding box
+* A high IoU means that there is considerable overlap between the bounding boxes
+* If the IoU is higher than a threshold, any remaining bounding boxes are discarded
+
+### [YOLO9000](https://arxiv.org/abs/1612.08242) and [YOLOv3](https://pjreddie.com/media/files/papers/YOLOv3.pdf)
+
+* The model predicts offsets from predefined anchor boxes, like Faster R-CNN
+* There are multiple detection layers at different levels of the model, and a few anchor boxes for each grid cell at each detection layer (for example three anchor boxes at three layers, totaling nine anchor boxes)
+* The anchor boxes are centered at the cell center, and their dimensions are determined by running k-means clustering on the training set bounding box dimensions
 
 
 ## Image Segmentation
