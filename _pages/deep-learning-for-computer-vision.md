@@ -104,9 +104,14 @@ author_profile: true
 
 ### [YOLO9000](https://arxiv.org/abs/1612.08242) and [YOLOv3](https://pjreddie.com/media/files/papers/YOLOv3.pdf)
 
-* The model predicts offsets from predefined anchor boxes, like Faster R-CNN
-* There are multiple detection layers at different levels of the model, and a few anchor boxes for each grid cell at each detection layer (for example three anchor boxes at three layers, totaling nine anchor boxes)
-* The anchor boxes are centered at the cell center, and their dimensions are determined by running k-means clustering on the training set bounding box dimensions
+* There are multiple detection layers at different levels of the model (for example, 3)
+* Each grid cell at each detection layer predicts multiple bounding boxes (for example, 3)
+* The predicted values are offsets from predefined anchor boxes, like in Faster R-CNN
+* The anchor boxes are centered at the cell center, i.e. the bounding box location is still predicted relative to the grid cell
+* There is a corresponding anchor width and height for each of the 3 predictors at each of the 3 detection layers, totaling nine anchor box sizes
+* The anchor box dimensions are determined by running k-means clustering on the training set bounding boxes
+* The grid cell responsible for a training target is determined by the object center
+* At each detection layer, the predictor that is responsible for a training target is the one whose corresponding anchor dimensions best match the object size (in terms of Intersection over Union)
 
 
 ## Image Segmentation
