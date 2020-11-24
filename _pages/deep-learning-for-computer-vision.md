@@ -85,19 +85,31 @@ author_profile: true
 
 ### [YOLO](https://arxiv.org/abs/1506.02640)
 
-* The input image is conceptually divided into a grid of cells (e.g. 7x7)
-* For each cell, the model predicts multiple bounding boxes (e.g. two), whose center falls into the cell, and one set of class probabilities
-* A bounding box defines coordinates x and y (between 0 and 1, relative to the cell), width and height (between 0 and 1, relative to the image), and confidence
+* A single convolutional network extracts features and predicts the bounding boxes
+* The input image is conceptually divided into a grid of cells (for example, 7 × 7)
+* For each cell, the model predicts multiple bounding boxes (for example, two), whose center falls into the cell, and one set of class probabilities
+* The model predicts 5 values for each bounding box:
+    - x and y coordinates (between 0 and 1, relative to the cell)
+    - width and height (between 0 and 1, relative to the image)
+    - confidence score (between 0 and 1)
 * At test time, the confidences are multiplied by the class probabilities to get a set of class scores for each bounding box
 * For every bounding box, keeps only the class with the highest score
 * Overlapping bounding boxes are filtered using non-maximum suppression
-* At training time, the bounding box with highest Intersection over Union with a ground truth bounding box is "responsible for predicting the object", i.e. takes part in the loss calculation
+* At training time, the bounding box with the highest Intersection over Union with a ground truth bounding box is "responsible for predicting the object", i.e. takes part in the loss calculation
 * Target for the confidence score is the Intersection over Union between the predicted and ground truth bounding boxes
-* The loss from a bounding box consists of MSE losses its coordinates and dimensions, confidence score, and class probabilities
+* The loss of a bounding box is the sum of squared errors from its coordinates and dimensions, confidence score, and class probabilities
+
+<figure>
+  <img src="https://raw.githubusercontent.com/D3lt4lph4/papers/master/docs/images/imagedetection/yolo/network.png">
+  <figcaption>
+    YOLO architecture.
+    <a href="https://dx.doi.org/10.1109/CVPR.2016.91">Redmon et al. 2016</a>
+  </figcaption>
+</figure>
 
 ### Non-Maximum Suppression
 
-* Bounding boxes that lie in the same area and predict the same class, are sorted by probability, and iterated starting from the one with the highest probability
+* Bounding boxes that predict the same class, are sorted by probability, and iterated starting from the one with the highest probability
 * At each step, calculates Intersection over Union (IoU) with the next bounding box
 * A high IoU means that there is considerable overlap between the bounding boxes
 * If the IoU is higher than a threshold, any remaining bounding boxes are discarded
@@ -105,13 +117,19 @@ author_profile: true
 ### [YOLO9000](https://arxiv.org/abs/1612.08242) and [YOLOv3](https://pjreddie.com/media/files/papers/YOLOv3.pdf)
 
 * There are multiple detection layers at different levels of the model (for example, 3)
-* Each grid cell at each detection layer predicts multiple bounding boxes (for example, 3)
-* The predicted values are offsets from predefined anchor boxes, like in Faster R-CNN
-* The anchor boxes are centered at the cell center, i.e. the bounding box location is still predicted relative to the grid cell
-* There is a corresponding anchor width and height for each of the 3 predictors at each of the 3 detection layers, totaling nine anchor box sizes
+* Each grid cell at each detection layer predicts multiple bounding boxes (for example, 3) and a separate set of class probabilities for every box (as opposed to YOLO)
+* Boxes are predicted relative to predefined anchor boxes, like in Faster R-CNN
+* The anchor boxes are centered at the cell center, i.e. the bounding box location is still predicted relative to the grid cell and the anchor box only defines a prior width and height
+* The three boxes predicted at a cell each have a separate prior width and height
+* The three detection layers use separate priors, totaling nine anchor box shapes
 * The anchor box dimensions are determined by running k-means clustering on the training set bounding boxes
-* The grid cell responsible for a training target is determined by the object center
-* At each detection layer, the predictor that is responsible for a training target is the one whose corresponding anchor dimensions best match the object size (in terms of Intersection over Union)
+* At each detection layer, the bounding box that is responsible for a training target is the one whose anchor box best matches the object
+    - The grid cell is determined by the object center
+    - The predictor within the cell is the one whose prior dimensions give the ighest Intersection over Union with the target
+* Confidence score is now called objectness, and YOLOv3 uses binary targets
+    - The target is one for the bounding boxes that are responsible for predicting any objects
+    - Bounding boxes that are not responsible for predicting any objects, but whose anchor box overlaps an object (high enough IoU), are ignored from the objectness loss
+    - Objectness loss is calculated as the binary cross entropy from those boxes that are not ignored
 
 
 ## Image Segmentation
