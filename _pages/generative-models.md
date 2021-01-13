@@ -53,32 +53,40 @@ math: true
 * Two generators, <span>$G$</span> and <span>$F$</span>, translate images between two domains
 
 <div>$$
-G: X \to Y
-F: Y \to X
+\begin{align}
+&G: X \to Y \\
+&F: Y \to X
+\end{align}
 $$</div>
 
 * Generator is a CNN consisting of an encoder, transformer, and a decoder
-* Two discriminators, <span>$D_Y$</span> and <span>$D_X$</span>, try to detect generated images
+* Two discriminators, <span>$D_Y$</span> and <span>$D_X$</span>, try to distinguish real images from generated images
 * Discriminator is a CNN that follows the PatchGAN architecture
 * Adversarial loss for <span>$G$</span> makes <span>$D_Y$</span> distinguish <span>$G(x)$</span> from <span>$y$</span>:
 
 <div>$$
-D_Y(y) \to 0
-D_Y(G(x)) \to 1
+\begin{align}
+&D_Y(y) \to 0 \\
+&D_Y(G(x)) \to 1
+\end{align}
 $$</div>
 
 * Adversarial loss for <span>$F$</span> makes <span>$D_X$</span> distinguish <span>$F(y)$</span> from <span>$x$</span>:
 
 <div>$$
-D_X(x) \to 0
-D_X(F(y)) \to 1
+\begin{align}
+&D_X(x) \to 0 \\
+&D_X(F(y)) \to 1
+\end{align}
 $$</div>
 
-* Cycle consistency loss makes sure that an image translation cycle brings back to the original image:
+* Cycle consistency loss expresses that an image translation cycle should bring back the original image:
 
 <div>$$
-F(G(x)) \to x
-G(F(y)) \to y
+\begin{align}
+&F(G(x)) \to x \\
+&G(F(y)) \to y
+\end{align}
 $$</div>
 
 ## [Reversible Generative Models](https://iclr.cc/virtual_2020/speaker_4.html)
