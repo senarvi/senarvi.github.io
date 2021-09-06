@@ -5,8 +5,8 @@ author_profile: true
 ---
 
 Seppo Enarvi  
-Nuance Communications  
-Berlin, Germany  
+Groke Technologies  
+Helsinki, Finland
 
 E-mail: {{ site.author.email }}  
 Mobile: +358-44-322-5563
