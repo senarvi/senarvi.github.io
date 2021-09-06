@@ -100,7 +100,7 @@ analytics:
 author:
   name             : "Seppo Enarvi"
   avatar           : "/assets/images/bio-portrait.jpg"
-  bio              : "natural language processing, machine learning, deep learning"
+  bio              : "computer vision, natural language processing, deep learning"
   location         : "Helsinki, FI"
   email            : "seppo2021@marjaniemi.com"
   uri              :
