@@ -13,13 +13,13 @@ Kalman filter estimates the state of some quantities by combining two kinds of i
 
 ### Measurements
 
-Each measurement <span>$z[n]$</span> has some uncertainty. Assume that we know the variance <span>$r$</span> of the measurement error from the specifications of the sensor or through calibration. Usually we have multiple sensors, and it’s convenient to store them in a vector. Then the measurement error is specified as a covariance matrix <span>$R$</span>.
+Each measurement <span>$z[n]$</span> has some uncertainty. Kalman filter assumes that the measurement error is distributed normally (Gaussian distribution). We need to know the error variance <span>$r$</span> from the specifications of the sensor or through calibration. Usually we measure multiple quantities, and it’s convenient to store them in a vector. Then the measurement error is specified as a covariance matrix <span>$R$</span>.
 
 In some applications we want to first transform the measurements into appropriate outputs. For example, we may want to combine the measurements from multiple sensors that measure the same physical quantity. In the standard Kalman filter, each output is a linear combination of the measurements, meaning that the transform can be represented as a matrix <span>$H$</span> that we call the observation matrix.
 
 ### State update equation
 
-State update equations describe how to combine the measurements and the estimate that is obtainced using our dynamic model to producee a better state estimate.
+State update equations describe how to combine the measurements and the estimate that is obtained using our dynamic model to producee a better state estimate.
 
 The current state could be estimated as the average of all the previous measurements, but we don't want to store all the previous measurements. It's possible to derive the following recursive equation:
 
@@ -37,20 +37,28 @@ Kalman gain will be computed based on uncertainty in our measurements. A low val
 
 ### State extrapolation equation
 
-The state extrapolation equation predicts the next state according to our dynamic model. For example, a one-dimensional, constant velocity movement can be modeled using two variables:
+The state extrapolation equation predicts the next state according to our dynamic model. For example, a one-dimensional accelerating movement can be modeled using three variables:
 
 <div>$$
 \begin{align}
-x[n,n-1] &= x[n,n] + \Delta t x’[n,n] \\
- x’[n,n] &= x’[n,n]
+  x[n+1,n] &= x[n,n] + \Delta t x_v[n,n] + \frac{\Delta t^2}{2} x_a[n,n] \\
+x_v[n+1,n] &= x_v[n,n] + \Delta t x_a[n,n] \\
+x_a[n+1,n] &= x_a[n,n]
 \end{align}
 $$</div>
 
-When considering acceleration, we would have three variables. In a three-dimensional model, there would be nine variables in total. For convenience, we want to place them in a nine-dimensional vector, so that we can represent the state extrapolation equation as a multiplication by a state transition matrix <span>$F$</span>.
+It's convenient to place the variables in a vector. In the standard Kalman filter, the dynamic model has to be linear, meaning that it's possible to represent the state extrapolation equation as matrix multiplication. One-dimensional accelerating movement can be described by the following state transition matrix:
+
+<div>$$
+F =
+\begin{bmatrix}
+1 & \Delta t & \frac{\Delta t^2}{2} \\
+0 &        1 &             \Delta t \\
+0 &        0 &                    1
+\end{bmatrix}
+$$</div>
 
 We’ll make the state extrapolation equation more generic by including control input <span>$u[n]$</span>. This vector may contain other information that we don't predict using the dynamic model, for example steering of the vehicle.
-
-In the standard Kalman filter, our dynamic model is linear, meaning that the transform can be described by matrix multiplication.
 
 <div>$$
 x[n+1,n] = F x[n,n] + B u[n]
