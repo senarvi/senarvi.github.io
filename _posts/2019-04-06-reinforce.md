@@ -28,6 +28,22 @@ But during training the reference sequence (offset by one word) is fed into the 
 The reference sequence deviates at each time step more and more from what the model would generate.
 This second problem was named **exposure bias** by [Ranzato et al][].
 
+<figure>
+  <img src="/assets/images/language-model-inference.svg">
+  <figcaption>
+    During inference, a language model generates one word at a time.
+    In this case the sentence "A C E" is drawn from the model distribution.
+  </figcaption>
+</figure>
+
+<figure>
+  <img src="/assets/images/language-model-training.svg">
+  <figcaption>
+    During training, the model is only exposed to the training data distribution.
+    In this case the probability of the reference sequence "A B C" is calculated.
+  </figcaption>
+</figure>
+
 
 ### Formulation as a decision making problem
 
