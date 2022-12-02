@@ -65,7 +65,7 @@ G_t = \sum_{i=t}^T r_i
 $$</div>
 
 The **value** of a state is the expected cumulative reward by following policy <span>$p_\theta$</span>.
-Usually, when the task is to generate word sequences, can only observe the cumulative reward <span>$G_1 = R(W)$</span>, for example the ROUGE score, after generating the entire sequence <span>$W$</span>.
+Usually, when the task is to generate word sequences, we can only observe the cumulative reward <span>$G_1 = R(W)$</span>, for example the ROUGE score, after generating the entire sequence <span>$W$</span>.
 
 
 ### REINFORCE objective and its gradient
