@@ -93,7 +93,7 @@ social:
 analytics:
   provider               : "google"
   google:
-    tracking_id          : "UA-71174541-1"
+    tracking_id          : "G-FEQNNF2VW2"
 
 
 # Site Author
