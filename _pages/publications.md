@@ -46,7 +46,7 @@ See also [Google Scholar](https://scholar.google.com/citations?user=4fAZhfkAAAAJ
   RELATED CODE: [filter-text](https://github.com/senarvi/senarvi-speech/tree/master/filter-text),
   [filter-dictionary](https://github.com/senarvi/senarvi-speech/tree/master/filter-dictionary).
 * Seppo Enarvi and Mikko Kurimo (2016),
-  [TheanoLM — An Extensible Toolkit for Neural Network Language Modeling](http://www.isca-speech.org/archive/Interspeech_2016/abstracts/0618.html).
+  [TheanoLM — An Extensible Toolkit for Neural Network Language Modeling](https://www.isca-archive.org/interspeech_2016/enarvi16_interspeech.html).
   In Proceedings of the 17th Annual Conference of the International Speech Communication Association (INTERSPEECH), pp. 3052–3056.
   ([PDF]({{ site.baseurl }}/publications/interspeech2016.pdf),
   [BibTex]({{ site.baseurl }}/publications/interspeech2016.bib)).  
