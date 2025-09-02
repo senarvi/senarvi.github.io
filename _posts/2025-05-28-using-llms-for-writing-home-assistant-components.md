@@ -2,7 +2,7 @@
 title: "Using LLMs for writing Home Assistant components"
 ---
 
-### Why I switched to Home Assistant?
+### Why I switched to Home Assistant
 
 I bought a Samsung SmartThings hub and various Zigbee 3.0 device when I was living in Germany. I bought the hub from UK. The problems started when I moved to Finland five years ago. Initially the system worked in Finland too, but I wasn't able to pair new sensors. Turned out my Samsung account was locked to the US region. I spent weeks talking with Samsung supports in the US, Germany, UK, and Finland. Someone even asked me to contact the Swedish support. Most representatives told me that it's not possible to change the account region, but someone told me that it would be possible, so I was persistent.
 
@@ -16,7 +16,7 @@ Our new water meters send their readings periodically to the manufacturer's clou
 
 The first thing I did was running the JavaScript file through a code formatter. Since the minifier has replaces all the symbols with as short character sequences as possible, it still made very little sense to me. I wanted to see what I could make of it using LLMs. The file is huge, so I couldn't feed the whole file to an LLM. I had to find the interesting parts. My assumption was that the code authenticates to the manufacturer's cloud and receives a connection token. Searching for keywords such as "username" and "password", I found some promising sections.
 
-```
+```js
 ge = function (e, t, n) {
     return function (r) {
         return fe(void 0, void 0, void 0, (function () {

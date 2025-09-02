@@ -12,6 +12,11 @@
       src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
     </script>
 {% endif %}
+{% if page.chart %}
+    <script type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/chart.js">
+    </script>
+{% endif %}
 
     <!-- For overriding the theme defaults -->
     <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/custom.css">
