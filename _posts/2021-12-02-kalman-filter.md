@@ -7,8 +7,8 @@ math: true
 
 Kalman filter estimates the state of some quantities by combining two kinds of information: a dynamic model that describes our idea of how the world behaves, and measurements that provide noisy estimates of the state. The principle is to iterate the following steps:
 
-*	Take measurement <span>$z[n]$</span>.
-*	Estimate the current state <span>$x[n,n]$</span> based on the measurement and the values predicted by the dynamic model.
+*	Take a measurement <span>$z[n]$</span>.
+*	Estimate the current state <span>$x[n,n]$</span> based on the (noisy) measurement and the values predicted by the dynamic model.
 *	Predict the next state <span>$x[n+1,n]$</span> based on the dynamic model equations.
 
 ### Measurements
@@ -19,7 +19,7 @@ In some applications we want to first transform the measurements into appropriat
 
 ### State update equation
 
-State update equations describe how to combine the measurements and the estimate that is obtained using our dynamic model to producee a better state estimate.
+State update equations describe how to combine the measurements and the estimate that is obtained using our dynamic model to produce a better state estimate.
 
 The current state could be estimated as the average of all the previous measurements, but we don't want to store all the previous measurements. It's possible to derive the following recursive equation:
 
